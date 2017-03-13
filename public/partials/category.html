@@ -1,0 +1,46 @@
+<div class="page-header text-center">
+	<h1>CADASTRO CATEGORIA</h1>
+</div>
+
+<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+
+<form novalidate name="editForm" class="row" ng-submit="submit()">
+	
+	<div class="col-md-6">
+	
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid && submitted]">
+		    <label class="control-label" for="name">Nome *</label>
+		    <input ng-model="category.name" type="text" class="form-control" name="name" placeholder="Name" required>    
+		    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required && submitted">Nome da categoria é obrigatório.</span>
+		</div>
+
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid && submitted]">
+		    <label class="control-label" for="name">Código *</label>
+		    <input ng-model="category.code" type="text" class="form-control" name="code" placeholder="Code" required>    
+		    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required && submitted">Código da categoria é obrigatório.</span>
+		</div>
+
+		<div class="form-group">
+			<label>Descrição</label>
+			<textarea name="description" class="form-control" ng-model="category.description">
+			</textarea>
+		</div>
+
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid && submitted]">
+			<label>Status *</label>
+			<select name="active" ng-model="category.active" class="form-control" required 
+			ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
+				<option value="">Escolha um status</option>
+			</select>
+			<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required && submitted">Status da categoria é obrigatório.</span>
+		</div>
+
+		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
+			Salvar
+		</button>
+		<a href="#/category/list" class="btn btn-primary">Voltar</a>
+	</div>
+
+	
+	
+</form>

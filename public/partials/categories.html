@@ -1,0 +1,49 @@
+<div class="page-header text-center">
+	<h1>CATEGORIAS</h1>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{message}}</p>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="input-group">
+			<span class="input-group-btn">
+				<a href="#/category/new" class="btn btn-primary" type="button">
+					Nova Categoria
+				</a>
+			</span>
+			<input class="form-control" placeholder="Pesquisar" ng-model="filter">
+		</div> <!-- fim col-md-12 -->
+	</div> <!-- fim row -->
+	<hr />
+<div class="col-md-12" ng-show="categories.length">
+	<form novalidate name="editForm" ng-submit="submit()">
+		<div class="table-responsive">
+			<table class="table">
+			    <thead>
+				    <tr>
+				    	<th>#</th>
+				    	<th>Nome</th>
+				        <th>Código</th>
+				        <th>Descrição</th>
+				        <th>Status</th>
+				        <th></th>
+				    </tr>
+			    </thead>
+			    <tbody>
+			    	<tr ng-repeat="category in categories | filter: filter">
+				        <td>{{category.id}}</td>
+				        <td>{{category.name}}</td>
+				        <td>{{category.code}}</td>
+				        <td>{{category.description}}</td>
+				        <td>{{category.active}}</td>
+				        <td class="text-center text-nowrap">
+				        	<a href="#/category/edit/{{category.id}}" class="btn btn-warning">Editar</a> 
+				        	<a ng-click="inactivate(category)" class="btn btn-danger">Remover</a>
+				        </td>
+			      	</tr>
+			    </tbody>
+			</table>
+		</div>
+	</form>
+</div>

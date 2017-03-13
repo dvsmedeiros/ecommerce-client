@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- <base href="/"> -->
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    
+    <title>Shop Homepage</title>
+
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-animate.min.js"></script>
+    <script src="js/lib/angular-route.min.js"></script>
+    <script src="js/lib/angular-resource.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/services/ecommerce-services.js"></script>
+    <script src="js/controllers/principal-controller.js"></script>
+    <script src="js/controllers/home-controller.js"></script>
+    <script src="js/controllers/products-controller.js"></script>
+    <script src="js/controllers/product-controller.js"></script>
+    <script src="js/controllers/category-controller.js"></script>
+    <script src="js/controllers/categories-controller.js"></script>
+    <script src="js/controllers/active-controller.js"></script>
+    <script src="js/controllers/packing-type-controller.js"></script>
+    <script src="js/controllers/cart-controller.js"></script>
+    <script src="js/controllers/my-requests-controller.js"></script>
+
+</head>
+
+<body ng-app="ecommerce">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/#/">Store</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestão Produto<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/#/products">Produtos</a>
+                            </li>
+                            <li>
+                                <a href="/#/category">Categorias</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>    
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/#/cart">
+                        	<span style="font-size:1.8em;" class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+                            </span>
+                            <span class="label label-danger" ng-controller="CartController">
+                            {{cart.cartItems.length}}</span>   
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/#/home/myaccount">Minha Conta</a>
+                    </li>
+                    <li>
+                        <a href="/#/home/myrequests">Meus Pedidos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> <!-- Navbar -->
+    
+    <!-- Page Content -->
+    <div class="container" style="min-height: 450px;">
+        <ng-view></ng-view>
+    </div><!-- Page Content -->
+
+    <!-- Footer -->
+    <div class="container">
+	    <footer>
+	    <hr />
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="text-center">Copyright &copy; Davisson Medeiros 2017</p>
+                </div>
+            </div>
+	    </footer>
+    </div> <!-- Footer -->
+
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+	<script src="js/lib/shop-homepage.js"></script>
+
+</body>
+</html>

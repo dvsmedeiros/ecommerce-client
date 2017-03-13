@@ -1,0 +1,83 @@
+<div class="col-md-12" ng-cloak>
+	<h3 class="text-center">CARRINHO</h3>
+	<br/>
+    <!-- SHOP ITEM -->
+    <div ng-show="cart.cartItems.length">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+			  	<div class="panel-body">
+			  		<div>	
+					  	<!-- SHOP ITEM -->
+					  	<div class="row" ng-repeat="item in cart.cartItems">
+						  	<div class="col-md-4">
+		                        <div class="thumbnail">
+		                            <img src="http://placehold.it/320x150" alt="">
+		                        </div>
+		                    </div>
+						  	<div class="col-md-4">
+		                        <div class="caption">
+		                                <h4 class="pull-right">R${{item.product.price.value}}</h4>
+		                                <h4><a href="#">{{item.product.name}}</a></h4>
+		                        </div>
+		                    </div>
+		                	<div class="col-md-3">
+		                		<p class="text-center">Quantidade</p>
+								<div class="input-group number-spinner">
+									<span class="input-group-btn">
+										<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+									</span>
+									<input type="text" class="form-control text-center" value="{{item.quantity}}">
+									<span class="input-group-btn">
+										<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<a href="" ng-click="delete(item)"><span class="glyphicon glyphicon-remove"></span></a>
+							</div>							
+						</div>
+					</div>						
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h4 class="text-center">FRETE</h4>
+					<form>
+						<div class="input-group">
+							<span class="input-group-addon">CEP</span>
+							<input type="text"  class="form-control">
+							<span class="input-group-btn">
+								<button class="btn btn-default">CALCULAR</button>
+						   </span>
+						</div>
+					</form>
+					<div class="radio">
+						<label><input type="radio" name="optradio">Option 1</label>
+					</div>	
+				</div>
+			</div>
+			<div class="panel panel-default">
+			  	<div class="panel-body">
+			  		<h4 class="text-center">RESUMO</h4>
+			  		<table class="table">
+			  			<tr>
+			  				<td><p>Subtotal</p></td>
+			  				<td><p class="text-right">R$ {{cart.subTotal}}</p></td>
+			  			</tr>
+			  			<tr>
+			  				<td><p>Frete</p></td>
+			  				<td><p class="text-right">R$ 0.0</p></td>
+			  			</tr>
+			  			<tr>
+			  				<td><strong><p>Total</p></strong></td>
+			  				<td><strong><p class="text-right">R$ {{cart.total}}</p></strong></td>
+			  			</tr>
+			  		</table>
+						<a class="btn btn-success btn-block" href="/ecommercews/public/checkout.html" >FINALIZAR COMPRA</a>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
