@@ -92,6 +92,7 @@
 				ng-controller="CategoriesController" ng-options="category.id as (category.name) for category in categories">
 					<option value="">Escolha uma Categoria</option>
 				</select>
+				<a href="/#/category/new">cadastre categoria</a>
 				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required  && submitted">Categoria do Produto é obrigatório.</span>
 			</div>
 
