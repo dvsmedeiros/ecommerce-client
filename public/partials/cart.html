@@ -24,16 +24,16 @@
 		                		<p class="text-center">Quantidade</p>
 								<div class="input-group number-spinner">
 									<span class="input-group-btn">
-										<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+										<a ng-click="delete(item)" class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
 									</span>
-									<input type="text" class="form-control text-center" value="{{item.quantity}}">
+									<input type="text" class="form-control text-center" value="{{item.quantity}}" disabled="true">
 									<span class="input-group-btn">
-										<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+										<a href="/#/cart/{{item.product.id}}" class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
 									</span>
 								</div>
 							</div>
 							<div class="col-md-1">
-								<a href="" ng-click="delete(item)"><span class="glyphicon glyphicon-remove"></span></a>
+								<a href="" ng-click="deleteAll(item)"><span class="glyphicon glyphicon-remove"></span></a>
 							</div>							
 						</div>
 					</div>						

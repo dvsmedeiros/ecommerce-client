@@ -4,29 +4,45 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 	$scope.cart = {};
 	$scope.quantity = 0;
 
-	cartResource.get(function(cart){
-		$scope.cart = cart;
-	}, function(erro){
-		console.log(erro);
-	});
+	$scope.get = function(){
+		cartResource.get(function(cart){
+			$scope.cart = cart;
+		}, function(erro){
+			console.log(erro);
+		});	
+	};
+	
+	$scope.cart = $scope.get();
+
+	$scope.reload = function(){
+		$scope.cart = $scope.get();
+	};
 
 	if($routeParams.productId) {
 		cartResource.save({productId: $routeParams.productId}, function(status) {
-		$window.location='/#/cart';
-		$scope.message = status.message;
+			$window.location='/#/cart';
+			$scope.message = status.message;
 		}, function(erro) {
 			console.log(erro);
 		});
 	}
 
 	$scope.delete = function(cartItem) {		
-		cartResource.update({productId: cartItem.product.id}, function() {
-			var indexItem = $scope.cart.cartItems.indexOf(cartItem);
-			$scope.cart.cartItems.splice(indexItem, 1);
+		cartResource.update({productId: cartItem.product.id}, function(status) {
+			$scope.message = status.message;
+			$scope.reload();
 		}, function(erro) {
 			console.log(erro);
 		});
 	};	
 	
+	$scope.deleteAll = function(cartItem) {		
+		cartResource.delete({productId: cartItem.product.id}, function(status) {
+			$scope.message = status.message;
+			$scope.reload();
+		}, function(erro) {
+			console.log(erro);
+		});
+	};
 
 });
