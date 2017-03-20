@@ -47,9 +47,9 @@
 					<form>
 						<div class="input-group">
 							<span class="input-group-addon">CEP</span>
-							<input type="text"  class="form-control">
+							<input ng-model="cart.freight.request.postalCodeSource" type="text"  class="form-control">
 							<span class="input-group-btn">
-								<button class="btn btn-default">CALCULAR</button>
+								<button ng-click="calculateFreight()" class="btn btn-default">CALCULAR</button>
 						   </span>
 						</div>
 					</form>

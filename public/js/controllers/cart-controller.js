@@ -1,7 +1,8 @@
-angular.module('ecommerce').controller('CartController', function($scope, $route, $routeParams, $window, cartResource){
+angular.module('ecommerce').controller('CartController', function($scope, $route, $routeParams, $window, cartResource, freightCartResource){
 	
 	$scope.message = '';
 	$scope.cart = {};
+	$scope.freights = [];
 	$scope.quantity = 0;
 
 	$scope.get = function(){
@@ -12,7 +13,7 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 		});	
 	};
 	
-	$scope.cart = $scope.get();
+	$scope.cart = $scope.get();	
 
 	$scope.reload = function(){
 		$scope.cart = $scope.get();
@@ -40,6 +41,15 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 		cartResource.delete({productId: cartItem.product.id}, function(status) {
 			$scope.message = status.message;
 			$scope.reload();
+		}, function(erro) {
+			console.log(erro);
+		});
+	};
+
+
+	$scope.calculateFreight = function() {		
+		freightCartResource.query($scope.cart, function(freights) {
+			$scope.freights = freights;			
 		}, function(erro) {
 			console.log(erro);
 		});
