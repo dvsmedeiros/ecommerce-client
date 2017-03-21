@@ -50,12 +50,12 @@
 		    <div class="col-md-4" ng-repeat="product in activeProducts | filter: filter">
 	            <div class="panel panel-default">
 	            	
-		                <img class="img-responsive" src="http://placehold.it/320x150" alt="">
+		                <img class="img-responsive" src="http://placehold.it/400x300" alt="">
 		                <div class="panel-body">
 			                <h4 class="text-center"><a href="#">{{product.name}}</a></h3>
 			                <h4 class="text-center">R$ {{product.price.value}}</h4>
 			                <!--<p>{{product.shortDescription}}</p>-->
-			                <a href="/#/cart/{{product.id}}" class="btn btn-success btn-block">COMPRAR</a>
+			                <a href="/#/products/detail/{{product.id}}" class="btn btn-success btn-block">COMPRAR</a>
 	                    </div>                  
 	            </div>
 	   	 	</div>
