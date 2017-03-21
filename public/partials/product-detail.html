@@ -37,6 +37,11 @@
                    </span>
                 </div>
             </form>
+            <div class="radio" ng-repeat="freight in freights">
+                <label><input type="radio" name="optradio">
+                    {{freight.serviceName}} | {{freight.value}} | {{freight.deadline}}
+                </label>
+            </div>
         </div>
     </div>
 </div>

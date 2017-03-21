@@ -47,14 +47,16 @@
 					<form>
 						<div class="input-group">
 							<span class="input-group-addon">CEP</span>
-							<input ng-model="cart.freight.request.postalCodeSource" type="text"  class="form-control">
+							<input ng-model="freight.origin" type="text"  class="form-control">
 							<span class="input-group-btn">
 								<button ng-click="calculateFreight()" class="btn btn-default">CALCULAR</button>
 						   </span>
 						</div>
 					</form>
-					<div class="radio">
-						<label><input type="radio" name="optradio">Option 1</label>
+					<div class="radio" ng-repeat="freight in freights">
+						<label><input type="radio" name="optradio">
+							{{freight.serviceName}} | {{freight.value}} | {{freight.deadline}}
+						</label>
 					</div>	
 				</div>
 			</div>

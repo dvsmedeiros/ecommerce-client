@@ -44,14 +44,9 @@ angular.module('ecommerceServices', ['ngResource'])
 			}
 		});
 	})
-	.factory('freightProductResource', function($resource) {
+	.factory('freightResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/freight/product/', null, {			
-		});
-	})
-	.factory('freightCartResource', function($resource) {
-
-		return $resource('http://localhost:8888/ecommercews/freight/cart/', null, {			
+		return $resource('http://localhost:8888/ecommercews/freight/:productId', null, {			
 		});
 	})
 	;

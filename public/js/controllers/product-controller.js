@@ -1,13 +1,15 @@
-angular.module('ecommerce').controller('ProductController', function($scope, $routeParams, productResource){
+angular.module('ecommerce').controller('ProductController', function($scope, $routeParams, productResource, freightResource){
 	
 	$scope.message = ''
 	$scope.categories = []
 	$scope.stock = {}
+	$scope.freights = []
 	$scope.product = {
 		packing: {},
 		price: {},
 		category: {}
 	}
+
 
 	//if present :productId on route, load the product by productId
 	if($routeParams.productId) {
@@ -17,6 +19,14 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
 			console.log(erro);
 		});
 	}
+
+	$scope.calculateFreight = function() {		
+		freightResource.query({productId: $scope.product.id}, function(freights) {
+			$scope.freights = freights;			
+		}, function(erro) {
+			console.log(erro);
+		});
+	};
 
 	$scope.submit = function(){
 		
