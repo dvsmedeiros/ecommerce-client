@@ -1,8 +1,8 @@
-
+<br />
 <div class="row">	
 	<div class="col-md-6">
         <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            <img class="img-responsive" src="http://placehold.it/800x600" alt="">
         </div>
     </div>
     <div class="col-md-6">
@@ -18,29 +18,34 @@
         </div>
         <div class="col-md-12">
             <div class="col-md-6 text-center">
-                <h2>R$ {{product.price.value}}</h2>
-                <p>12 x R$1.27 Sem Juros</p>
+                <h2>R$ {{product.price.value | number:2}}</h2>
+                <p>12 x R$ {{product.price.value / 12 | number:2}} Sem Juros</p>
                 <a>Parcelas</a>
             </div>
             <div class="col-md-6 text-center">
                 <a class="btn btn-success btn-block" href="/#/cart/{{product.id}}">COMPRAR</a>
             </div>
         </div>  
-        <div class="col-md-12">
+        <div class="col-md-12" ng-controller="FreightController">
             <hr />
-            <form>
+            <form novalidate name="freightForm">
                 <div class="input-group">
                     <span class="input-group-addon">Calcular Frete e Prazo</span>
-                    <input ng-model="cart.freight.request.postalCodeSource" type="text"  class="form-control">
+                    <input ng-model="freight.postalCodeSource"   type="text" class="form-control" required>
                     <span class="input-group-btn">
-                        <button ng-click="calculateFreight()" class="btn btn-default">CALCULAR</button>
+                        <button ng-click="calculateFreight()" class="btn btn-default" ng-disabled="freightForm.$invalid">CALCULAR</button>
                    </span>
                 </div>
             </form>
-            <div class="radio" ng-repeat="freight in freights">
-                <label><input type="radio" name="optradio">
-                    {{freight.serviceName}} | {{freight.value}} | {{freight.deadline}}
-                </label>
+            <br />
+            <div class="row">
+                <div class="col-md-4" ng-repeat="freight in freights">
+                    <div class="panel panel-default text-center">
+                        <p><strong>{{freight.serviceName}}</strong></p>
+                        <p>R$ {{freight.value}}</p>
+                        <p>Prazo: {{freight.deadline}} dia(s)</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

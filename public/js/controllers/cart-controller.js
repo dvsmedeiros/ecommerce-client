@@ -1,7 +1,9 @@
 angular.module('ecommerce').controller('CartController', function($scope, $route, $routeParams, $window, cartResource, freightResource){
 	
 	$scope.message = '';
-	$scope.cart = {};
+	$scope.cart = {
+		cartItems : []
+	};
 	$scope.freights = [];
 	$scope.quantity = 0;
 
@@ -45,14 +47,4 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 			console.log(erro);
 		});
 	};
-
-
-	$scope.calculateFreight = function() {		
-		freightResource.query(function(freights) {
-			$scope.freights = freights;			
-		}, function(erro) {
-			console.log(erro);
-		});
-	};
-
 });

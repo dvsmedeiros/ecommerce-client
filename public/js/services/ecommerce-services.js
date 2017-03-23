@@ -46,8 +46,13 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('freightResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/freight/:productId', null, {			
-		});
+		return $resource('http://localhost:8888/ecommercews/freight/:productId/:postalCode', null, {
+			method: 'GET',
+				params: {
+					productId: '@productId',
+					postalCode: '@postalCode'
+				}			
+			});
 	})
 	;
 	

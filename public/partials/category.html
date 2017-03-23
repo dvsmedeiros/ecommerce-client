@@ -8,16 +8,16 @@
 	
 	<div class="col-md-6">
 	
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid && submitted]">
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
 		    <label class="control-label" for="name">Nome *</label>
 		    <input ng-model="category.name" type="text" class="form-control" name="name" placeholder="Name" required>    
-		    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required && submitted">Nome da categoria é obrigatório.</span>
+		    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Nome da categoria é obrigatório.</span>
 		</div>
 
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid && submitted]">
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
 		    <label class="control-label" for="name">Código *</label>
 		    <input ng-model="category.code" type="text" class="form-control" name="code" placeholder="Code" required>    
-		    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required && submitted">Código da categoria é obrigatório.</span>
+		    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código da categoria é obrigatório.</span>
 		</div>
 
 		<div class="form-group">
@@ -26,15 +26,14 @@
 			</textarea>
 		</div>
 
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid && submitted]">
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
 			<label>Status *</label>
 			<select name="active" ng-model="category.active" class="form-control" required 
 			ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
 				<option value="">Escolha um status</option>
 			</select>
-			<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required && submitted">Status da categoria é obrigatório.</span>
+			<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Status da categoria é obrigatório.</span>
 		</div>
-
 		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
 			Salvar
 		</button>
