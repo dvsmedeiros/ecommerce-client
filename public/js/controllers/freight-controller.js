@@ -20,7 +20,7 @@ angular.module('ecommerce').controller('FreightController', function($scope, $ro
 		}
 
 		if(! $scope.productId && $scope.freight.postalCodeSource){
-			freightResource.get(
+			freightResource.query(
 				{ 
 					postalCode: $scope.freight.postalCodeSource
 				}, function(freights) {
