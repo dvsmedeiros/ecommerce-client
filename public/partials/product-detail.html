@@ -41,9 +41,9 @@
             <div class="row">
                 <div class="col-md-4" ng-repeat="freight in freights">
                     <div class="panel panel-default text-center">
-                        <p><strong>{{freight.serviceName}}</strong></p>
-                        <p>R$ {{freight.value}}</p>
-                        <p>Prazo: {{freight.deadline}} dia(s)</p>
+                        <p><strong>{{freight.service.serviceName}}</strong></p>
+                        <p>R$ {{freight.service.value}}</p>
+                        <p>Prazo: {{freight.service.deadline}} dia(s)</p>
                     </div>
                 </div>
             </div>

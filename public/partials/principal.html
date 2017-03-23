@@ -48,13 +48,13 @@
     <div class="row">
     	<br />
        	<div ng-controller="ProductsController">
-		    <div class="col-md-4" ng-repeat="product in activeProducts | filter: filter">
+		    <div class="col-md-3" ng-repeat="product in activeProducts | filter: filter">
 	            <div class="panel panel-default">
 	            	
 		                <img class="img-responsive" src="http://placehold.it/800x600" alt="">
 		                <div class="panel-body">
-			                <h4 class="text-center"><a href="#">{{product.name}}</a></h3>
-			                <h4 class="text-center">R$ {{product.price.value | number:2}}</h4>
+			                <h5 class="text-center"><a href="#">{{product.name}}</a></h5>
+			                <h5 class="text-center">R$ {{product.price.value | number:2}}</h5>
 			                <!--<p>{{product.shortDescription}}</p>-->
 			                <a href="/#/products/detail/{{product.id}}" class="btn btn-success btn-block">COMPRAR</a>
 	                    </div>                  

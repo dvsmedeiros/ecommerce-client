@@ -3,11 +3,12 @@ angular.module('ecommerce').controller('FreightController', function($scope, $ro
 	$scope.message = ''
 	$scope.freights = []
 	$scope.freight = {}
-
+	$scope.product = {}
+	
 	$scope.calculateFreight = function() {		
 		
 
-		if($scope.productId && $scope.freight.postalCodeSource){
+		if($scope.product.id && $scope.freight.postalCodeSource){
 			freightResource.query(
 				{
 					productId: $scope.product.id, 
@@ -19,7 +20,7 @@ angular.module('ecommerce').controller('FreightController', function($scope, $ro
 			});
 		}
 
-		if(! $scope.productId && $scope.freight.postalCodeSource){
+		if(! $scope.product.id && $scope.freight.postalCodeSource){
 			freightResource.query(
 				{ 
 					postalCode: $scope.freight.postalCodeSource

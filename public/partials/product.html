@@ -9,7 +9,7 @@
 	
 	<div class="col-md-6">
 	
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[(editForm.name.$dirty && editForm.name.$invalid]">
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
 		    <label class="control-label" for="name">Nome *</label>
 		    <input ng-model="product.name" type="text" class="form-control" name="name" placeholder="Name" required> 
 		    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Nome do produto é obrigatório.</span>
