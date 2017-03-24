@@ -44,12 +44,12 @@
 			<div class="panel panel-default" ng-controller="FreightController">
 				<div class="panel-body">
 					<h4 class="text-center">FRETE</h4>
-					<form>
+					<form novalidate name="freightForm">
 						<div class="input-group">
 							<span class="input-group-addon">CEP</span>
-							<input ng-model="freight.postalCodeSource" type="text"  class="form-control">
+							<input ng-model="freight.postalCodeSource" type="text"  class="form-control" ui-br-cep-mask required>
 							<span class="input-group-btn">
-								<button ng-click="calculateFreight()" class="btn btn-default">CALCULAR</button>
+								<button ng-click="calculateFreight()" class="btn btn-default" ng-disabled="freightForm.$invalid">CALCULAR</button>
 						   </span>
 						</div>
 					</form>
