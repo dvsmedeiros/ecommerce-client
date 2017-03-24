@@ -85,7 +85,7 @@
 		
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.price.$dirty && editForm.price.$invalid] ">
 			    <label class="control-label" for="name">Preço *</label>
-			    <input ng-model="product.price.value" type="text" min="0" class="form-control" name="price" placeholder="price" ui-money-mask required>    
+			    <input ng-model="product.price.value" type="text" min="0" class="form-control" name="price" placeholder="price" ui-money-mask="2" required>    
 			    <span class="help-block" ng-show="editForm.price.$dirty && editForm.price.$error.required">Preço do produto é obrigatório.</span>
 			</div>
 
