@@ -1,4 +1,4 @@
-angular.module('ecommerce', ['ngRoute', 'ecommerceServices'])
+angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks'])
 	.config(function($routeProvider, $locationProvider) {
 
 		//$locationProvider.html5Mode(true);
