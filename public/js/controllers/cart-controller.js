@@ -6,6 +6,7 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 	};
 	$scope.freights = [];
 	$scope.quantity = 0;
+	$scope.product = {};
 
 	$scope.get = function(){
 		cartResource.get(function(cart){
