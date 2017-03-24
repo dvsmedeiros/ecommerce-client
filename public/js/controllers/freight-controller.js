@@ -3,8 +3,7 @@ angular.module('ecommerce').controller('FreightController', function($scope, $ro
 	$scope.message = ''
 	$scope.freights = []
 	$scope.freight = {}
-	$scope.product = {}
-	
+
 	$scope.calculateFreight = function() {		
 		
 
@@ -31,4 +30,5 @@ angular.module('ecommerce').controller('FreightController', function($scope, $ro
 			});
 		}		
 	};
+
 });
