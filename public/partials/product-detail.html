@@ -31,7 +31,7 @@
             <form novalidate name="freightForm">
                 <div class="input-group">
                     <span class="input-group-addon">Calcular Frete e Prazo</span>
-                    <input ng-model="freight.postalCodeSource"   type="text" class="form-control" required>
+                    <input ng-model="freight.postalCodeSource"   type="text" class="form-control" ui-br-cep-mask required>
                     <span class="input-group-btn">
                         <button ng-click="calculateFreight()" class="btn btn-default" ng-disabled="freightForm.$invalid">CALCULAR</button>
                    </span>
