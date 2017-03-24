@@ -3,7 +3,7 @@
 	<br/>
     <!-- SHOP ITEM -->
     <div ng-show="cart.cartItems.length">
-		<div class="col-md-8">
+		<div class="col-md-7">
 			<div class="panel panel-default">
 			  	<div class="panel-body">
 			  		<div>	
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<div class="panel panel-default" ng-controller="FreightController">
 				<div class="panel-body">
 					<h4 class="text-center">FRETE</h4>
@@ -53,11 +53,17 @@
 						   </span>
 						</div>
 					</form>
-					<div class="radio" ng-repeat="freight in freights">
-						<label><input type="radio" name="optradio">
-							{{freight.serviceName}} | {{freight.value}} | {{freight.deadline}}
-						</label>
-					</div>	
+					<div class="row">
+						<br />
+		                <div class="col-md-4" ng-repeat="freight in freights">
+		                    <div class="panel panel-default text-center">
+								<input type="radio" name="optradio">
+		                        <p><strong>{{freight.service.serviceName}}</strong></p>
+		                        <p>R$ {{freight.service.value}}</p>
+		                        <p>Prazo: {{freight.service.deadline}} dia(s)</p>
+		                    </div>
+		                </div>
+		            </div>	
 				</div>
 			</div>
 			<div class="panel panel-default">
