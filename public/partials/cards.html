@@ -1,0 +1,61 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="/#/home" class="list-group-item">Inicio</a>
+		<a href="/#/home/account" class="list-group-item">Informações de Conta</a>
+		<a href="/#/home/adresses" class="list-group-item">Meus Endereços</a>
+		<a href="/#/home/orders" class="list-group-item">Meus Pedidos</a>
+		<a href="/#/home/returns" class="list-group-item">Trocas e Devoluções</a>
+		<a href="/#/home/cards" class="list-group-item">Cartões e Vales</a>
+		<a href="/#/logout" class="list-group-item">Sair</a>
+    </div>
+</div>
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-body" style="min-height: 500px;">
+			<h3 class="text-center">MEUS CARTÕES</h3>
+			<hr />
+			<div class="col-md-12">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<a href="/#/cards/new" class="btn btn-primary" type="button">
+							Novo Cartão
+						</a>
+					</span>
+					<input class="form-control" placeholder="Pesquisar"	ng-model="filter">
+				</div> <!-- fim col-md-12 -->
+			</div>			
+			<div class="col-md-12" ng-show="cards.length">
+				<br />
+				<form novalidate name="editForm" ng-submit="submit()">
+					<div class="table-responsive">
+						<table class="table">
+						    <thead>
+							    <tr>
+							    	<th>#</th>
+							    	<th>Nome</th>
+							        <th>Código</th>
+							        <th>Descrição</th>
+							        <th>Status</th>
+							        <th></th>
+							    </tr>
+						    </thead>
+						    <tbody>
+						    	<tr ng-repeat="card in cards | filter: filter">
+							        <td>{{card.id}}</td>
+							        <td>{{card.name}}</td>
+							        <td>{{card.code}}</td>
+							        <td>{{card.description}}</td>
+							        <td>{{card.active}}</td>
+							        <td class="text-center text-nowrap">
+							        	<a href="#/cards/edit/{{card.id}}" class="btn btn-warning">Editar</a> 
+							        	<a ng-click="inactivate(card)" class="btn btn-danger">Remover</a>
+							        </td>
+						      	</tr>
+						    </tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
