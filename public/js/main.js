@@ -1,4 +1,4 @@
-angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks'])
+angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', 'angularModalService', 'ngAnimate'])
 	.config(function($routeProvider, $locationProvider) {
 
 		//$locationProvider.html5Mode(true);
@@ -15,14 +15,29 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks'])
 			controller: 'HomeController'
 		});
 
-		$routeProvider.when('/home/myrequests', {
-			templateUrl: 'partials/myrequests.html',
+		$routeProvider.when('/home/orders', {
+			templateUrl: 'partials/orders.html',
 			controller: 'MyRequestsController'
 		});
 
-		$routeProvider.when('/home/myaccount', {
-			templateUrl: 'partials/myaccount.html',
+		$routeProvider.when('/home/account', {
+			templateUrl: 'partials/account.html',
 			controller: 'MyAccountController'
+		});
+
+		$routeProvider.when('/home/adresses', {
+			templateUrl: 'partials/adresses.html',
+			controller: 'AdressesController'
+		});
+
+		$routeProvider.when('/home/cards', {
+			templateUrl: 'partials/cards.html',
+			controller: 'HomeController'
+		});
+
+		$routeProvider.when('/home/returns', {
+			templateUrl: 'partials/shipping-return.html',
+			controller: 'HomeController'
 		});
 
 		//PRODUCT
@@ -72,8 +87,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks'])
 			controller: 'CategoryController'
 		});
 
-		//SHOPCART
-		
+		//SHOPCART	
 		$routeProvider.when('/cart', {
 			templateUrl: 'partials/cart.html',
 			controller: 'CartController'
@@ -88,11 +102,11 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks'])
 			templateUrl: 'partials/cart.html',
 			controller: 'CartController'
 		});
+		
 		//CHECKOUT
-
-		$routeProvider.when('/home', {
-			templateUrl: 'partials/home.html',
-			controller: 'HomeController'
+		$routeProvider.when('/checkout', {
+			templateUrl: 'partials/checkout.html',
+			controller: 'CheckoutController'
 		});
 
 		$routeProvider.otherwise({redirectTo: '/'});
