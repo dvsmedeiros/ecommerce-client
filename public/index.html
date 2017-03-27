@@ -17,12 +17,17 @@
     
     <title>Shop Homepage</title>
 
+    <script src="js/lib/jquery.js"></script>
     <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/lib/angular-input-masks-dependencies.js"></script>
     <script src="js/lib/angular-input-masks.js"></script>
     <script src="js/lib/angular-animate.min.js"></script>
     <script src="js/lib/angular-route.min.js"></script>
     <script src="js/lib/angular-resource.min.js"></script>
+    <script src="js/lib/angular-modal-service.min.js"></script>
+    <script src="js/lib/shop-homepage.js"></script>
+    
     <script src="js/main.js"></script>
     <script src="js/services/ecommerce-services.js"></script>
     <script src="js/controllers/principal-controller.js"></script>
@@ -35,7 +40,9 @@
     <script src="js/controllers/packing-type-controller.js"></script>
     <script src="js/controllers/freight-controller.js"></script>
     <script src="js/controllers/cart-controller.js"></script>
-    <script src="js/controllers/my-requests-controller.js"></script>
+    <script src="js/controllers/orders-controller.js"></script>
+    <script src="js/controllers/checkout-controller.js"></script>
+    <script src="js/controllers/adresses-controller.js"></script>
 
 </head>
 
@@ -98,14 +105,14 @@
                         </span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/#/home/myaccount">        
+                                <a href="/#/home/account">        
                                     Minha Conta
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/#/home/myrequests">Meus Pedidos</a>
+                        <a href="/#/home/orders">Meus Pedidos</a>
                     </li>
                 </ul>
             </div>
@@ -128,10 +135,6 @@
             </div>
 	    </footer>
     </div> <!-- Footer -->
-
-    <script src="js/lib/jquery.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-	<script src="js/lib/shop-homepage.js"></script>
 
 </body>
 </html>
