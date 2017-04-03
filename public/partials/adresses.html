@@ -19,17 +19,29 @@
 			
 			<div class="col-md-6">	
 				<h5>ENDEREÇO PRINCIPAL</h5>
+				<hr />
+				<p><strong>{{adress.firstName}} {{adress.lastName}}</strong></p>
+				<p>{{adress.street}}, {{adress.number}}</p>
+				<p>{{adress.zipcode}} - {{adress.neighborhood}}
+				<p>{{adress.city}} - {{adress.state}}</p>
+				<p>({{adress.phoneNumber.ddd}}) {{adress.phoneNumber.number}}</p>
 			</div>
 
 			<div class="col-md-6">	
 				<h5>ENDEREÇO ENTREGA</h5>
+				<hr />
+				<p><strong>{{adress.firstName}} {{adress.lastName}}</strong></p>
+				<p>{{adress.street}}, {{adress.number}}</p>
+				<p>{{adress.zipcode}} - {{adress.neighborhood}}
+				<p>{{adress.city}} - {{adress.state}}</p>
+				<p>({{adress.phoneNumber.ddd}}) {{adress.phoneNumber.number}}</p>
 			</div>
 
 			<div class="col-md-12">
-				<hr />
+				<br />
 				<div class="input-group">
 					<span class="input-group-btn">
-						<a ng-click="showComplex()" class="btn btn-primary" type="button">
+						<a ng-click="modalShow()" class="btn btn-primary" type="button">
 							Novo Endereço
 						</a>
 					</span>
