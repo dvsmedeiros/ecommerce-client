@@ -1,4 +1,4 @@
-angular.module('ecommerce').controller('AdressesController', function($scope, $element, ModalService){
+angular.module('ecommerce').controller('AdressesController', function($scope, ModalService){
   	
     $scope.name = null;
   	$scope.age = null;
