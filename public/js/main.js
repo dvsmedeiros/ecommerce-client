@@ -35,8 +35,8 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'HomeController'
 		});
 
-		$routeProvider.when('/home/returns', {
-			templateUrl: 'partials/shipping-return.html',
+		$routeProvider.when('/home/exchanges', {
+			templateUrl: 'partials/exchanges.html',
 			controller: 'HomeController'
 		});
 
