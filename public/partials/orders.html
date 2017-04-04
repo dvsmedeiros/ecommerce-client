@@ -16,7 +16,44 @@
 			<h4 class="text-center">MEUS PEDIDOS</h4>
 		</div>
 		<div class="panel-body" style="min-height: 500px;">
-		</div>
 
+			<div class="col-md-12">
+				<input class="form-control" placeholder="Pesquisar" ng-model="filter">
+			</div> 
+
+			<div class="col-md-12" ng-show="orders.length">
+				<br />
+				<form novalidate name="editForm" ng-submit="submit()">
+					<div class="table-responsive">
+						<table class="table">
+						    <thead>
+							    <tr>
+							    	<th>Nº</th>
+							    	<th>Quantidade</th>
+							        <th>Data</th>
+							        <th>Total</th>
+							        <th>Status</th>
+							        <th></th>
+							    </tr>
+						    </thead>
+						    <tbody>
+						    	<tr ng-repeat="order in orders | filter: filter">
+							        <td>{{order.id}}</td>
+							        <td>{{order.quantity}}</td>
+							        <td>{{order.date}}</td>
+							        <td>{{order.total}}</td>
+							        <td>{{order.status}}</td>
+							        <td class="text-center text-nowrap">
+							        	<a href="#/home/order/detail" class="btn btn-warning">
+							        		Ver Detalhes
+							        	</a> 
+							        </td>
+						      	</tr>
+						    </tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>

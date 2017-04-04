@@ -81,14 +81,34 @@
 			</div>
 		</div>
 
-		<div class="col-md-12">	
-		
+		<div class="col-md-6">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.price.$dirty && editForm.price.$invalid] ">
 			    <label class="control-label" for="name">Preço *</label>
 			    <input ng-model="product.price.value" type="text" min="0" class="form-control" name="price" placeholder="price" ui-money-mask="2" required>    
 			    <span class="help-block" ng-show="editForm.price.$dirty && editForm.price.$error.required">Preço do produto é obrigatório.</span>
 			</div>
+		</div>
 
+		<div class="col-md-6">
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
+			    <label class="control-label" for="name">Estoque Minimo *</label>
+			    <input ng-model="product.packing.width" type="number" min="{{width.min}}" max="{{width.max}}" class="form-control" name="width" placeholder="width" required>    
+			</div>
+		</div>
+
+		<div class="col-md-12">	
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
+				<label>Fornecedor * <a href="/#/category/new">Novo fornecedor</a></label>
+				<select name="category" ng-model="product.category.id" class="form-control" required 
+				ng-controller="CategoriesController" ng-options="category.id as (category.name) for category in categories">
+					<option value="">Escolha um Fornecedor</option>
+				</select>
+				<!--<a href="/#/category/new">cadastre categoria</a>-->	
+				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Categoria do Produto é obrigatório.</span>
+			</div>
+		</div>
+
+		<div class="col-md-8">	
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
 				<label>Categoria * <a href="/#/category/new">Nova categoria</a></label>
 				<select name="category" ng-model="product.category.id" class="form-control" required 
@@ -98,7 +118,9 @@
 				<!--<a href="/#/category/new">cadastre categoria</a>-->	
 				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Categoria do Produto é obrigatório.</span>
 			</div>
+		</div>
 
+		<div class="col-md-4">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
 				<label>Status *</label>
 				<select name="active" ng-model="product.active" class="form-control" required 

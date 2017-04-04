@@ -1,39 +1,15 @@
-angular.module('ecommerce').controller('AdressesController', function($scope, ModalService){
+angular.module('ecommerce').controller('CardsController', function($scope, ModalService){
   	
     $scope.name = null;
   	$scope.age = null;
   	$scope.title = 'ENDEREÇO';
 
-    $scope.adress = {
-        firstName : 'Davisson',
-        lastName : 'Medeiros',
-        street : 'Avenida Presbítero Eliezer Martins Costa',
-        number : '179',
-        zipcode : '08696-100',
-        neighborhood : 'Jardim Varan',
-        city : 'Suzano',
-        state : 'SP',
-        phoneNumber : {
-          ddd :  '11',
-          number : '4749-7851' 
-        }
-    }
-
-    $scope.adresses = 
+    $scope.cards = 
     [
       {
-        firstName : 'Davisson',
-        lastName : 'Medeiros',
-        street : 'Avenida Presbítero Eliezer Martins Costa',
-        number : '179',
-        zipcode : '08696-100',
-        neighborhood : 'Jardim Varan',
-        city : 'Suzano',
-        state : 'SP',
-        phoneNumber : {
-          ddd :  '11',
-          number : '4749-7851' 
-        }
+        flag : 'VISA',
+        name : 'DAVISSON MEDEIROS',
+        number : '****.****.****.6889',
       }
     ]
 

@@ -18,33 +18,24 @@
 			
 			<div class="col-md-12">
 				<h4>CARTÕES PARA COMPRA</h4>
-				<hr />
 			</div>			
 			<div class="col-md-12" ng-show="cards.length">
 				<br />
 				<form novalidate name="editForm" ng-submit="submit()">
 					<div class="table-responsive">
 						<table class="table">
-						    <thead>
-							    <tr>
-							    	<th>#</th>
-							    	<th>Nome</th>
-							        <th>Código</th>
-							        <th>Descrição</th>
-							        <th>Status</th>
-							        <th></th>
-							    </tr>
-						    </thead>
 						    <tbody>
 						    	<tr ng-repeat="card in cards | filter: filter">
-							        <td>{{card.id}}</td>
+							        <td>{{card.flag}}</td>
 							        <td>{{card.name}}</td>
-							        <td>{{card.code}}</td>
-							        <td>{{card.description}}</td>
-							        <td>{{card.active}}</td>
+							        <td>{{card.number}}</td>
+							        <td>
+							        	<label class="radio-inline"><input type="radio" name="optradio" checked>Padrão</label>
+							        </td>
 							        <td class="text-center text-nowrap">
-							        	<a href="#/cards/edit/{{card.id}}" class="btn btn-warning">Editar</a> 
-							        	<a ng-click="inactivate(card)" class="btn btn-danger">Remover</a>
+							        	<a ng-click="inactivate(category)" class="btn btn-danger">
+				        					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				        				</a>
 							        </td>
 						      	</tr>
 						    </tbody>
@@ -55,25 +46,20 @@
 
 			<div class="col-md-12">
 				<h4>VALES</h4>
-				<hr />
+
 			</div>			
-			<div class="col-md-12" ng-show="cards.length">
+			<div class="col-md-12" >
 				<br />
 				<form novalidate name="editForm" ng-submit="submit()">
 					<div class="table-responsive">
 						<table class="table">
-						    <thead>
-							    <tr>
-							    	<th>#</th>
-							    	<th>Nome</th>
-							        <th>Código</th>
-							        <th>Descrição</th>
-							        <th>Status</th>
-							        <th></th>
-							    </tr>
-						    </thead>
 						    <tbody>
-						    	<tr ng-repeat="card in cards | filter: filter">
+						    	<tr ng-show="!voucher.length">
+						    		<td>
+						    			<p>No results found.
+						    		</td>
+						    	</tr>
+						    	<tr ng-repeat="voucher in vouchers | filter: filter" ng-show="voucher.length">
 							        <td>{{card.id}}</td>
 							        <td>{{card.name}}</td>
 							        <td>{{card.code}}</td>

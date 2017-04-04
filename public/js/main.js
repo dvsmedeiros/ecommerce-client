@@ -20,6 +20,19 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'MyRequestsController'
 		});
 
+		$routeProvider.when('/home/order', {
+		});
+
+		$routeProvider.when('/home/order/detail', {
+			templateUrl: 'partials/order-detail.html',
+			controller: 'OrderDetailController'
+		});
+
+		$routeProvider.when('/home/order/detail', {
+			templateUrl: 'partials/order-detail.html',
+			controller: 'OrderDetailController'
+		});
+		
 		$routeProvider.when('/home/account', {
 			templateUrl: 'partials/account.html',
 			controller: 'MyAccountController'
@@ -32,7 +45,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 
 		$routeProvider.when('/home/cards', {
 			templateUrl: 'partials/cards.html',
-			controller: 'HomeController'
+			controller: 'CardsController'
 		});
 
 		$routeProvider.when('/home/exchanges', {
