@@ -15,6 +15,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'HomeController'
 		});
 
+		//ORDERS
 		$routeProvider.when('/home/orders', {
 			templateUrl: 'partials/orders.html',
 			controller: 'MyRequestsController'
@@ -33,21 +34,25 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'OrderDetailController'
 		});
 		
+		//ACCOUNT
 		$routeProvider.when('/home/account', {
 			templateUrl: 'partials/account.html',
 			controller: 'MyAccountController'
 		});
 
+		//ADRESS
 		$routeProvider.when('/home/adresses', {
 			templateUrl: 'partials/adresses.html',
 			controller: 'AdressesController'
 		});
 
+		//CARDS
 		$routeProvider.when('/home/cards', {
 			templateUrl: 'partials/cards.html',
 			controller: 'CardsController'
 		});
 
+		//EXCHANGES
 		$routeProvider.when('/home/exchanges', {
 			templateUrl: 'partials/exchanges.html',
 			controller: 'HomeController'
@@ -98,6 +103,38 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		$routeProvider.when('/category/edit/:categoryId', {
 			templateUrl: 'partials/category.html',
 			controller: 'CategoryController'
+		});
+
+		//STOCK
+		$routeProvider.when('/stock', {
+			templateUrl: 'partials/stock.html',
+			controller: 'StockController'
+		});
+
+		$routeProvider.when('/stock/movement', {
+			templateUrl: 'partials/stock-movement.html',
+			controller: 'StockController'
+		});
+
+		//SUPPLIER
+		$routeProvider.when('/supplier', {
+			templateUrl: 'partials/suppliers.html',
+			controller: 'SuppliersController'
+		});
+
+		$routeProvider.when('/supplier/new', {
+			templateUrl: 'partials/supplier.html',
+			controller: 'SupplierController'
+		});
+
+		$routeProvider.when('/supplier/list', {
+			templateUrl: 'partials/suppliers.html',
+			controller: 'SuppliersController'
+		});
+		
+		$routeProvider.when('/supplier/edit/:supplierId', {
+			templateUrl: 'partials/supplier.html',
+			controller: 'SuppliersController'
 		});
 
 		//SHOPCART	
