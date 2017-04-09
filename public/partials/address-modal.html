@@ -14,7 +14,7 @@
             <div class="col-md-6">
               <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstName.$dirty && editForm.firstName.$invalid]">
                   <label class="control-label" for="firstName">Nome *</label>
-                  <input ng-model="adress.user.firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required>    
+                  <input ng-model="address.user.firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required>    
                   <span class="help-block" ng-show="editForm.firstName.$dirty && editForm.firstName.$error.required">Nome é obrigatório.</span>
               </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="col-md-6">
               <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.lastName.$dirty && editForm.lastName.$invalid]">
                   <label class="control-label" for="lastName">Sobrenome *</label>
-                  <input ng-model="adress.user.lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required>    
+                  <input ng-model="address.user.lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required>    
                   <span class="help-block" ng-show="editForm.lastName.$dirty && editForm.lastName.$error.required">Sobrenome é obrigatório.</span>
               </div>
 
@@ -36,7 +36,7 @@
                   <label class="control-label" for="zipcode">CEP * 
                   <a href="http://www.buscacep.correios.com.br/servicos/dnec/index.do" target="_blank">Não sabe o CEP?</a>
                   </label>
-                  <input ng-model="adress.zipcode" type="text" class="form-control" name="zipcode" placeholder="CEP" required>    
+                  <input ng-model="address.zipCode" ng-blur="findAddressByZipcode(address.zipCode)" type="text" class="form-control" name="zipcode" placeholder="CEP" ui-br-cep-mask required>    
                   <span class="help-block" ng-show="editForm.zipcode.$dirty && editForm.zipcode.$error.required">Nome da categoria é obrigatório.</span>
               </div>
             </div>
@@ -47,14 +47,14 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label" for="street">Endereço *</label>
-                <input ng-model="adress.street" type="text" class="form-control" name="street" placeholder="Street" disabled>    
+                <input ng-model="address.street" type="text" class="form-control" name="street" placeholder="Street" disabled>    
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
                   <label class="control-label" for="number">Número *</label>
-                  <input ng-model="adress.number" type="text" class="form-control" name="number" placeholder="Number" required>    
+                  <input ng-model="address.aNumber" type="text" class="form-control" name="number" placeholder="Number" required>    
                   <span class="help-block" ng-show="editForm.number.$dirty && editForm.number.$error.required">Número é obrigatório.</span>
               </div>
             </div>
@@ -62,37 +62,35 @@
             <div class="col-md-6">
               <div class="form-group">
                   <label class="control-label" for="complement">Complemento</label>
-                  <input ng-model="adress.complement" type="text" class="form-control" name="complement" placeholder="Complement">    
+                  <input ng-model="address.complement" type="text" class="form-control" name="complement" placeholder="Complement">    
               </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-5">
               <div class="form-group">
                 <label class="control-label" for="neighborhood">Bairro *</label>
-                <input ng-model="adress.neighborhood" type="text" class="form-control" name="neighborhood" placeholder="Neighborhood" disabled>    
+                <input ng-model="address.neighborhood.name" type="text" class="form-control" name="neighborhood" placeholder="Neighborhood" disabled>    
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-5">
               <div class="form-group">
                   <label class="control-label" for="city">Cidade *</label>
-                  <input ng-model="adress.city" type="text" class="form-control" name="city" placeholder="City" disabled>    
+                  <input ng-model="address.neighborhood.city.description" type="text" class="form-control" name="city" placeholder="City" disabled>    
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-2">
               <div class="form-group">
                 <label>Estado *</label>
-                <select name="state" ng-model="adress.state" class="form-control" disabled>
-                  <option value="">Escolha um estado</option>
-                </select>
+                <input ng-model="address.neighborhood.city.state.code" type="text" class="form-control" name="state" placeholder="State" disabled>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
                   <label class="control-label" for="name">Telefone *</label>
-                  <input ng-model="adress.user.firstPhoneNumber" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" required>    
+                  <input ng-model="address.user.firstPhoneNumber" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" required>    
                   <span class="help-block" ng-show="editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$error.required">Telefone é obrigatório.</span>
               </div>
             </div>
@@ -100,7 +98,7 @@
             <div class="col-md-6">
               <div class="form-group">
                   <label class="control-label" for="name">Telefone</label>
-                  <input ng-model="adress.user.secondPhoneNumber" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number">    
+                  <input ng-model="address.user.secondPhoneNumber" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number">    
               </div>
             </div>
 
@@ -120,7 +118,7 @@
         <div class="modal-footer">
           <div class="col-md-12">
             <div class="col-md-12">
-            <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">OK</button>
+            <button type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">OK</button>
             <button type="button" ng-click="cancel()" class="btn">Cancel</button>
           </div>
         </div>

@@ -44,6 +44,26 @@ angular.module('ecommerceServices', ['ngResource'])
 			}
 		});
 	})
+	.factory('addressResource', function($resource) {
+
+		return $resource('http://localhost:8888/ecommercews/address/:addressId', null, {
+			'update' : { 
+				method: 'PUT',
+				params: {
+					productId: '@addressId'
+				}
+			}
+		});
+	})
+	.factory('viaCepResource', function($resource) {
+
+		return $resource('https://viacep.com.br/ws/:cep/json', null, {
+			method: 'GET',
+				params: {
+					cep: '@cep'
+				}			
+			});
+	})
 	.factory('freightResource', function($resource) {
 
 		return $resource('http://localhost:8888/ecommercews/freight/:productId/:postalCode', null, {

@@ -41,9 +41,9 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		});
 
 		//ADRESS
-		$routeProvider.when('/home/adresses', {
-			templateUrl: 'partials/adresses.html',
-			controller: 'AdressesController'
+		$routeProvider.when('/home/addresses', {
+			templateUrl: 'partials/addresses.html',
+			controller: 'AddressesController'
 		});
 
 		//CARDS
