@@ -90,7 +90,7 @@
             <div class="col-md-6">
               <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
                   <label class="control-label" for="name">Telefone *</label>
-                  <input ng-model="address.user.firstPhoneNumber" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" required>    
+                  <input ng-model="address.user.firstPhoneNumber" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
                   <span class="help-block" ng-show="editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$error.required">Telefone é obrigatório.</span>
               </div>
             </div>
@@ -98,7 +98,7 @@
             <div class="col-md-6">
               <div class="form-group">
                   <label class="control-label" for="name">Telefone</label>
-                  <input ng-model="address.user.secondPhoneNumber" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number">    
+                  <input ng-model="address.user.secondPhoneNumber" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
               </div>
             </div>
 
