@@ -134,7 +134,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		
 		$routeProvider.when('/supplier/edit/:supplierId', {
 			templateUrl: 'partials/supplier.html',
-			controller: 'SuppliersController'
+			controller: 'SupplierController'
 		});
 
 		//SHOPCART	
