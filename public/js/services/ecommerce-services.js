@@ -27,6 +27,20 @@ angular.module('ecommerceServices', ['ngResource'])
 			}
 		});
 	})
+	.factory('supplierResource', function($resource) {
+
+		return $resource('http://localhost:8888/ecommercews/supplier/:supplierId', null, {
+			'update' : { 
+				method: 'PUT'
+			},
+			'inactivate' : {
+				method: 'PUT',
+				params: {
+					supplierId: '@supplierId'
+				}
+			}
+		});
+	})
 	.factory('cartResource', function($resource) {
 
 		return $resource('http://localhost:8888/ecommercews/cart/product/:productId', null, {
