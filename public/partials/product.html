@@ -6,32 +6,33 @@
 
 <form novalidate name="editForm" class="row" ng-submit="submit()">
 
-	
 	<div class="col-md-6">
-	
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
-		    <label class="control-label" for="name">Nome *</label>
-		    <input ng-model="product.name" type="text" class="form-control" name="name" placeholder="Name" required> 
-		    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Nome do produto é obrigatório.</span>
-		</div>
+		<div class="col-md-12">
+		
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
+			    <label class="control-label" for="name">Nome *</label>
+			    <input ng-model="product.name" type="text" class="form-control" name="name" placeholder="Name" required> 
+			    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Nome do produto é obrigatório.</span>
+			</div>
 
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
-		    <label class="control-label" for="name">Código *</label>
-		    <input ng-model="product.code" type="text" class="form-control" name="code" placeholder="Code" required>    
-		    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código do produto é obrigatório.</span>
-		</div>
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
+			    <label class="control-label" for="name">Código *</label>
+			    <input ng-model="product.code" type="text" class="form-control" name="code" placeholder="Code" required>    
+			    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código do produto é obrigatório.</span>
+			</div>
 
-		<div class="form-group">
-			<label>Descrição resumida</label>
-			<textarea ng-model="product.shortDescription" name="shortDescription" class="form-control">
-			</textarea>
-		</div>
+			<div class="form-group">
+				<label>Descrição resumida</label>
+				<textarea ng-model="product.shortDescription" name="shortDescription" class="form-control">
+				</textarea>
+			</div>
 
-		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.description.$dirty && editForm.description.$invalid] ">
-			<label>Descrição Detalhada *</label>
-			<textarea ng-model="product.description" name="description" class="form-control" rows="4" required="">
-			</textarea>
-			<span class="help-block" ng-show="editForm.description.$dirty && editForm.description.$error.required">Descrição detalhada do produto é obrigatório.</span>
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.description.$dirty && editForm.description.$invalid] ">
+				<label>Descrição Detalhada *</label>
+				<textarea ng-model="product.description" name="description" class="form-control" rows="4" required="">
+				</textarea>
+				<span class="help-block" ng-show="editForm.description.$dirty && editForm.description.$error.required">Descrição detalhada do produto é obrigatório.</span>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -81,7 +82,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.price.$dirty && editForm.price.$invalid] ">
 			    <label class="control-label" for="name">Preço *</label>
 			    <input ng-model="product.price.value" type="text" min="0" class="form-control" name="price" placeholder="price" ui-money-mask="2" required>    
@@ -89,22 +90,34 @@
 			</div>
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
 			    <label class="control-label" for="name">Estoque Minimo *</label>
 			    <input ng-model="product.packing.width" type="number" min="{{width.min}}" max="{{width.max}}" class="form-control" name="width" placeholder="width" required>    
 			</div>
 		</div>
 
+		<div class="col-md-4">	
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.unitType.$dirty && editForm.unitType.$invalid] ">
+				<label>Unidade Medida</label>
+				<select name="unitType" ng-model="product.unitType" class="form-control" required 
+				ng-controller="UnitTypeController" ng-options="unit.value as (unit.name) for unit in units">
+					<option value="">Escolha unidade</option>
+				</select>
+				<!--<a href="/#/unitType/new">cadastre categoria</a>-->	
+				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Categoria do Produto é obrigatório.</span>
+			</div>
+		</div>
+
 		<div class="col-md-12">	
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
-				<label>Fornecedor * <a href="/#/category/new">Novo fornecedor</a></label>
-				<select name="category" ng-model="product.category.id" class="form-control" required 
-				ng-controller="CategoriesController" ng-options="category.id as (category.name) for category in categories">
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.supplier.$dirty && editForm.supplier.$invalid] ">
+				<label>Fornecedor * <a href="/#/supplier/new">Novo fornecedor</a></label>
+				<select name="supplier" ng-model="product.supplier.id" class="form-control" required 
+				ng-controller="SuppliersController" ng-options="supplier.id as (supplier.companyName) for supplier in suppliers">
 					<option value="">Escolha um Fornecedor</option>
 				</select>
-				<!--<a href="/#/category/new">cadastre categoria</a>-->	
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Categoria do Produto é obrigatório.</span>
+				<!--<a href="/#/supplier/new">cadastre categoria</a>-->	
+				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Fornecedor do Produto é obrigatório.</span>
 			</div>
 		</div>
 
@@ -133,9 +146,11 @@
 	</div>
 
 	<div class="col-md-12">
-		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
-			Salvar
-		</button>
-		<a href="#/products/list" class="btn btn-primary">Voltar</a>
+		<div class="col-md-12">
+			<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
+				Salvar
+			</button>
+			<a href="#/products/list" class="btn btn-primary">Voltar</a>
+		</div>
 	</div>	
 </form>
