@@ -14,7 +14,6 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
 	$scope.length = {}
 	$scope.diameter = {}
 
-
 	//if present :productId on route, load the product by productId
 	if($routeParams.productId) {
 		productResource.get({productId: $routeParams.productId}, function(product) {
@@ -31,18 +30,18 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
             var type = $scope.product.packing.type;
             if(type === 'ENVELOPE'){
 
-            	$scope.width = {min : 11, max : 60}
+            	$scope.width = {min : 0, max : 60}
 				$scope.height = {min : 0, max : 0}
 				$scope.weight = {min : 0, max : 1}
-				$scope.length = {min : 16, max : 60}
+				$scope.length = {min : 0, max : 60}
 				$scope.diameter = {min : 0, max : 0}
 
             } else if (type === 'BOX') {
 
-            	$scope.width = {min : 11, max : 105}
-				$scope.height = {min : 2, max : 105}
+            	$scope.width = {min : 0, max : 105}
+				$scope.height = {min : 0, max : 105}
 				$scope.weight = {min : 0, max : 30}
-				$scope.length = {min : 16, max : 105}
+				$scope.length = {min : 0, max : 105}
 				$scope.diameter = {min : 0, max : 0}
 
             } else if (type === 'ROLL') {
@@ -50,8 +49,8 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
             	$scope.width = {min : 0, max : 0}
 				$scope.height = {min : 0, max : 0}
 				$scope.weight = {min : 0, max : 30}
-				$scope.length = {min : 18, max : 60}
-				$scope.diameter = {min : 5, max : 91}
+				$scope.length = {min : 0, max : 60}
+				$scope.diameter = {min : 0, max : 91}
 
             }
         }
