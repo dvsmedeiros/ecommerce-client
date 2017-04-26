@@ -30,7 +30,7 @@
 				    </tr>
 			    </thead>
 			    <tbody>
-			    	<tr ng-repeat="supplier in suppliers | filter: filter">
+			    	<tr ng-repeat="supplier in activeSuppliers | filter: filter">
 				        <td>{{supplier.id}}</td>
 				        <td>{{supplier.companyName}}</td>
 				        <td>{{supplier.cnpj.number}}</td>

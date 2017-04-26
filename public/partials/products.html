@@ -30,7 +30,7 @@
 				    </tr>
 			    </thead>
 			    <tbody>
-			    	<tr ng-repeat="product in products | filter: filter">
+			    	<tr ng-repeat="product in activeProducts | filter: filter">
 				        <td>{{product.id}}</td>
 				        <td>{{product.name}}</td>
 				        <td>{{product.code}}</td>
