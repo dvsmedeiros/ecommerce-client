@@ -53,8 +53,8 @@
 	            	
 		                <img class="img-responsive" src="http://placehold.it/800x600" alt="">
 		                <div class="panel-body">
-			                <h5 class="text-center"><a href="#">{{product.name}}</a></h5>
-			                <h5 class="text-center">R$ {{product.price.value | number:2}}</h5>
+			                <h5 class="text-center"><a href="/#/products/detail/{{product.id}}">{{product.name}}</a></h5>
+			                <h5 class="text-center">{{product.price.value | currency}}</h5>
 			                <!--<p>{{product.shortDescription}}</p>-->
 			                <a href="/#/products/detail/{{product.id}}" class="btn btn-success btn-block">COMPRAR</a>
 	                    </div>                  

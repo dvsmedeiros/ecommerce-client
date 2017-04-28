@@ -1,4 +1,4 @@
-angular.module('ecommerce').controller('ProductController', function($scope, $routeParams, productResource, freightResource){
+angular.module('ecommerce').controller('ProductController', function($scope, $routeParams, $location, productResource, freightResource, cartResource){
 	
 	$scope.message = ''
 	$scope.categories = []
@@ -85,4 +85,12 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
 		}	
 	};
 	
+	$scope.addItemToCart = function (productId) {
+		cartResource.save({productId: productId}, function(status) {
+			$location.path('/cart');
+			$scope.message = status.message;
+		}, function(erro) {
+			console.log(erro);
+		});
+	}
 });

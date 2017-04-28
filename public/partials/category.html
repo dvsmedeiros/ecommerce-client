@@ -16,7 +16,7 @@
 
 		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
 		    <label class="control-label" for="name">Código *</label>
-		    <input ng-model="category.code" type="text" class="form-control" name="code" placeholder="Code" required>    
+		    <input ng-model="category.code" type="text" class="form-control" name="code" required>    
 		    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código da categoria é obrigatório.</span>
 		</div>
 
