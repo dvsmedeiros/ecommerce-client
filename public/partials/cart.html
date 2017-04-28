@@ -4,8 +4,9 @@
     <!-- SHOP ITEM -->
     <div ng-show="cart.cartItems.length">
 		<div class="col-md-7">
-			<!-- <div class="panel panel-default"> -->
-			  	<!-- <div class="panel-body"> -->
+			<div class="panel panel-default">
+			  	<div class="panel-body">
+			  		<div>	
 					  	<!-- SHOP ITEM -->
 					  	<div class="row" ng-repeat="item in cart.cartItems">
 						  	<div class="col-md-4">
@@ -15,29 +16,29 @@
 		                    </div>
 						  	<div class="col-md-4">
 		                        <div class="caption">
-		                            <h4 class="pull-right">{{item.product.price.value | currency}} </h4>
-		                        	<h4><a href="/#/products/detail/{{item.product.id}}">{{item.product.name}}</a></h4>
+		                                <h4 class="pull-right">R${{item.product.price.value}}</h4>
+		                                <h4><a href="#">{{item.product.name}}</a></h4>
 		                        </div>
 		                    </div>
 		                	<div class="col-md-3">
 		                		<p class="text-center">Quantidade</p>
 								<div class="input-group number-spinner">
 									<span class="input-group-btn">
-										<a ng-click="removeItemCart(item)" class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
+										<a ng-click="delete(item)" class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></a>
 									</span>
 									<input type="text" class="form-control text-center" value="{{item.quantity}}" disabled="true">
 									<span class="input-group-btn">
-										<a href="" ng-click="addItemToCart(item.product.id)" class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
+										<a href="/#/cart/{{item.product.id}}" class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></a>
 									</span>
 								</div>
 							</div>
 							<div class="col-md-1">
-								<a href="" ng-click="removeAllItemsCart(item)"><span class="glyphicon glyphicon-remove"></span></a>
+								<a href="" ng-click="deleteAll(item)"><span class="glyphicon glyphicon-remove"></span></a>
 							</div>							
 						</div>
-										
-				<!-- </div> -->
-			<!-- </div> -->
+					</div>						
+				</div>
+			</div>
 		</div>
 		<div class="col-md-5">
 			<div class="panel panel-default" ng-controller="FreightController">
@@ -58,7 +59,7 @@
 		                    <div class="panel panel-default text-center">
 								<input type="radio" name="optradio">
 		                        <p><strong>{{freight.service.serviceName}}</strong></p>
-		                        <p>{{freight.service.value | currency}}</p>
+		                        <p>R$ {{freight.service.value}}</p>
 		                        <p>Prazo: {{freight.service.deadline}} dia(s)</p>
 		                    </div>
 		                </div>
@@ -71,15 +72,15 @@
 			  		<table class="table">
 			  			<tr>
 			  				<td><p>Subtotal</p></td>
-			  				<td><p class="text-right">{{cart.subTotal | currency}}</p></td>
+			  				<td><p class="text-right">R$ {{cart.subTotal}}</p></td>
 			  			</tr>
 			  			<tr>
 			  				<td><p>Frete</p></td>
-			  				<td><p class="text-right">{{freight.service.value | currency}}</p></td>
+			  				<td><p class="text-right">R$ 0.0</p></td>
 			  			</tr>
 			  			<tr>
 			  				<td><strong><p>Total</p></strong></td>
-			  				<td><strong><p class="text-right">{{cart.total | currency}}</p></strong></td>
+			  				<td><strong><p class="text-right">R$ {{cart.total}}</p></strong></td>
 			  			</tr>
 			  		</table>
 						<a class="btn btn-success btn-block" href="/#/checkout" >FINALIZAR COMPRA</a>

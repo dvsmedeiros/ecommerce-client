@@ -1,4 +1,4 @@
-angular.module('ecommerce').controller('CartController', function($scope, $route, $routeParams, $location, $window, cartResource, freightResource){
+angular.module('ecommerce').controller('CartController', function($scope, $route, $routeParams, $window, cartResource, freightResource){
 	
 	$scope.message = '';
 	$scope.cart = {
@@ -22,27 +22,16 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 		$scope.cart = $scope.get();
 	};
 
-	/*
 	if($routeParams.productId) {
 		cartResource.save({productId: $routeParams.productId}, function(status) {
-			$location.path('/#/cart');
-			$scope.message = status.message;
-		}, function(erro) {
-			console.log(erro);
-		});
-	}
-	*/
-
-	$scope.addItemToCart = function (id) {
-		cartResource.save({productId: id}, function(status) {
-			$scope.reload();
+			$window.location='/#/cart';
 			$scope.message = status.message;
 		}, function(erro) {
 			console.log(erro);
 		});
 	}
 
-	$scope.removeItemCart = function(cartItem) {		
+	$scope.delete = function(cartItem) {		
 		cartResource.update({productId: cartItem.product.id}, function(status) {
 			$scope.message = status.message;
 			$scope.reload();
@@ -51,7 +40,7 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 		});
 	};	
 	
-	$scope.removeAllItemsCart = function(cartItem) {		
+	$scope.deleteAll = function(cartItem) {		
 		cartResource.delete({productId: cartItem.product.id}, function(status) {
 			$scope.message = status.message;
 			$scope.reload();
@@ -59,5 +48,4 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 			console.log(erro);
 		});
 	};
-
 });
