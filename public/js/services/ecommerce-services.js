@@ -1,7 +1,7 @@
-angular.module('ecommerceServices', ['ngResource'])
+	angular.module('ecommerceServices', ['ngResource'])
 	.factory('categoryResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/products/category/:categoryId', null, {
+		return $resource('http://localhost:8888/ecommerce-api/products/category/:categoryId', null, {
 			'update' : { 
 				method: 'PUT'
 			},
@@ -15,7 +15,7 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('productResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/products/:productId', null, {
+		return $resource('http://localhost:8888/ecommerce-api/products/:productId', null, {
 			'update' : { 
 				method: 'PUT'
 			},
@@ -29,7 +29,7 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('supplierResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/supplier/:supplierId', null, {
+		return $resource('http://localhost:8888/ecommerce-api/supplier/:supplierId', null, {
 			'update' : { 
 				method: 'PUT'
 			},
@@ -43,7 +43,7 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('cartResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/cart/product/:productId', null, {
+		return $resource('http://localhost:8888/ecommerce-api/cart/product/:productId', null, {
 			'update' : { 
 				method: 'PUT',
 				params: {
@@ -60,7 +60,7 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('addressResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/address/:addressId', null, {
+		return $resource('http://localhost:8888/ecommerce-api/address/:addressId', null, {
 			'update' : { 
 				method: 'PUT',
 				params: {
@@ -80,7 +80,7 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('freightResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommercews/freight/:productId/:postalCode', null, {
+		return $resource('http://localhost:8888/ecommerce-api/freight/:productId/:postalCode', null, {
 			method: 'GET',
 				params: {
 					productId: '@productId',
