@@ -31,4 +31,7 @@ angular.module('ecommerce').controller('FreightController', function($scope, $ro
 		}		
 	};
 
+	$scope.$watch('cart.subTotal', function () {
+		$scope.calculateFreight();
+    }, true);
 });

@@ -2,7 +2,8 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 	
 	$scope.message = '';
 	$scope.cart = {
-		cartItems : []
+		cartItems : [],
+		subTotal : 0
 	};
 	$scope.freights = [];
 	$scope.quantity = 0;
@@ -25,16 +26,20 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 		$scope.cart = $scope.get();
 	};
 
-	/*
-	if($routeParams.productId) {
-		cartResource.save({productId: $routeParams.productId}, function(status) {
-			$location.path('/#/cart');
-			$scope.message = status.message;
-		}, function(erro) {
-			console.log(erro);
-		});
-	}
-	*/
+	var attTotal = function(){
+		var newValue = parseFloat($scope.freightSelected.value) + parseFloat($scope.cart.subTotal);
+		$scope.cart.total = newValue;
+	};
+
+	$scope.$watch('freightSelected.value', function () {
+		attTotal();
+    }, true);
+
+	$scope.$watch('cart.subTotal', function () {
+		$scope.freightSelected = {
+			value : 0
+		};
+    }, true);
 
 	$scope.addItemToCart = function (id) {
 		cartResource.save({productId: id}, function(status) {
