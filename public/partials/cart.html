@@ -32,7 +32,7 @@
 								</div>
 							</div>
 							<div class="col-md-1">
-								<a href="" ng-click="removeAllItemsCart(item)"><span class="glyphicon glyphicon-remove"></span></a>
+								<a href="" ng-click="removeAllItemsCart(item)"><span class="glyphicon glyphicon-trash"></span></a>
 							</div>							
 						</div>
 										
@@ -40,6 +40,7 @@
 			<!-- </div> -->
 		</div>
 		<div class="col-md-5">
+			<!--
 			<div class="panel panel-default" ng-controller="FreightController">
 				<div class="panel-body">
 					<h4 class="text-center">FRETE</h4>
@@ -65,25 +66,48 @@
 		            </div>	
 				</div>
 			</div>
+			-->
 			<div class="panel panel-default">
 			  	<div class="panel-body">
-			  		<h4 class="text-center">RESUMO</h4>
+				  	<h4 class="text-center">RESUMO</h4>
+				  	<br />
 			  		<table class="table">
 			  			<tr>
-			  				<td><p>Subtotal</p></td>
+			  				<th>PRODUTO</th>
+			  				<th>QUANTIDADE</th>
+			  				<th>TOTAL</th>
+			  			</tr>
+			  			<tr ng-repeat="item in cart.cartItems">
+			  				<td>{{item.product.name}}</td>
+			  				<td>{{item.quantity}}</td>
+			  				<td>{{item.product.price.value * item.quantity | currency}}</td>
+			  			</tr>
+			  		</table>
+			  		<table class="table">
+			  			<tr>
+			  				<td><strong><p>Subtotal</p></strong></td>
 			  				<td><p class="text-right">{{cart.subTotal | currency}}</p></td>
 			  			</tr>
+			  			<!--
 			  			<tr>
 			  				<td><p>Frete</p></td>
 			  				<td><p class="text-right">{{freightSelected.value | currency}}</p></td>
 			  			</tr>
+			  			-->
 			  			<tr>
-			  				<td><strong><p>Total</p></strong></td>
-			  				<td><strong><p class="text-right">{{cart.total | currency}}</p></strong></td>
+			  				<td><strong><h4><p>Total</p><h4></strong></td>
+			  				<td><strong><h4><p class="text-right">{{cart.total | currency}}</p></h4></strong></td>
 			  			</tr>
 			  		</table>
-						<a class="btn btn-success btn-block" href="/#/checkout" >FINALIZAR COMPRA</a>
+					<a class="btn btn-success btn-block" href="/#/checkout" >FINALIZAR COMPRA</a>
 			  	</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+				 	<h4 class="text-center">RECOMENDAÇÕES</h4>
+				</div>
 			</div>
 		</div>
 	</div>
