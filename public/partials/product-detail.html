@@ -43,10 +43,17 @@
                     <div class="panel panel-default text-center">
                         <p><strong>{{freight.service.serviceName}}</strong></p>
                         <p>{{freight.service.value | currency}}</p>
-                        <p>Prazo: {{freight.service.deadline}} dia(s)</p>
+                        <p>Prazo: {{freight.service.deadline}} dia(s)<span ng-show="freight.service.serviceName == 'PAC'"> úteis</span></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">RECOMENDAÇÕES</h4>
+                </div>
+            </div>
+        </div>
 </div>
