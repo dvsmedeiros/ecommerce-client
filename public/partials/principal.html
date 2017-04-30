@@ -1,7 +1,7 @@
 <div class="col-md-3">
 	<p class="lead">Shop Name</p>
-    <div class="list-group" ng-controller="CategoriesController">
-        <a ng-repeat="category in activeCategories" href="#" class="list-group-item">{{category.name}}</a>
+    <div class="list-group">
+        <a ng-repeat="category in activeCategories" href="" ng-click="findProductsByCategory(category.id)" class="list-group-item">{{category.name}}</a>
     </div>
 </div>
 <div class="col-md-9">
@@ -47,7 +47,7 @@
     -->
     <div class="row">
     	<br />
-       	<div ng-controller="ProductsController">
+       	<div>
 		    <div class="col-md-3" ng-repeat="product in activeProducts | filter: filter">
 	            <div class="panel panel-default">
 	            	
