@@ -35,7 +35,7 @@
 								<a href="" ng-click="removeAllItemsCart(item)"><span class="glyphicon glyphicon-trash"></span></a>
 							</div>							
 						</div>
-										
+				<a href="/#/"><span class="glyphicon glyphicon-plus"></span> continuar comprando</a>							
 				<!-- </div> -->
 			<!-- </div> -->
 		</div>
@@ -70,23 +70,25 @@
 			<div class="panel panel-default">
 			  	<div class="panel-body">
 				  	<h4 class="text-center">RESUMO</h4>
-				  	<br />
+				  	<hr />
+					<div class="row" ng-repeat="item in cart.cartItems">	  		
+				  		<div class="col-md-12">	
+				  			<div class="col-md-8">
+				  				<p>{{item.product.name}}</p>
+				  			</div>
+				  			<div class="col-md-1">
+				  				<p>{{item.quantity}}</p>
+				  			</div>
+				  			<div class="col-md-3">
+				  				<p class="pull-right">{{item.product.price.value * item.quantity | currency}}</p>
+				  			</div>
+				  		</div>
+			  		</div>	
+			  		<br />
 			  		<table class="table">
 			  			<tr>
-			  				<th>PRODUTO</th>
-			  				<th>QUANTIDADE</th>
-			  				<th>TOTAL</th>
-			  			</tr>
-			  			<tr ng-repeat="item in cart.cartItems">
-			  				<td>{{item.product.name}}</td>
-			  				<td>{{item.quantity}}</td>
-			  				<td>{{item.product.price.value * item.quantity | currency}}</td>
-			  			</tr>
-			  		</table>
-			  		<table class="table">
-			  			<tr>
-			  				<td><strong><p>Subtotal</p></strong></td>
-			  				<td><p class="text-right">{{cart.subTotal | currency}}</p></td>
+			  				<td><h5>Subtotal</h5></td>
+			  				<td><h5 class="text-right">{{cart.subTotal | currency}}</h5></td>
 			  			</tr>
 			  			<!--
 			  			<tr>
@@ -95,8 +97,13 @@
 			  			</tr>
 			  			-->
 			  			<tr>
-			  				<td><strong><h4><p>Total</p><h4></strong></td>
-			  				<td><strong><h4><p class="text-right">{{cart.total | currency}}</p></h4></strong></td>
+			  				<td><h4>Total</p><h4></td>
+			  				<td>
+			  					<h4 class="text-right">
+			  						<p>{{cart.total | currency}}</p> 
+			  						<p>ou 12 x {{cart.total / 12 | currency}}</p>
+			  					</h4>
+			  				</td>
 			  			</tr>
 			  		</table>
 					<a class="btn btn-success btn-block" href="/#/checkout" >FINALIZAR COMPRA</a>
