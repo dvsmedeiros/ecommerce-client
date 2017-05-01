@@ -5,9 +5,6 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 		cartItems : [],
 		subTotal : 0
 	};
-	$scope.freights = [];
-	$scope.quantity = 0;
-	$scope.product = {};
 	$scope.freightSelected = {
 		value : 0
 	};
