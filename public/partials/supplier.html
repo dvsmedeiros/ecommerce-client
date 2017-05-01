@@ -33,7 +33,7 @@
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cnpj.$dirty && editForm.cnpj.$invalid]">
 			    <label class="control-label" for="cnpj">CNPJ *</label>
 			    <!-- ui-br-cnpj-mask -->
-			    <input ng-model="supplier.cnpj.number" type="text" class="form-control" name="cnpj" placeholder="CNPJ"  ui-br-cnpj-mask required> 
+			    <input ng-model="supplier.cnpj.number" type="text" class="form-control" name="cnpj" placeholder="CNPJ" required> 
 			    <span class="help-block" ng-show="editForm.cnpj.$dirty && editForm.cnpj.$error.required">CNPJ é obrigatório.</span>
 			</div>
 		</div>
@@ -60,16 +60,23 @@
 			    <input ng-model="supplier.email" type="text" class="form-control" name="email" placeholder="Email" required> 
 			    <span class="help-block" ng-show="editForm.email.$dirty && editForm.email.$error.required">Email do produto é obrigatório.</span>
 			</div>
-
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
-				<label>Status *</label>
-				<select name="active" ng-model="supplier.active" class="form-control" required 
-				ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
-					<option value="">Escolha um status</option>
-				</select>
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Status do fornecedor é obrigatório.</span>
-			</div>
 		</div>
+
+		<div class="col-md-6">
+	      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
+	          	<label class="control-label" for="name">Telefone *</label>
+	          	<input ng-model="supplier.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
+	          	<span class="help-block" ng-show="editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$error.required">Telefone é obrigatório.</span>
+	      	</div>
+	    </div>
+
+	    <div class="col-md-6">
+		  	<div class="form-group">
+		      	<label class="control-label" for="name">Telefone</label>
+		      	<input ng-model="supplier.phones[1].phone" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
+		  	</div>
+		</div>
+
 	</div>
 	
 	<div class="col-md-6">
@@ -125,21 +132,17 @@
 	      	</div>
 	    </div>
 
-	    <div class="col-md-6">
-	      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
-	          	<label class="control-label" for="name">Telefone *</label>
-	          	<input ng-model="supplier.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
-	          	<span class="help-block" ng-show="editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$error.required">Telefone é obrigatório.</span>
-	      	</div>
-	    </div>
-
-	    <div class="col-md-6">
-		  	<div class="form-group">
-		      	<label class="control-label" for="name">Telefone</label>
-		      	<input ng-model="supplier.phones[1].phone" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
-		  	</div>
+	    <div class="col-md-12">
+	    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
+				<label>Status *</label>
+				<select name="active" ng-model="supplier.active" class="form-control" required 
+				ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
+					<option value="">Escolha um status</option>
+				</select>
+				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Status do fornecedor é obrigatório.</span>
+			</div>
 		</div>
-		
+
 	</div>
 
 	<div class="col-md-12">
@@ -147,7 +150,7 @@
 			<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
 				Salvar
 			</button>
-			<a href="#/suppliers/list" class="btn btn-primary">Voltar</a>
+			<a href="#/supplier/list" class="btn btn-primary">Voltar</a>
 		</div>
 	</div>
 
