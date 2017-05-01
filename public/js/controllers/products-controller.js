@@ -6,7 +6,7 @@ angular.module('ecommerce').controller('ProductsController', function($scope, $r
 
 
 	//load all products
-	productResource.query({active: false},function(products){
+	productResource.query( function(products){
 		$scope.products = products;
 	}, function(error){
 		console.log(error);
