@@ -93,7 +93,7 @@
 		<div class="col-md-4">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
 			    <label class="control-label" for="name">Estoque Minimo *</label>
-			    <input ng-model="product.packing.width" type="number" min="{{width.min}}" max="{{width.max}}" class="form-control" name="width" placeholder="width" required>    
+			    <input ng-model="product.minimalStock" type="number" min="0" class="form-control" name="width" placeholder="width" required>    
 			</div>
 		</div>
 
