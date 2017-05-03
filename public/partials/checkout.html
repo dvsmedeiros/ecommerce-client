@@ -5,83 +5,101 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="panel panel-default">
-					<div class="panel-heading text-center">ENDEREÇOS</div>
+					<div class="panel-heading text-center"><h4>ENDEREÇOS</h4></div>
 					<div class="panel-body">
 						<h4>Endereço Principal</h4>
 						<hr />
 						<strong>Davisson Medeiros</strong>
 						<p>
 							 Avenida Presbítero Eliezer Martins Costa, 179
-							 Jardim Varan
-							 08696-100 | Suzano - SP
+							 Jardim Varan<br />
+							 08696-100<br />
+							 Suzano - SP
 						</p>
-						<p>(11) 4749-7851</p>
+						<p>(11) 4749-7851 | (11) 4749-7851</p>
 						<hr />
 						<h4>Endereço Entrega</h4>
 						<div class="checkbox">
 							<label><input type="checkbox" value="">Endereço de Entrega igual ao Principal</label>
 						</div>
 						<hr />
-						<a class="btn btn-default btn-block" >INSERIR NOVO ENDEREÇO</a>
+						<a ng-controller="AddressesController" ng-click="modalShow()" class="btn btn-default btn-block" >INSERIR NOVO ENDEREÇO</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel panel-default">
-					<div class="panel-heading text-center">FORMA DE PAGAMENTO</div>
+					<div class="panel-heading text-center"><h4>FRETE</h4></div>
+					<div class="panel-body"></div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading text-center"><h4>FORMA DE PAGAMENTO</h4></div>
 					<div class="panel-body">
 						<div class="radio">
-							<label><input type="radio" name="optradio" ng-model="meansOfPayment" value="boleto">Boleto Bancário 
+							<label><input type="radio" name="optradio" ng-model="purchaseOrder.payment.paymentType" value="0" checked>Boleto Bancário 
 							</label>
 						</div>
 						<hr />
 						<div class="radio">
-							<label><input type="radio" name="optradio" ng-model="meansOfPayment" value="card">Cartão de Crédito</label>
+							<label><input type="radio" name="optradio" ng-model="purchaseOrder.payment.paymentType" value="1">Cartão de Crédito</label>
 						</div>
 						<br />
-						<div ng-show="meansOfPayment == 'card'">
-							<form class="form-horizontal">
-								<div class="form-group">
-									<label class="control-label col-sm-3" for="email">Cartão:</label>
+						<div ng-show="purchaseOrder.payment.paymentType == 1">
+							<form novalidate name="editForm" class="form-horizontal" ng-submit="submit()">
+
+								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
+									<label class="control-label col-sm-3" for="number">Cartão:</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control">
+										<input ng-model="purchaseOrder.payment.card.aNumber" type="text" class="form-control" name="number" ui-mask="9999 9999 9999 9999" required>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="control-label col-sm-3" for="email">Parcelas:</label>
+
+								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.quota.$dirty && editForm.quota.$invalid]">
+									<label class="control-label col-sm-3" for="quota">Parcelas:</label>
 									<div class="col-sm-9">
-										<select class="form-control">
-								        	<option>1 x Parcela</option>
-								        </select>
+										<select name="quota" ng-model="purchaseOrder.payment.quota.aNumber" class="form-control"
+											ng-init="quotas=[1,2,3,4,5,6,7,8,9,10,11,12]"   
+											ng-options="quota for quota in quotas" required>
+											<option value="">Selecione Parcelas</option>
+										</select>
+										<input type="hidden" ng-model="purchaseOrder.payment.quota.quotaValue" value="{{purchaseOrder.total / purchaseOrder.payment.quota.aNumber}}">
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="control-label col-sm-3" for="email">Nome:</label>
+
+								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
+									<label class="control-label col-sm-3" for="name">Nome:</label>
 									<div class="col-sm-9">
-										<input type="text" class="form-control">
+										<input ng-model="purchaseOrder.payment.card.name" type="text" class="form-control" name="name" required>
 									</div>
 								</div>
+
 								<div class="form-group">
 									<label class="control-label col-sm-4" for="email">Vencimento:</label>
 									<div class="col-sm-4">
-										<select class="form-control">
-								        	<option>Mês</option>
-								        </select>
+										<select name="month" ng-model="purchaseOrder.payment.card.expiringDate.month" class="form-control"
+											ng-init="months=[1,2,3,4,5,6,7,8,9,10,11,12]"   
+											ng-options="month for month in months" required>
+											<option value="">Mes</option>
+										</select>
 									</div>
 									<div class="col-sm-4">
-										<select class="form-control">
-								        	<option>Ano</option>
-								        </select>
+										<select name="year" ng-model="purchaseOrder.payment.card.expiringDate.year" class="form-control"
+											ng-init="years=[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]"   
+											ng-options="year for year in years" required>
+											<option value="">Ano</option>
+										</select>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="control-label col-sm-5" for="email">Cód. Segurança:</label>
+
+								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cvv.$dirty && editForm.cvv.$invalid]">
+									<label class="control-label col-sm-5" for="cvv">Cód. Segurança:</label>
 									<div class="col-sm-7">
-										<input type="text" class="form-control">
+										<input ng-model="purchaseOrder.payment.card.cvv" type="text" class="form-control" name="cvv" ui-mask="999" required>
 									</div>
 								</div>
+
 								<div class="checkbox">
-									<label><input type="checkbox" value="">Salvar cartão para para próxima compra</label>
+									<label><input type="checkbox" value="">Salvar cartão para para próxima compras</label>
 								</div>
 							</form>
 						</div>
@@ -90,31 +108,45 @@
 			</div>
 			<div class="col-md-4">
 				<div class="panel panel-default">
-				<div class="panel-heading text-center">REVISÃO DO PEDIDO</div>
+					<div class="panel-heading text-center"><h4>REVISÃO DO PEDIDO</h4></div>
 					<div class="panel-body">
-						<p>Produto 1</p>
-						<p>Qtde: 1</p>
-						<p>Preço: $ 48.99</p>
-						<hr />
-						<p>Produto 2</p>
-						<p>Qtde: 3</p>
-						<p>Preço: $ 48.99</p>
-						
-						<table class="table">
-					  			<tr>
-					  				<td><h5>Subtotal</h5></td>
-					  				<td><h5 class="text-right">$ 49.98</h5></td>
-					  			</tr>
-					  			<tr>
-					  				<td><h5>Frete</h5></td>
-					  				<td><h5 class="text-right">$ 49.98</h5></td>
-					  			</tr>
-					  			<tr>
-					  				<td><h4>Total</h4></td>
-					  				<td><h4 class="text-right">$ 49.98</h4></td>
-					  			</tr>
-					  		</table>
-						<a class="btn btn-success btn-block" href="/ecommerce-api/public/home.html">FINALIZAR COMPRA</a>
+
+					 	<div class="col-md-12">
+							<div class="row" ng-repeat="item in purchaseOrder.items">	  		
+					  			<div class="col-md-7">
+					  				<p>{{item.product.name}}</p>
+					  			</div>
+					  			<div class="col-md-2">
+					  				<p>{{item.quantity}}</p>
+					  			</div>
+					  			<div class="col-md-3">
+					  				<p class="pull-right">{{item.product.price.value * item.quantity | currency}}</p>
+					  			</div>
+					  		</div>	
+					  	</div>
+				  		<br />
+				  		<table class="table">
+				  			<tr>
+				  				<td><h5>Subtotal</h5></td>
+				  				<td><h5 class="text-right">{{purchaseOrder.subTotal | currency}}</h5></td>
+				  			</tr>
+				  			
+				  			<tr>
+				  				<td><h5>Frete</h5></td>
+				  				<td><h5 class="text-right">{{freightSelected.value | currency}}</h5></td>
+				  			</tr>
+				  	
+				  			<tr>
+				  				<td><h4>Total</p><h4></td>
+				  				<td>
+				  					<h4 class="text-right">
+				  						<p>{{purchaseOrder.total | currency}}</p> 
+				  						<p>ou 12 x {{purchaseOrder.total / 12 | currency}}</p>
+				  					</h4>
+				  				</td>
+				  			</tr>
+				  		</table>
+						<a class="btn btn-success btn-block" ng-click="submit()">FINALIZAR COMPRA</a>
 					</div>
 				</div>
 			</div>
