@@ -1,10 +1,11 @@
-angular.module('ecommerce').controller('CheckoutController', function($scope, cartResource){
+angular.module('ecommerce').controller('CheckoutController', function($scope, cartResource, checkoutResource, freightResource){
 	
 	$scope.message = '';
 	$scope.purchaseOrder = {
 		subTotal : 0,
 		total : 0,
 		items : [],
+		freight: {},
 		payment : {
 			card : {}, 
 			paymentType : 0,
@@ -19,11 +20,8 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 	$scope.$watch('purchaseOrder.payment.paymentType', function () {
 		
 		$scope.purchaseOrder.payment.purchaseValue = $scope.purchaseOrder.total;
-
-
-		if($scope.purchaseOrder.payment.paymentType == 0){
-			$scope.purchaseOrder.payment.card = {};	
-		}
+		$scope.purchaseOrder.payment.quota = {};
+		$scope.purchaseOrder.payment.card = null;
 
     }, true);
 
@@ -32,6 +30,45 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 		$scope.purchaseOrder.payment.quota.quotaValue = $scope.purchaseOrder.total / $scope.purchaseOrder.payment.quota.aNumber;
 
     }, true);
+
+	var attTotal = function(){
+		var newValue = parseFloat($scope.purchaseOrder.freight.value) + parseFloat($scope.purchaseOrder.subTotal);
+		$scope.purchaseOrder.total = newValue;
+	};
+
+	$scope.$watch('purchaseOrder.freight.value', function () {
+		attTotal();
+    }, true);
+
+	$scope.$watch('purchaseOrder.subTotal', function () {
+		$scope.purchaseOrder.freight = {
+			value : 0
+		};
+    }, true);
+
+	$scope.submit = function(){
+		console.log(JSON.stringify($scope.purchaseOrder));
+
+		if ($scope.editForm.$valid || $scope.purchaseOrder.payment.paymentType == 0) {
+
+			checkoutResource.save($scope.purchaseOrder, function(status) {
+				$scope.purchaseOrder = clearOrder();
+				$scope.message = status.message;
+				//$route.reload();
+			}, function(erro) {
+				console.log(erro);
+			});
+		}
+	}
+
+	freightResource.query(
+		{ 
+			postalCode: '08696100'
+		}, function(freights) {
+			$scope.freights = freights;			
+		}, function(erro) {
+			console.log(erro);
+	});
 
 	$scope.get = function(){
 
@@ -65,9 +102,24 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 
 	$scope.purchaseOrder.items = $scope.get();
 
-	$scope.submit = function(){
-		console.log(JSON.stringify($scope.purchaseOrder));
-	}
+	var clearOrder = function(){
 
+		$scope.purchaseOrder = {
+
+			subTotal : 0,
+			total : 0,
+			items : [],
+			freight:{},
+			payment : {
+				card : {}, 
+				paymentType : 0,
+				purchaseValue : 0,
+				quota : {
+					aNumber : null,
+					quotaValue : null
+				}
+			}
+		}
+	};
 
 });
