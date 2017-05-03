@@ -69,6 +69,9 @@
 			}
 		});
 	})
+	.factory('checkoutResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/checkout', null, null);
+	})
 	.factory('viaCepResource', function($resource) {
 
 		return $resource('https://viacep.com.br/ws/:cep/json', null, {
