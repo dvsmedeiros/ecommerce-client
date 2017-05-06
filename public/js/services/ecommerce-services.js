@@ -64,7 +64,18 @@
 			'update' : { 
 				method: 'PUT',
 				params: {
-					productId: '@addressId'
+					addressId: '@addressId'
+				}
+			}
+		});
+	})
+	.factory('orderResource', function($resource) {
+
+		return $resource('http://localhost:8888/ecommerce-api/orders/:orderId', null, {
+			'update' : { 
+				method: 'PUT',
+				params: {
+					orderId: '@orderId'
 				}
 			}
 		});
