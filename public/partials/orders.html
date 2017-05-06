@@ -21,15 +21,15 @@
 				<input class="form-control" placeholder="Pesquisar" ng-model="filter">
 			</div> 
 
-			<div class="col-md-12" ng-show="orders.length">
+			<div class="col-md-12">
 				<br />
 				<form novalidate name="editForm" ng-submit="submit()">
 					<div class="table-responsive">
 						<table class="table">
 						    <thead>
 							    <tr>
-							    	<th>Nº</th>
-							    	<th>Quantidade</th>
+							    	<th>Nº Pedido</th>
+							    	<th>Itens</th>
 							        <th>Data</th>
 							        <th>Total</th>
 							        <th>Status</th>
@@ -37,14 +37,17 @@
 							    </tr>
 						    </thead>
 						    <tbody>
+						    	<tr ng-show="!orders.length"> 
+						    		<td>No results found.</td>
+						    	</tr>
 						    	<tr ng-repeat="order in orders | filter: filter">
 							        <td>{{order.id}}</td>
-							        <td>{{order.quantity}}</td>
-							        <td>{{order.date}}</td>
-							        <td>{{order.total}}</td>
-							        <td>{{order.status}}</td>
+							        <td>{{order.items.length}}</td>
+							        <td>{{order.insertionDate}}</td>
+							        <td>{{order.total | currency}}</td>
+							        <td>{{order.statusOrder}}</td>
 							        <td class="text-center text-nowrap">
-							        	<a href="#/home/order/detail" class="btn btn-warning">
+							        	<a href="#/home/orders/detail/{{order.id}}" class="btn btn-warning">
 							        		Ver Detalhes
 							        	</a> 
 							        </td>
