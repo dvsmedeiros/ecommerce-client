@@ -21,15 +21,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.mask', 'ui.util
 			controller: 'MyRequestsController'
 		});
 
-		$routeProvider.when('/home/order', {
-		});
-
-		$routeProvider.when('/home/order/detail', {
-			templateUrl: 'partials/order-detail.html',
-			controller: 'OrderDetailController'
-		});
-
-		$routeProvider.when('/home/order/detail', {
+		$routeProvider.when('/home/orders/detail/:orderId', {
 			templateUrl: 'partials/order-detail.html',
 			controller: 'OrderDetailController'
 		});
@@ -156,6 +148,12 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.mask', 'ui.util
 		//CHECKOUT
 		$routeProvider.when('/checkout', {
 			templateUrl: 'partials/checkout.html',
+			controller: 'CheckoutController'
+		});
+
+		//SINGUP
+		$routeProvider.when('/singup', {
+			templateUrl: 'partials/singup.html',
 			controller: 'CheckoutController'
 		});
 
