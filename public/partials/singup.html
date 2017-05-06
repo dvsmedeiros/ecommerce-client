@@ -1,0 +1,145 @@
+<div class="page-header text-center">
+	<h1>CADASTRO DE USUÁRIO</h1>
+</div>
+<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+<div class="col-md-12">
+	<form novalidate name="editForm" class="row" ng-submit="submit()">
+	    <div class="col-md-6">
+
+	  		<div class="col-md-6">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstName.$dirty && editForm.firstName.$invalid]">
+				    <label class="control-label" for="firstName">Nome *</label>
+				    <input ng-model="user.firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required> 
+				</div>
+			</div>
+
+			<div class="col-md-6">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.lastName.$dirty && editForm.lastName.$invalid]">
+				    <label class="control-label" for="lastName">Sobrenome *</label>
+				    <input ng-model="user.lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required> 
+				</div>
+			</div>
+	  		
+			<div class="col-md-6">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.password.$dirty && editForm.password.$invalid]">
+				    <label class="control-label" for="password">Password *</label>
+				    <input ng-model="user.password" type="password" class="form-control" name="password" placeholder="Password" required> 
+				</div>
+			</div>
+
+			<div class="col-md-6">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.confirmPassword.$dirty && editForm.confirmPassword.$invalid]">
+				    <label class="control-label" for="confirmPassword">Confirmar Password *</label>
+				    <input ng-model="user.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required> 
+				</div>
+			</div>
+			
+			<div class="col-md-5">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cpf.$dirty && editForm.cpf.$invalid]">
+				    <label class="control-label" for="cpf">CPF *</label>
+				    <input ng-model="user.cpf" type="text" class="form-control" name="cpf" placeholder="CPF" ui-br-cpf-mask required> 
+				</div>
+			</div>	
+
+			<div class="col-md-7">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.email.$dirty && editForm.email.$invalid]">
+				    <label class="control-label" for="email">Email *</label>
+				    <input ng-model="user.email" type="text" class="form-control" name="email" placeholder="Email"required> 
+				</div>
+			</div>	
+
+			<div class="col-md-6">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.gender.$dirty && editForm.gender.$invalid]">
+					<label>Gênero *</label>
+					<select name="gender" ng-model="supplier.gender" class="form-control" required 
+					ng-controller="GenderController" ng-options="gender.value as (gender.name | uppercase) for gender in genders">
+						<option value="">Escolha um Gênero</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.bornDate.$dirty && editForm.bornDate.$invalid]">
+				    <label class="control-label" for="bornDate">Data de Nascimento *</label>
+				    <input ng-model="user.bornDate" type="date" class="form-control" name="bornDate" placeholder="Born Date" required> 
+				</div>
+			</div>	
+			  
+			<div class="col-md-6">
+		      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
+		          	<label class="control-label" for="name">Telefone *</label>
+		          	<input ng-model="supplier.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
+		          	<span class="help-block" ng-show="editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$error.required">Telefone é obrigatório.</span>
+		      	</div>
+		    </div>
+
+		    <div class="col-md-6">
+			  	<div class="form-group">
+			      	<label class="control-label" for="name">Telefone</label>
+			      	<input ng-model="supplier.phones[1].phone" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
+			  	</div>
+			</div>
+			
+		</div>
+
+		<div class="col-md-6">
+			
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.zipcode.$dirty && editForm.zipcode.$invalid]">
+		        	<label class="control-label" for="zipcode">CEP * 
+			        <a href="http://www.buscacep.correios.com.br/servicos/dnec/index.do" target="_blank">Não sabe o CEP?</a>
+			        </label>
+			        <input ng-model="supplier.address.zipCode" ng-blur="findAddressByZipcode(supplier.address.zipCode)" type="text" class="form-control" name="zipcode" placeholder="CEP" ui-br-cep-mask required>    
+			        <span class="help-block" ng-show="editForm.zipcode.$dirty && editForm.zipcode.$error.required">CEP é obrigatório.</span>
+		      	</div>
+
+		      	<div class="form-group">
+		        	<label class="control-label" for="street">Endereço *</label>
+		        	<input ng-model="supplier.address.street" type="text" class="form-control" name="street" placeholder="Street" disabled>    
+		      	</div>
+		    </div>
+
+	      	<div class="col-md-6">
+		      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
+		          	<label class="control-label" for="number">Número *</label>
+		          	<input ng-model="supplier.address.aNumber" type="text" class="form-control" name="number" placeholder="Number" required>    
+		          	<span class="help-block" ng-show="editForm.number.$dirty && editForm.number.$error.required">Número é obrigatório.</span>
+		      	</div>
+		    </div>
+
+		    <div class="col-md-6">
+			  	<div class="form-group">
+			      	<label class="control-label" for="complement">Complemento</label>
+			      	<input ng-model="supplier.address.complement" type="text" class="form-control" name="complement" placeholder="Complement">    
+			  	</div>
+	        </div>
+
+	        <div class="col-md-12">
+			    <div class="form-group">
+			        <label class="control-label" for="neighborhood">Bairro *</label>
+			        <input ng-model="supplier.address.neighborhood.name" type="text" class="form-control" name="neighborhood" placeholder="Neighborhood" disabled>    
+			    </div>
+	        </div>
+
+	        <div class="col-md-6">
+		        <div class="form-group">
+		            <label class="control-label" for="city">Cidade *</label>
+		            <input ng-model="supplier.address.neighborhood.city.description" type="text" class="form-control" name="city" placeholder="City" disabled>    
+		        </div>
+		    </div>
+	        
+	        <div class="col-md-6">   
+		      	<div class="form-group">
+		        	<label>Estado *</label>
+		        	<input ng-model="supplier.address.neighborhood.city.state.code" type="text" class="form-control" name="state" placeholder="State" disabled>
+		      	</div>
+		    </div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="col-md-12">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+	</form>                
+</div>
