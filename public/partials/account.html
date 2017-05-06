@@ -15,9 +15,91 @@
 			<h4 class="text-center">MINHA CONTA</h4>
 		</div>
 		<div class="panel-body" style="min-height: 500px;">
+			<br />
 			<div class="col-md-12">
-				
+				<form novalidate name="editForm" class="row" ng-submit="submit()">
+				    <div class="col-md-12">
+
+				  		<div class="col-md-6">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstName.$dirty && editForm.firstName.$invalid]">
+							    <label class="control-label" for="firstName">Nome *</label>
+							    <input ng-model="user.firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required> 
+							</div>
+						</div>
+
+						<div class="col-md-6">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.lastName.$dirty && editForm.lastName.$invalid]">
+							    <label class="control-label" for="lastName">Sobrenome *</label>
+							    <input ng-model="user.lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required> 
+							</div>
+						</div>
+				  		
+						<div class="col-md-6">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.password.$dirty && editForm.password.$invalid]">
+							    <label class="control-label" for="password">Password *</label>
+							    <input ng-model="user.password" type="password" class="form-control" name="password" placeholder="Password" required> 
+							</div>
+						</div>
+
+						<div class="col-md-6">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.confirmPassword.$dirty && editForm.confirmPassword.$invalid]">
+							    <label class="control-label" for="confirmPassword">Confirmar Password *</label>
+							    <input ng-model="user.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required> 
+							</div>
+						</div>
+						
+						<div class="col-md-5">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cpf.$dirty && editForm.cpf.$invalid]">
+							    <label class="control-label" for="cpf">CPF *</label>
+							    <input ng-model="user.cpf" type="text" class="form-control" name="cpf" placeholder="CPF" ui-br-cpf-mask required> 
+							</div>
+						</div>	
+
+						<div class="col-md-7">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.email.$dirty && editForm.email.$invalid]">
+							    <label class="control-label" for="email">Email *</label>
+							    <input ng-model="user.email" type="text" class="form-control" name="email" placeholder="Email"required> 
+							</div>
+						</div>	
+
+						<div class="col-md-6">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.gender.$dirty && editForm.gender.$invalid]">
+								<label>Gênero *</label>
+								<select name="gender" ng-model="supplier.gender" class="form-control" required 
+								ng-controller="GenderController" ng-options="gender.value as (gender.name | uppercase) for gender in genders">
+									<option value="">Escolha um Gênero</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.bornDate.$dirty && editForm.bornDate.$invalid]">
+							    <label class="control-label" for="bornDate">Data de Nascimento *</label>
+							    <input ng-model="user.bornDate" type="date" class="form-control" name="bornDate" placeholder="Born Date" required> 
+							</div>
+						</div>	
+						  
+						<div class="col-md-6">
+					      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
+					          	<label class="control-label" for="name">Telefone *</label>
+					          	<input ng-model="supplier.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
+					      	</div>
+					    </div>
+
+					    <div class="col-md-6">
+						  	<div class="form-group">
+						      	<label class="control-label" for="name">Telefone</label>
+						      	<input ng-model="supplier.phones[1].phone" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
+						  	</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-primary">Atualizar</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-	</div>
+	</div>		
 </div>
