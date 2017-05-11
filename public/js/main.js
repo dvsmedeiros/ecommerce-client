@@ -28,8 +28,11 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.mask', 'ui.util
 		
 		//ACCOUNT
 		$routeProvider.when('/home/account', {
+		});
+
+		$routeProvider.when('/home/account/:userId', {
 			templateUrl: 'partials/account.html',
-			controller: 'MyAccountController'
+			controller: 'AccountController'
 		});
 
 		//ADRESS
@@ -154,7 +157,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.mask', 'ui.util
 		//SINGUP
 		$routeProvider.when('/singup', {
 			templateUrl: 'partials/singup.html',
-			controller: 'CheckoutController'
+			controller: 'SingupController'
 		});
 
 		$routeProvider.otherwise({redirectTo: '/'});
