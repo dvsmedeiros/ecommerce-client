@@ -1,5 +1,5 @@
 angular.module('ecommerce').controller('GenderController', function($scope, $http){
 	
-	$scope.genders = [{value: 'M', name: 'Masculino'}, {value: 'F', name: 'Feminino'}, {value: 'O', name: 'Outro'}];
+	$scope.genders = [{value: 'MALE', name: 'Masculino'}, {value: 'FEMALE', name: 'Feminino'}, {value: 'OTHER', name: 'Outro'}];
 
 });
