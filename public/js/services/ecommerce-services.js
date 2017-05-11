@@ -80,6 +80,9 @@
 			}
 		});
 	})
+	.factory('singupResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/singup', null, null);
+	})
 	.factory('checkoutResource', function($resource) {
 		return $resource('http://localhost:8888/ecommerce-api/checkout', null, null);
 	})
@@ -99,6 +102,15 @@
 				params: {
 					productId: '@productId',
 					postalCode: '@postalCode'
+				}			
+			});
+	})
+	.factory('accountResource', function($resource) {
+
+		return $resource('http://localhost:8888/ecommerce-api/account/:userId', null, {
+			method: 'GET',
+				params: {
+					userId: '@userId'
 				}			
 			});
 	})
