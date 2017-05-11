@@ -33,6 +33,13 @@
 							    <input ng-model="user.lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required> 
 							</div>
 						</div>
+
+						<div class="col-md-12">
+					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.email.$dirty && editForm.email.$invalid]">
+							    <label class="control-label" for="email">Email *</label>
+							    <input ng-model="user.email" type="text" class="form-control" name="email" placeholder="Email"required> 
+							</div>
+						</div>	
 				  		
 						<div class="col-md-6">
 					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.password.$dirty && editForm.password.$invalid]">
@@ -48,48 +55,40 @@
 							</div>
 						</div>
 						
-						<div class="col-md-5">
+						<div class="col-md-4">
 					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cpf.$dirty && editForm.cpf.$invalid]">
 							    <label class="control-label" for="cpf">CPF *</label>
-							    <input ng-model="user.cpf" type="text" class="form-control" name="cpf" placeholder="CPF" ui-br-cpf-mask required> 
+							    <input ng-model="user.cpf.number" type="text" class="form-control" name="cpf" placeholder="CPF" ui-br-cpf-mask required> 
 							</div>
 						</div>	
 
-						<div class="col-md-7">
-					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.email.$dirty && editForm.email.$invalid]">
-							    <label class="control-label" for="email">Email *</label>
-							    <input ng-model="user.email" type="text" class="form-control" name="email" placeholder="Email"required> 
-							</div>
-						</div>	
-
-						<div class="col-md-6">
+						<div class="col-md-3">
 					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.gender.$dirty && editForm.gender.$invalid]">
 								<label>Gênero *</label>
-								<select name="gender" ng-model="supplier.gender" class="form-control" required 
-								ng-controller="GenderController" ng-options="gender.value as (gender.name | uppercase) for gender in genders">
-									<option value="">Escolha um Gênero</option>
+								<select name="gender" class="form-control" required>
+									<option value="">{{user.gender}}</option>
 								</select>
 							</div>
 						</div>
 						
-						<div class="col-md-6">
+						<div class="col-md-5">
 					    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.bornDate.$dirty && editForm.bornDate.$invalid]">
 							    <label class="control-label" for="bornDate">Data de Nascimento *</label>
-							    <input ng-model="user.bornDate" type="date" class="form-control" name="bornDate" placeholder="Born Date" required> 
+							    <input type="text" class="form-control" name="bornDate" value="{{user.bornDate}}" required> 
 							</div>
 						</div>	
 						  
 						<div class="col-md-6">
 					      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
 					          	<label class="control-label" for="name">Telefone *</label>
-					          	<input ng-model="supplier.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
+					          	<input ng-model="user.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
 					      	</div>
 					    </div>
 
 					    <div class="col-md-6">
 						  	<div class="form-group">
 						      	<label class="control-label" for="name">Telefone</label>
-						      	<input ng-model="supplier.phones[1].phone" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
+						      	<input ng-model="user.phones[1].phone" type="text" class="form-control" name="secondPhoneNumber" placeholder="Phone Number" ui-br-phone-number>    
 						  	</div>
 						</div>
 					</div>
