@@ -2,23 +2,13 @@ angular.module('ecommerce').controller('ProductsController', function($scope, $r
 	
 	$scope.message = '';
 	$scope.products = [];
-	$scope.activeProducts = [];
 
-
-	//load all products
-	productResource.query( function(products){
+	productResource.query(function(products){
 		$scope.products = products;
 	}, function(error){
 		console.log(error);
 	});
 	
-	//load all products
-	productResource.query({active: true},function(products){
-		$scope.activeProducts = products;
-	}, function(error){
-		console.log(error);
-	});
-
 	$scope.delete = function(product) {
 		
 		productResource.delete({productId: product.id}, function() {

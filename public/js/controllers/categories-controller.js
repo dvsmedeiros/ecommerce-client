@@ -3,17 +3,8 @@ angular.module('ecommerce').controller('CategoriesController', function($scope, 
 	$scope.category = {};
 	$scope.message = '';
 	$scope.categories = [];
-	$scope.activeCategories = [];
 
-	//load all categories
-	categoryResource.query({active: true}, function(categories){
-		$scope.activeCategories = categories;
-	}, function(error){
-		console.log(error);
-	});
-
-	//load all categories
-	categoryResource.query({active: false}, function(categories){
+	categoryResource.query(function(categories){
 		$scope.categories = categories;
 	}, function(error){
 		console.log(error);

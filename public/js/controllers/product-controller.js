@@ -1,20 +1,32 @@
-angular.module('ecommerce').controller('ProductController', function($scope, $routeParams, $location, productResource, freightResource, cartResource){
+angular.module('ecommerce').controller('ProductController', function($scope, $routeParams, $location, productResource, cartResource, categoryResource, supplierResource){
 	
-	$scope.message = ''
-	$scope.categories = []
-	$scope.stock = {}
+	$scope.message = '';
+	$scope.categories = [];
+	$scope.suppliers = [];
+	$scope.stock = {};
 	$scope.product = {
 		packing: {},
 		price: {},
 		category: {}
-	}
-	$scope.width = {}
-	$scope.height = {}
-	$scope.weight = {}
-	$scope.length = {}
-	$scope.diameter = {}
+	};
+	$scope.width = {};
+	$scope.height = {};
+	$scope.weight = {};
+	$scope.length = {};
+	$scope.diameter = {};
 
-	//if present :productId on route, load the product by productId
+	categoryResource.query(function(categories){
+		$scope.categories = categories;
+	}, function(error){
+		console.log(error);
+	});
+
+	supplierResource.query(function(suppliers){
+		$scope.suppliers = suppliers;
+	}, function(error){
+		console.log(error);
+	});
+
 	if($routeParams.productId) {
 		productResource.get({productId: $routeParams.productId}, function(product) {
 		$scope.product = product; 
@@ -66,7 +78,7 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
 				productResource.update($scope.product, function(status) {
 					$scope.product = {};
 					$scope.message = status.message;
-					//$route.reload();
+					$location.path('/products');
 				}, function(erro) {
 					console.log(erro);
 				});
@@ -77,7 +89,7 @@ angular.module('ecommerce').controller('ProductController', function($scope, $ro
 					console.log(JSON.stringify($scope.product));
 					$scope.product = {};
 					$scope.message = status.message;
-					//$route.reload();
+					$location.path('/products');
 				}, function(erro) {
 					console.log(erro);
 				});

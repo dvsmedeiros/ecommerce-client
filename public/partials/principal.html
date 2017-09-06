@@ -1,5 +1,4 @@
 <div class="col-md-3">
-	<p class="lead">Shop Name</p>
     <div class="list-group">
         <a ng-repeat="category in activeCategories" href="" ng-click="findProductsByCategory(category.id)" class="list-group-item">{{category.name}}</a>
     </div>
@@ -51,7 +50,7 @@
 		    <div class="col-md-3" ng-repeat="product in activeProducts | filter: filter">
 	            <div class="panel panel-default">
 	            	
-		                <img class="img-responsive" src="http://placehold.it/800x600" alt="">
+		                <img class="img-responsive" src="http://placehold.it/800x600" alt=""/>
 		                <div class="panel-body">
 			                <h5 class="text-center"><a href="/#/products/detail/{{product.id}}">{{product.name}}</a></h5>
 			                <h5 class="text-center">{{product.price.value | currency}}</h5>

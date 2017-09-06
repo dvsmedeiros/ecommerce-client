@@ -113,7 +113,7 @@
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.supplier.$dirty && editForm.supplier.$invalid] ">
 				<label>Fornecedor * <a href="/#/supplier/new">Novo fornecedor</a></label>
 				<select name="supplier" ng-model="product.supplier.id" class="form-control" required 
-				ng-controller="SuppliersController" ng-options="supplier.id as (supplier.companyName) for supplier in suppliers">
+				ng-options="supplier.id as (supplier.companyName) for supplier in suppliers">
 					<option value="">Escolha um Fornecedor</option>
 				</select>
 				<!--<a href="/#/supplier/new">cadastre categoria</a>-->	
@@ -125,7 +125,7 @@
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
 				<label>Categoria * <a href="/#/category/new">Nova categoria</a></label>
 				<select name="category" ng-model="product.category.id" class="form-control" required 
-				ng-controller="CategoriesController" ng-options="category.id as (category.name) for category in categories">
+				ng-options="category.id as (category.name) for category in categories">
 					<option value="">Escolha uma Categoria</option>
 				</select>
 				<!--<a href="/#/category/new">cadastre categoria</a>-->	

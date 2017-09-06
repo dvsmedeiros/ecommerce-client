@@ -2,17 +2,8 @@ angular.module('ecommerce').controller('SuppliersController', function($scope, $
 	
 	$scope.message = '';
 	$scope.suppliers = [];
-	$scope.activeSuppliers = [];
-
-	//load all suppliers
-	supplierResource.query({active: true}, function(suppliers){
-		$scope.activeSuppliers = suppliers;
-	}, function(error){
-		console.log(error);
-	});
-
-	//load all suppliers
-	supplierResource.query({active: false}, function(suppliers){
+	
+	supplierResource.query(function(suppliers){
 		$scope.suppliers = suppliers;
 	}, function(error){
 		console.log(error);
