@@ -1,4 +1,5 @@
-	angular.module('ecommerceServices', ['ngResource'])
+angular.module('ecommerceServices', ['ngResource'])	
+	
 	.factory('categoryResource', function($resource) {
 
 		return $resource('http://localhost:8888/ecommerce-api/products/category/:categoryId', null, {
@@ -102,15 +103,6 @@
 				params: {
 					productId: '@productId',
 					postalCode: '@postalCode'
-				}			
-			});
-	})
-	.factory('accountResource', function($resource) {
-
-		return $resource('http://localhost:8888/ecommerce-api/account/:userId', null, {
-			method: 'GET',
-				params: {
-					userId: '@userId'
 				}			
 			});
 	})
