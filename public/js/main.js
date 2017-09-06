@@ -1,8 +1,6 @@
-angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.mask', 'ui.utils.masks', 'angularModalService', 'ngAnimate'])
-	.config(function($routeProvider, $locationProvider) {
-
-		//$locationProvider.html5Mode(true);
-
+angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', 'angularModalService'])
+	.config(function($routeProvider, $locationProvider, $httpProvider) {
+		
 		//PRINCIPAL
 		$routeProvider.when('/', {
 			templateUrl: 'partials/principal.html',
@@ -160,6 +158,6 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.mask', 'ui.util
 			controller: 'SingupController'
 		});
 
-		$routeProvider.otherwise({redirectTo: '/'});
-		
+		$routeProvider.otherwise({redirectTo: '/'});		
+
 	});
