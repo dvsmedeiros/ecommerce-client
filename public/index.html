@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- <base href="/"> -->
     
     <link rel="shortcut icon" href="images/favicon.ico">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +18,6 @@
 
     <script src="js/lib/jquery.js"></script>
     <script src="js/lib/angular.min.js"></script>
-    <script src="js/lib/mask.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/lib/angular-input-masks-dependencies.js"></script>
     <script src="js/lib/angular-input-masks.js"></script>
@@ -29,9 +26,11 @@
     <script src="js/lib/angular-resource.min.js"></script>
     <script src="js/lib/angular-modal-service.min.js"></script>
     <script src="js/lib/shop-homepage.js"></script>
-    
+
     <script src="js/main.js"></script>
+    
     <script src="js/services/ecommerce-services.js"></script>
+    
     <script src="js/controllers/principal-controller.js"></script>
     <script src="js/controllers/home-controller.js"></script>
     <script src="js/controllers/products-controller.js"></script>
@@ -52,9 +51,7 @@
     <script src="js/controllers/stock-controller.js"></script>
     <script src="js/controllers/unit-type-controller.js"></script>
     <script src="js/controllers/gender-controller.js"></script>
-    <script src="js/controllers/account-controller.js"></script>
-    <script src="js/controllers/singup-controller.js"></script>
-
+    
 </head>
 
 <body ng-app="ecommerce">
@@ -70,59 +67,41 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/#/">
-                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    <span style="font-size:1.2em;" class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
             </div>
-            <!--
-            <div class="col-md-3">
-                <form class="navbar-form" role="search">
-                    <div class="input-group">
-                        <input style="background: gray;"type="text" class="form-control" placeholder="Search" name="q">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            -->
             <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestão<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/#/products">Produtos</a>
-                            </li>
-                            <li>
-                                <a href="/#/category">Categorias</a>
-                            </li>
-                            <li>
-                                <a href="/#/supplier">Fornecedores</a>
-                            </li>
-                            <li>
-                                <a href="/#/stock">Movimentação</a>
-                            </li>
-                            <li>
-                                <a href="#">Relatórios</a>
-                            </li>
-                        </ul>
+                <ul class="nav navbar-nav">                     
+                    <li>
+                        <a href="/#/products">Produtos</a>
                     </li>
+                    <li>
+                        <a href="/#/category">Categorias</a>
+                    </li>
+                    <li>
+                        <a href="/#/supplier">Fornecedores</a>
+                    </li>
+                    <li>
+                        <a href="/#/stock">Estoque</a>
+                    </li>                                                    
                 </ul>  
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/#/cart">
-                        	<span style="font-size:1.8em;" class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+                            <span style="font-size:1.8em;" class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
                             </span>
+                    <!--
                             <span class="label label-danger" ng-controller="CartController">
                             {{cart.cartItems.length}}</span>   
+                    -->
                         </a>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            Usuário
                             <span class="caret">    
                         </span></a>
+                        
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="/#/home/account">        
