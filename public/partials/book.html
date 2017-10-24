@@ -1,0 +1,217 @@
+<div class="page-header text-center">
+	<h1>CADASTRO PRODUTO</h1>
+</div>
+
+<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+
+<form novalidate name="editForm" class="row" ng-submit="submit()">
+
+	<div class="col-md-6">
+		
+		<div class="panel panel-default panel-body">
+			<div class="col-md-8">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.title.$dirty && editForm.title.$invalid]">
+				    <label class="control-label" for="title">Titúlo *</label>
+				    <input ng-model="product.title" type="text" class="form-control" name="title" placeholder="Title" required> 
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
+				    <label class="control-label" for="name">Código *</label>
+				    <input ng-model="product.code" type="text" class="form-control" name="code" placeholder="Code"  disabled>    
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.synopsis.$dirty && editForm.synopsis.$invalid] ">
+					<label>Sinopse *</label>
+					<textarea ng-model="product.synopsis" name="synopsis" class="form-control" required>
+					</textarea>
+				</div>
+			</div>			
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.isbn.$dirty && editForm.isbn.$invalid]">
+				    <label class="control-label" for="isbn">ISBN *</label>
+				    <input ng-model="product.isbn" type="text" class="form-control" name="isbn" placeholder="ISBN" required> 
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.barcode.$dirty && editForm.barcode.$invalid]">
+				    <label class="control-label" for="barcode">Código de Barras *</label>
+				    <input ng-model="product.barCode" type="text" class="form-control" name="barcode" placeholder="Bar Code" required> 
+				</div>
+			</div>
+	
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.year.$invalid]">
+					    <label class="control-label" for="year">Ano *</label>
+					    <input ng-model="product.year" ng-init="product.year=2017" type="number" class="form-control" name="year" placeholder="Year" required> 
+					    <span class="help-block" ng-show="editForm.year.$error.required" ></span>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.edition.$invalid]">
+					    <label class="control-label" for="edition">Edição *</label>
+					    <input ng-model="product.edition" ng-init="product.edition=1" type="text" class="form-control" name="edition" placeholder="Edition" required> 
+					    <span class="help-block" ng-show="editForm.edition.$error.required" ></span>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.pages.$invalid]">
+					    <label class="control-label" for="pages">Nº Páginas *</label>
+					    <input ng-model="product.pages" ng-init="product.pages=1" type="number" class="form-control" name="pages" placeholder="Pages" required> 
+					    <span class="help-block" ng-show="editForm.pages.$error.required" ></span>
+				</div>
+			</div>
+
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.author.$dirty && editForm.author.$invalid] ">
+					<label>Autor (es) *</label>
+					 <multiselect ng-model="product.authors" options="authors" id-prop="id" display-prop="description" placeholder="Selecione" required>
+ 					</multiselect>
+				</div>
+			</div>
+
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
+					<label>Categoria (s) *</label>
+					 <multiselect ng-model="product.categories" options="categories" id-prop="id" display-prop="description" placeholder="Selecione" required>
+ 					</multiselect>
+				</div>
+			</div>
+	
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.publishingCompany.$dirty && editForm.publishingCompany.$invalid] ">
+					<label>Editora (s) *</label>
+					 <multiselect ng-model="product.publishers" options="publishers" id-prop="id" display-prop="description" placeholder="Selecione" required>
+ 					</multiselect>
+				</div>
+			</div>
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.priceGroup.$dirty && editForm.priceGroup.$invalid] ">
+					<label>Grupo de Preço *</label>
+					<select name="priceGroup" ng-model="product.priceGroup.id" class="form-control"  
+					ng-options="priceGroup.id as (priceGroup.description) for priceGroup in priceGroups"	
+					required>
+						<option value="" disabled>Selecione</option>
+					</select>
+					<!--<a href="/#/priceGroup/new">cadastre categoria</a>-->	
+				</div>
+			</div>					
+			<!--
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
+					<label>Status *</label>										
+					<select name="active" ng-model="product.active" class="form-control" required 
+					ng-controller="ActiveController" ng-options="active.value as (active.name) for active in activies">
+						<option value="" disabled>Selecione</option>
+					</select>					
+				</div>	
+			</div>
+			-->
+		</div>	
+	</div>
+	<div class="col-md-6">
+
+		<div class="panel panel-default panel-body">
+
+			<div class="col-md-3">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.weight.$dirty && editForm.weight.$invalid]">
+				    <label class="control-label" for="name">Peso (Kg) *</label>
+				    <input ng-model="product.packing.weight" ng-init="product.packing.weight=1" type="number" min="0.1" step="0.1" class="form-control" name="weight" placeholder="weight" required>    
+				</div>	
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.height.$dirty && editForm.height.$invalid]">
+				    <label class="control-label" for="name">Altura *</label>
+				    <input ng-model="product.packing.height" ng-init="product.packing.height=1" type="number" min="0.1" step="0.1" class="form-control" name="height" placeholder="height" required>    
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
+				    <label class="control-label" for="name">Largura *</label>
+				    <input ng-model="product.packing.width" ng-init="product.packing.width=1" type="number" min="0.1" step="0.1" class="form-control" name="width" placeholder="width" required>    
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.length.$dirty && editForm.length.$invalid]">
+				    <label class="control-label" for="name">Compr. *</label>
+				    <input ng-model="product.packing.length" ng-init="product.packing.length=1" type="number" min="0.1" step="0.1" class="form-control" name="length" placeholder="length" ng-required="!product.id">    
+				</div>
+			</div>
+
+		</div>	<!-- packing panel -->
+		
+		<div class="panel panel-default panel-body" ng-show="!product.id">	
+			
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stockMin.$invalid]">
+					    <label class="control-label" for="stockMin">Estoque Minimo *</label>
+					    <input ng-model="stock.min" ng-init="stock.min=1.0" type="number" min="1" class="form-control" name="stockMin" placeholder="Minimal Stock" ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.stockMin.$error.required"></span>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stockMax.$invalid]">
+					    <label class="control-label" for="stockMax">Estoque Máximo *</label>
+					    <input ng-model="stock.max" ng-init="stock.max=1.0" type="number" min="1" class="form-control" name="stockMax" placeholder="Maximo Stock" ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.stockMax.$error.required"></span>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stockInitial.$invalid]">
+					    <label class="control-label" for="stockInitial">Estoque Inicial *</label>
+					    <input ng-model="stock.records[0].volume" ng-init="stock.records[0].volume=1.0" type="number" min="1.0" class="form-control" name="stockInitial" placeholder="Initial Stock" ng-disabled="product.id" required> 
+					    <span class="help-block" ng-show="editForm.stockInitial.$error.required"></span>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.purchasePrice.$invalid]">
+					    <label class="control-label" for="purchasePrice">Preço de Compra *</label>
+					    <input ng-model="stock.records[0].purchasePrice.value" ng-init="stock.records[0].purchasePrice.value=0.0" type="text" ui-money-mask="2" class="form-control" name="purchasePrice" placeholder="Purchase Price" ng-disabled="product.id" required> 
+					    <span class="help-block" ng-show="editForm.purchasePrice.$error.required" ></span>
+				</div>
+			</div>
+
+		</div> <!-- stock panel -->
+			
+		<div class="panel panel-default panel-body" ng-show="product.id">
+			<div class="table-responsive">
+				<table class="table table-striped">
+				    <thead>
+				    	<caption class="text-center"><h3>HISTÓRICO DE ALTERAÇÃO DE STATUS</h3></caption>
+					    <tr class="text-center">
+					    	<th>Data</th>				    						        
+					        <th>Justificativa</th>				        					        
+					        <th>Categoria</th>				        
+					    </tr>
+				    </thead>
+				    <tbody>						
+				    	<tr ng-repeat="reason in reasons | orderBy: '-insertionDate'">
+					        <td>{{reason.insertionDate | date:'dd/MM/yyyy'}}</td>		        
+					        <td>{{reason.description}}</td>					        
+					        <td>{{reason.category.description}}</td>				        
+				      	</tr>
+				    </tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</div>
+	
+	<div class="col-md-12">		
+		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
+			Salvar
+		</button>
+		<a href="#/products/list" class="btn btn-primary">Voltar</a>
+	</div>	
+</form>
