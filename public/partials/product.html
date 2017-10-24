@@ -2,155 +2,240 @@
 	<h1>CADASTRO PRODUTO</h1>
 </div>
 
-<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
 
 <form novalidate name="editForm" class="row" ng-submit="submit()">
 
 	<div class="col-md-6">
-		<div class="col-md-12">
 		
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
-			    <label class="control-label" for="name">Nome *</label>
-			    <input ng-model="product.name" type="text" class="form-control" name="name" placeholder="Name" required> 
-			    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Nome do produto é obrigatório.</span>
+		<div class="panel panel-default panel-body">
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
+				    <label class="control-label" for="name">Nome *</label>
+				    <input ng-model="product.name" type="text" class="form-control" name="name" placeholder="Name" required> 
+				</div>
+			</div>
+			<!--
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
+				    <label class="control-label" for="name">Código *</label>
+				    <input ng-model="product.code" type="text" class="form-control" name="code" placeholder="Code" required>    
+				</div>
+			</div>
+			-->
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>Descrição resumida</label>
+					<textarea ng-model="product.shortDescription" name="shortDescription" class="form-control">
+					</textarea>
+				</div>
 			</div>
 
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
-			    <label class="control-label" for="name">Código *</label>
-			    <input ng-model="product.code" type="text" class="form-control" name="code" placeholder="Code" required>    
-			    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código do produto é obrigatório.</span>
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.description.$dirty && editForm.description.$invalid] ">
+					<label>Descrição Detalhada *</label>
+					<textarea ng-model="product.description" name="description" class="form-control" required>
+					</textarea>
+				</div>
+			</div>	
+
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.igredients.$dirty && editForm.igredients.$invalid]">
+				    <label class="control-label" for="igredients">Igredientes *</label>
+				    <input ng-model="product.igredients[0].description" type="text" class="form-control" name="igredients" placeholder="Igredients" required> 
+				</div>
+			</div>			
+
+			<div class="col-md-3">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.alcoholContent.$dirty && editForm.alcoholContent.$invalid]">
+					    <label></label>			  
+						<div class="checkbox">
+  							<label><input ng-model="isAlcoholic" type="checkbox" value="false">Alcoólico</label>
+						</div>					    
+				</div>
 			</div>
 
-			<div class="form-group">
-				<label>Descrição resumida</label>
-				<textarea ng-model="product.shortDescription" name="shortDescription" class="form-control">
-				</textarea>
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.alcoholContent.$dirty && editForm.alcoholContent.$invalid]">				
+					    <label class="control-label" for="alcoholContent">Teor Alcoólico *</label>			  
+					    <input ng-model="product.alcoholContent" ng-init="product.alcoholContent=0.0" type="text" ui-percentage-mask class="form-control" name="alcoholContent" placeholder="Alcohol Content" ng-disabled="!isAlcoholic" ng-required="isAlcoholic"> 
+					    <span class="help-block" ng-show="editForm.alcoholContent.$dirty && editForm.alcoholContent.$error.required"></span>
+				</div>
 			</div>
 
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.description.$dirty && editForm.description.$invalid] ">
-				<label>Descrição Detalhada *</label>
-				<textarea ng-model="product.description" name="description" class="form-control" rows="4" required="">
-				</textarea>
-				<span class="help-block" ng-show="editForm.description.$dirty && editForm.description.$error.required">Descrição detalhada do produto é obrigatório.</span>
+			<div class="col-md-5">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.salePrice.$invalid]">
+					    <label class="control-label" for="salePrice">Preço de Venda *</label>
+					    <input ng-model="product.salePrice.value" ng-init="product.salePrice.value=0.0" type="text" ui-money-mask="2" class="form-control" name="salePrice" placeholder="Sale Price" required> 
+					    <span class="help-block" ng-show="editForm.salePrice.$error.required" ></span>
+				</div>
 			</div>
-		</div>
+
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
+					<label>Categoria *</label>
+					<select name="category" ng-model="product.category.id" class="form-control" required 
+					ng-options="category.id as (category.name) for category in categories">
+						<option value="">Categoria</option>
+					</select>
+					<!--<a href="/#/category/new">cadastre categoria</a>-->	
+				</div>
+			</div>
+
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.supplier.$dirty && editForm.supplier.$invalid] ">
+					<label>Fornecedor *</label>
+					<select name="supplier" ng-model="product.supplier.id" class="form-control" required 
+					ng-options="supplier.id as (supplier.companyName) for supplier in suppliers">
+						<option value="">Fornecedor</option>
+					</select>
+					<!--<a href="/#/supplier/new">cadastre categoria</a>-->	
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.manufacturer.$dirty && editForm.manufacturer.$invalid] ">
+					<label>Fabricante *</label>
+					<select name="manufacturer" ng-model="product.manufacturer.id" class="form-control" required>
+						<!-- ng-options="manufacturer.value as (manufacturer.name) for manufacturer in manufacturerTypes" -->
+						<option value="">Fabricante</option>
+						<option value-"1">teste</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
+					<label>Status *</label>
+					<select name="active" ng-model="product.active" class="form-control" required 
+					ng-controller="ActiveController" ng-options="active.value as (active.name) for active in activies">
+						<option value="">Status</option>
+					</select>
+				</div>	
+			</div>
+		</div>	
 	</div>
 	<div class="col-md-6">
 
-		<div class="col-md-6">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.packing.$dirty && editForm.packing.$invalid] ">
-				<label>Embalagem *</label>
-				<select ng-controller="PackingTypeController" name="packing" ng-model="product.packing.type" class="form-control" required 
-					ng-options="packing.value as (packing.name) for packing in packingTypes">
-					<option value="">Escolha embalagem</option>
-				</select>
+		<div class="panel panel-default panel-body">
+
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.packing.$dirty && editForm.packing.$invalid] ">
+					<label>Embalagem *</label>
+					<select ng-controller="PackingTypeController" name="packing" ng-model="product.packing.type" class="form-control" required 
+						ng-options="packing.type as (packing.name) for packing in packingTypes">
+						<option value="">Embalagem</option>
+					</select>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-6">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.weight.$dirty && editForm.weight.$invalid]">
-			    <label class="control-label" for="name">Peso (Kg) *</label>
-			    <input ng-model="product.packing.weight" type="number" min="{{weight.min}}" max="{{weight.max}}" class="form-control" name="weight" placeholder="weight" required>    
-			</div>	
-		</div>
-
-		<div class="col-md-3">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.height.$dirty && editForm.height.$invalid]">
-			    <label class="control-label" for="name">Altura *</label>
-			    <input ng-model="product.packing.height" type="number" min="{{height.min}}" max="{{height.max}}" class="form-control" name="height" placeholder="height" required>    
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.weight.$dirty && editForm.weight.$invalid]">
+				    <label class="control-label" for="name">Peso (Kg) *</label>
+				    <input ng-model="product.packing.weight" type="number" min="{{weight.min}}" max="{{weight.max}}" class="form-control" name="weight" placeholder="weight" required>    
+				</div>	
 			</div>
-		</div>
 
-		<div class="col-md-3">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
-			    <label class="control-label" for="name">Largura *</label>
-			    <input ng-model="product.packing.width" type="number" min="{{width.min}}" max="{{width.max}}" class="form-control" name="width" placeholder="width" required>    
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.height.$dirty && editForm.height.$invalid]">
+				    <label class="control-label" for="name">Altura *</label>
+				    <input ng-model="product.packing.height" type="number" min="{{height.min}}" max="{{height.max}}" class="form-control" name="height" placeholder="height" required>    
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-3">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.length.$dirty && editForm.length.$invalid]">
-			    <label class="control-label" for="name">Comprimento *</label>
-			    <input ng-model="product.packing.length" type="number" min="{{length.min}}" max="{{length.max}}" class="form-control" name="length" placeholder="length" required>    
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
+				    <label class="control-label" for="name">Largura *</label>
+				    <input ng-model="product.packing.width" type="number" min="{{width.min}}" max="{{width.max}}" class="form-control" name="width" placeholder="width" required>    
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-3">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.diameter.$dirty && editForm.diameter.$invalid]">
-			    <label class="control-label" for="name">Diametro *</label>
-			    <input ng-model="product.packing.diameter" type="number" min="{{diameter.min}}" max="{{diameter.max}}" class="form-control" name="diameter" placeholder="diameter" required>    
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.length.$dirty && editForm.length.$invalid]">
+				    <label class="control-label" for="name">Comprimento *</label>
+				    <input ng-model="product.packing.length" type="number" min="{{length.min}}" max="{{length.max}}" class="form-control" name="length" placeholder="length" ng-required="!product.id">    
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-4">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.price.$dirty && editForm.price.$invalid] ">
-			    <label class="control-label" for="name">Preço *</label>
-			    <input ng-model="product.price.value" type="text" min="0" class="form-control" name="price" placeholder="price" ui-money-mask="2" required>    
-			    <span class="help-block" ng-show="editForm.price.$dirty && editForm.price.$error.required">Preço do produto é obrigatório.</span>
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.diameter.$dirty && editForm.diameter.$invalid]">
+				    <label class="control-label" for="name">Diametro *</label>
+				    <input ng-model="product.packing.diameter" type="number" min="{{diameter.min}}" max="{{diameter.max}}" class="form-control" name="diameter" placeholder="diameter" ng-required="!product.id">    
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-4">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.width.$dirty && editForm.width.$invalid] ">
-			    <label class="control-label" for="name">Estoque Minimo *</label>
-			    <input ng-model="product.minimalStock" type="number" min="0" class="form-control" name="width" placeholder="width" required>    
+		</div>	<!-- packing panel -->
+		
+		<div class="panel panel-default panel-body" ng-show="!product.id">	
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.fabricationDate.$invalid]">
+					    <label class="control-label" for="fabricationDate">Data de Fabricação *</label>
+					    <input ng-model="stock.records[0].fabricationDate" ng-init="stock.records[0].fabricationDate = Date" type="date" class="form-control" name="fabricationDate" placeholder="fabricationDate" ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.fabricationDate.$error.required"></span>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-4">	
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.unitType.$dirty && editForm.unitType.$invalid] ">
-				<label>Unidade Medida</label>
-				<select name="unitType" ng-model="product.unitType" class="form-control" required 
-				ng-controller="UnitTypeController" ng-options="unit.value as (unit.name) for unit in units">
-					<option value="">Escolha unidade</option>
-				</select>
-				<!--<a href="/#/unitType/new">cadastre categoria</a>-->	
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Categoria do Produto é obrigatório.</span>
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.expiryDate.$invalid]">
+					    <label class="control-label" for="expiryDate">Data de Validade *</label>
+					    <input ng-model="stock.records[0].expiryDate" ng-init="stock.records[0].expiryDate = Date" type="date"  class="form-control" name="expiryDate" placeholder="Expiry Date"  ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.expiryDate.$error.required"></span>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-12">	
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.supplier.$dirty && editForm.supplier.$invalid] ">
-				<label>Fornecedor * <a href="/#/supplier/new">Novo fornecedor</a></label>
-				<select name="supplier" ng-model="product.supplier.id" class="form-control" required 
-				ng-options="supplier.id as (supplier.companyName) for supplier in suppliers">
-					<option value="">Escolha um Fornecedor</option>
-				</select>
-				<!--<a href="/#/supplier/new">cadastre categoria</a>-->	
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Fornecedor do Produto é obrigatório.</span>
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stockMin.$invalid]">
+					    <label class="control-label" for="stockMin">Estoque Minimo *</label>
+					    <input ng-model="stock.min" ng-init="stock.min=1.0" type="number" min="1" class="form-control" name="stockMin" placeholder="Minimal Stock" ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.stockMin.$error.required"></span>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-8">	
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.category.$dirty && editForm.category.$invalid] ">
-				<label>Categoria * <a href="/#/category/new">Nova categoria</a></label>
-				<select name="category" ng-model="product.category.id" class="form-control" required 
-				ng-options="category.id as (category.name) for category in categories">
-					<option value="">Escolha uma Categoria</option>
-				</select>
-				<!--<a href="/#/category/new">cadastre categoria</a>-->	
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required ">Categoria do Produto é obrigatório.</span>
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stockMax.$invalid]">
+					    <label class="control-label" for="stockMax">Estoque Máximo *</label>
+					    <input ng-model="stock.max" ng-init="stock.max=1.0" type="number" min="1" class="form-control" name="stockMax" placeholder="Maximo Stock" ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.stockMax.$error.required"></span>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-4">
-			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
-				<label>Status *</label>
-				<select name="active" ng-model="product.active" class="form-control" required 
-				ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
-					<option value="">Escolha um status</option>
-				</select>
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Status da categoria é obrigatório.</span>
-			</div>	
-		</div>
+			<div class="col-md-4">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stockInitial.$invalid]">
+					    <label class="control-label" for="stockInitial">Estoque Inicial *</label>
+					    <input ng-model="stock.records[0].volume" ng-init="stock.records[0].volume=1.0" type="number" min="1.0" class="form-control" name="stockInitial" placeholder="Initial Stock" ng-disabled="product.id" required> 
+					    <span class="help-block" ng-show="editForm.stockInitial.$error.required"></span>
+				</div>
+			</div>
+
+			<div class="col-md-6">	
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.unitType.$dirty && editForm.unitType.$invalid] ">
+					<label>Unidade Medida *</label>
+					<select name="unitType" ng-model="stock.records[0].unitType" class="form-control"  
+					ng-controller="UnitTypeController" ng-options="unit.key as (unit.value) for unit in units"
+					ng-disabled="product.id" ng-required="!product.id"
+					>
+						<option value="">Escolha unidade</option>
+					</select>
+					<!--<a href="/#/unitType/new">cadastre categoria</a>-->	
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.purchasePrice.$invalid]">
+					    <label class="control-label" for="purchasePrice">Preço de Compra *</label>
+					    <input ng-model="stock.records[0].purchasePrice.value" ng-init="stock.records[0].purchasePrice.value=0.0" type="text" ui-money-mask="2" class="form-control" name="purchasePrice" placeholder="Purchase Price" ng-disabled="product.id" ng-required="!product.id"> 
+					    <span class="help-block" ng-show="editForm.purchasePrice.$error.required" ></span>
+				</div>
+			</div>
+
+		</div> <!-- stock panel -->
+
 	</div>
-
-	<div class="col-md-12">
-		<div class="col-md-12">
-			<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
-				Salvar
-			</button>
-			<a href="#/products/list" class="btn btn-primary">Voltar</a>
-		</div>
+	
+	<div class="col-md-12">		
+		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
+			Salvar
+		</button>
+		<a href="#/products/list" class="btn btn-primary">Voltar</a>
 	</div>	
 </form>
