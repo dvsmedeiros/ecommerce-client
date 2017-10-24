@@ -1,0 +1,120 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="/#/home" class="list-group-item">Inicio</a>
+		<a href="/#/home/account" class="list-group-item">Informações de Conta</a>
+		<a href="/#/home/addresses" class="list-group-item">Meus Endereços</a>
+		<a href="/#/home/orders" class="list-group-item">Meus Pedidos</a>
+		<a href="/#/home/exchanges" class="list-group-item">Trocas e Devoluções</a>
+		<a href="/#/home/cards" class="list-group-item">Cartões</a>
+		<a href="/#/logout" class="list-group-item">Sair</a>
+    </div>
+</div>
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="text-center">ENDEREÇO</h4>
+		</div>
+
+		<div class="panel-body">
+			
+			<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+
+			<form novalidate name="editForm" class="row" ng-submit="submit()">
+
+				<div class="col-md-12">
+				    <div class="form-group">
+				      	<label class="control-label" for="description">Descrição</label>
+				      	<input ng-model="address.description" type="text" class="form-control" name="description" placeholder="Description" required>    
+				  	</div>
+				</div>		
+
+				<div class="col-md-6">
+					<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.zipcode.$dirty && editForm.zipcode.$invalid]">
+			        	<label class="control-label" for="zipcode">CEP * 
+				        <a href="http://www.buscacep.correios.com.br/servicos/dnec/index.do" target="_blank">Não sabe o CEP?</a>
+				        </label>
+				        <input ng-model="address.zipCode" ng-blur="findAddressByZipcode(address.zipCode)" type="text" class="form-control" name="zipcode" placeholder="CEP" ui-br-cep-mask required>    			       
+			      	</div>
+			    </div>
+			    <div class="col-md-6">
+			    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.addressType.$dirty && editForm.addressType.$invalid]">
+						<label>Tipo de Endereço *</label>
+						<select name="addressType" ng-model="address.type.id" class="form-control" required 
+						ng-options="addressType.id as addressType.description for addressType in addressTypes">
+							<option value="" disabled>Selecione</option>
+						</select>
+					</div>
+			    </div>
+				<div class="col-md-12">
+
+			      	<div class="form-group">
+			        	<label class="control-label" for="street">Endereço *</label>
+			        	<input ng-model="address.street" type="text" class="form-control" name="street" placeholder="Street" disabled>    
+			      	</div>
+			    </div>
+
+		      	<div class="col-md-6">
+			      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
+			          	<label class="control-label" for="number">Número *</label>
+			          	<input ng-model="address.aNumber" type="text" class="form-control" name="number" placeholder="Number" required>    		          	
+			      	</div>
+			    </div>
+
+			    <div class="col-md-6">
+				  	<div class="form-group">
+				      	<label class="control-label" for="complement">Complemento</label>
+				      	<input ng-model="address.complement" type="text" class="form-control" name="complement" placeholder="Complement">    
+				  	</div>
+		        </div>
+
+		        <div class="col-md-12">
+				    <div class="form-group">
+				        <label class="control-label" for="neighborhood">Bairro *</label>
+				        <input ng-model="address.neighborhood.name" type="text" class="form-control" name="neighborhood" placeholder="Neighborhood" disabled>    
+				    </div>
+		        </div>
+
+		        <div class="col-md-6">
+			        <div class="form-group">
+			            <label class="control-label" for="city">Cidade *</label>
+			            <input ng-model="address.neighborhood.city.description" type="text" class="form-control" name="city" placeholder="City" disabled>    
+			        </div>
+			    </div>
+	        
+		        <div class="col-md-3">   
+			      	<div class="form-group">
+			        	<label>Estado *</label>
+			        	<input ng-model="address.neighborhood.city.state.code" type="text" class="form-control" name="state" placeholder="State" disabled>
+			      	</div>
+			    </div>
+
+			    <div class="col-md-3">   
+			      	<div class="form-group">
+			        	<label>País *</label>
+			        	<input ng-model="address.neighborhood.city.state.country.code" type="text" class="form-control" name="state" placeholder="State" disabled>
+			      	</div>
+			    </div>
+
+			    <div class="col-md-6">
+				    <div class="form-group checkbox">			    	
+		  				<label><input ng-model="address.billing" type="checkbox" value="true">Cobrança</label>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+				    <div class="checkbox">
+		  				<label><input ng-model="address.delivery" type="checkbox" value="true">Entrega</label>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<hr/>
+					<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
+						Salvar
+					</button>
+					<a href="#/home/addresses/list" class="btn btn-primary">Voltar</a>
+				</div>	
+			</form>		  		
+		</div>
+	</div>
+</div>		
