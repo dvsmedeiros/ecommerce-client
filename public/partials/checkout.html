@@ -8,22 +8,38 @@
 				<div class="panel panel-default">
 					<div class="panel-heading text-center"><h4>ENDEREÇOS</h4></div>
 					<div class="panel-body">
-						<h4>Endereço Principal</h4>
+						<h4>Endereço Cobrança</h4>
 						<hr />
-						<strong>Davisson Medeiros</strong>
+						<strong>{{billingAddress.description}}</strong>
 						<p>
-							 Avenida Presbítero Eliezer Martins Costa, 179
-							 Jardim Varan<br />
-							 08696-100<br />
-							 Suzano - SP
+							 {{billingAddress.street}}, {{billingAddress.aNumber}}
+							 {{billingAddress.neighborhood.name}}<br />
+							 {{billingAddress.zipCode}}<br />
+							 {{billingAddress.neighborhood.city.description}} - {{billingAddress.neighborhood.city.state.code}}
 						</p>
-						<p>(11) 4749-7851 | (11) 4749-7851</p>
+						<!--<p>(11) 4749-7851 | (11) 4749-7851</p>-->
 						<hr />
 						<h4>Endereço Entrega</h4>
-						<div class="checkbox">
-							<label><input type="checkbox" value="">Endereço de Entrega igual ao Principal</label>
+						<div ng-show="!deliveryEqBilling">
+							<select name="active" ng-model="delivery" class="	form-control" required 
+								ng-options="address as (address.description) for address in deliveries">				
+							</select>
+							<br/>
+							<strong>{{delivery.description}}</strong>
+							<p>
+								 {{delivery.street}}, {{delivery.aNumber}}
+								 {{delivery.neighborhood.name}}<br />
+								 {{delivery.zipCode}}<br />
+								 {{delivery.neighborhood.city.description}} - {{delivery.neighborhood.city.state.code}}
+							</p>
 						</div>
-						<hr />
+						<div class="checkbox">							
+							<label>
+								<input type="checkbox" ng-model="deliveryEqBilling">Endereço de Entrega igual ao Principal
+							</label>
+							<hr/>
+						</div>						
+
 						<a ng-controller="AddressesController" ng-click="modalShow()" class="btn btn-default btn-block" >INSERIR NOVO ENDEREÇO</a>
 					</div>
 				</div>
@@ -133,14 +149,14 @@
 
 					 	<div class="col-md-12">
 							<div class="row" ng-repeat="item in purchaseOrder.items">	  		
-					  			<div class="col-md-7">
+					  			<div class="col-md-7">					  			
 					  				<p>{{item.product.name}}</p>
 					  			</div>
 					  			<div class="col-md-2">
 					  				<p>{{item.quantity}}</p>
 					  			</div>
 					  			<div class="col-md-3">
-					  				<p class="pull-right">{{item.product.price.value * item.quantity | currency}}</p>
+					  				<p class="pull-right">{{item.product.calculatedSalePrice.value * item.quantity | currency}}</p>
 					  			</div>
 					  		</div>	
 					  	</div>

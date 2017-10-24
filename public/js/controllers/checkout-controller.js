@@ -1,6 +1,10 @@
-angular.module('ecommerce').controller('CheckoutController', function($scope, cartResource, checkoutResource, freightResource){
+angular.module('ecommerce').controller('CheckoutController', function($scope, cartResource, orderResource, freightResource, addressResource){
 	
 	$scope.message = '';
+	$scope.billingAddress = {};	
+	$scope.deliveryEqBilling = true;
+	$scope.delivery = [];
+	$scope.deliveries = [];
 	$scope.purchaseOrder = {
 		subTotal : 0,
 		total : 0,
@@ -16,6 +20,23 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 			}
 		}
 	};
+
+	addressResource.delivery(function(deliveries){
+		$scope.deliveries = deliveries;
+		$scope.delivery = deliveries[0];
+	}, function(error){
+		console.log(error);
+	});
+
+	addressResource.billing(function(billingAddress){
+		$scope.billingAddress = billingAddress;
+	}, function(error){
+		console.log(error);
+	});
+
+	$scope.$watch('deliveryEqBilling', function () {	
+		$scope.deliveryEqBilling = !deliveryEqBilling;
+    }, true);
 
 	$scope.$watch('purchaseOrder.payment.paymentType', function () {
 		
@@ -51,7 +72,7 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 
 		if ($scope.editForm.$valid || $scope.purchaseOrder.payment.paymentType == 0) {
 
-			checkoutResource.save($scope.purchaseOrder, function(status) {
+			orderResource.checkout($scope.purchaseOrder, function(status) {
 				$scope.purchaseOrder = clearOrder();
 				$scope.message = status.message;
 				//$route.reload();
@@ -61,6 +82,7 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 		}
 	}
 
+	/*
 	freightResource.query(
 		{ 
 			postalCode: '08696100'
@@ -69,7 +91,7 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 		}, function(erro) {
 			console.log(erro);
 	});
-
+	*/
 	$scope.get = function(){
 
 		cartResource.get(function(cart){
@@ -81,12 +103,15 @@ angular.module('ecommerce').controller('CheckoutController', function($scope, ca
 					quantity: items[i].quantity,
 					product: {
 						id : items[i].product.id,
-						name: items[i].product.name,
-						price: {
-							value : items[i].product.price.value
+						name: items[i].product.title,
+						salePrice: {
+							value : items[i].product.salePrice.value
+						},
+						calculatedSalePrice: {
+							value : items[i].product.calculatedSalePrice.value
 						}
 					},	
-					salePrice: items[i].product.price.value
+					salePrice: items[i].product.salePrice.value
 				}
 				orderItems.push(item);
 			}
