@@ -4,7 +4,7 @@ angular.module('ecommerce').controller('SuppliersController', function($scope, $
 	$scope.suppliers = [];
 	
 	supplierResource.query(function(suppliers){
-		$scope.suppliers = suppliers;
+    $scope.suppliers = suppliers;
 	}, function(error){
 		console.log(error);
 	});
@@ -31,7 +31,7 @@ angular.module('ecommerce').controller('SuppliersController', function($scope, $
       }, function(erro) {
         console.log(erro);
       });
-
     }   
   };
+
 });

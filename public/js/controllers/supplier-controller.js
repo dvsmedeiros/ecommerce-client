@@ -1,4 +1,4 @@
-angular.module('ecommerce').controller('SupplierController', function($scope, $routeParams, viaCepResource, supplierResource){
+angular.module('ecommerce').controller('SupplierController', function($scope, $routeParams, $location, viaCepResource, supplierResource){
 	
 	$scope.message = '';
 	$scope.supplier = {
@@ -6,7 +6,6 @@ angular.module('ecommerce').controller('SupplierController', function($scope, $r
     phones : []
 	};
 
-  //if present :supplierId on route, load the supplier by supplierId
   if($routeParams.supplierId) {
     supplierResource.get({supplierId: $routeParams.supplierId}, function(supplier) {
     $scope.supplier = supplier; 
@@ -29,7 +28,7 @@ angular.module('ecommerce').controller('SupplierController', function($scope, $r
             phones : []
           };
           $scope.message = status.message;
-          //$route.reload();
+          $location.path('/suppliers');
         }, function(erro) {
           console.log(erro);
         });
@@ -39,7 +38,7 @@ angular.module('ecommerce').controller('SupplierController', function($scope, $r
         supplierResource.save($scope.supplier, function(status) {
           $scope.supplier = {};
           $scope.message = status.message;
-          //$route.reload();
+          $location.path('/suppliers');
         }, function(erro) {
           console.log(erro);
         });
