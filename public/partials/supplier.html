@@ -12,19 +12,16 @@
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.companyName.$dirty && editForm.companyName.$invalid]">
 			    <label class="control-label" for="companyName">Razão Social *</label>
 			    <input ng-model="supplier.companyName" type="text" class="form-control" name="companyName" placeholder="Company Name" required> 
-			    <span class="help-block" ng-show="editForm.companyName.$dirty && editForm.companyName.$error.required">Razão Social é obrigatório.</span>
 			</div>
 
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.tradingName.$dirty && editForm.tradingName.$invalid]">
 			    <label class="control-label" for="tradingName">Nome Fantasia *</label>
-			    <input ng-model="supplier.tradingName" type="text" class="form-control" name="tradingName" placeholder="Trading Name" required> 
-			    <span class="help-block" ng-show="editForm.tradingName.$dirty && editForm.tradingName.$error.required">Nome Fantasia é obrigatório.</span>
+			    <input ng-model="supplier.tradingName" type="text" class="form-control" name="tradingName" placeholder="Trading Name" required> 			   
 			</div>
 
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
 			    <label class="control-label" for="name">Código *</label>
 			    <input ng-model="supplier.code" type="text" class="form-control" name="code" placeholder="Code" required>    
-			    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código do fornecedor é obrigatório.</span>
 			</div>
 
 		</div>
@@ -32,9 +29,8 @@
 		<div class="col-md-4">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cnpj.$dirty && editForm.cnpj.$invalid]">
 			    <label class="control-label" for="cnpj">CNPJ *</label>
-			    <!-- ui-br-cnpj-mask -->
-			    <input ng-model="supplier.cnpj.number" type="text" class="form-control" name="cnpj" placeholder="CNPJ" required> 
-			    <span class="help-block" ng-show="editForm.cnpj.$dirty && editForm.cnpj.$error.required">CNPJ é obrigatório.</span>
+			    <!--  -->
+			    <input ng-model="supplier.cnpj.number" type="text" class="form-control" name="cnpj" ui-br-cnpj-mask placeholder="CNPJ" required> 
 			</div>
 		</div>
 
@@ -42,7 +38,6 @@
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.municipalRegistration.$dirty && editForm.municipalRegistration.$invalid]">
 			    <label class="control-label" for="municipalRegistration">Inscrição Municipal *</label>
 			    <input ng-model="supplier.municipalRegistration.number" type="text" class="form-control" name="municipalRegistration" placeholder="Municipal Registration" required> 
-			    <span class="help-block" ng-show="editForm.municipalRegistration.$dirty && editForm.municipalRegistration.$error.required">Inscrição Municipal é obrigatório.</span>
 			</div>
 		</div>
 
@@ -50,15 +45,13 @@
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.stateRegistration.$dirty && editForm.stateRegistration.$invalid]">
 			    <label class="control-label" for="stateRegistration">Inscrição Estadual *</label>
 			    <input ng-model="supplier.stateRegistration.number" type="text" class="form-control" name="stateRegistration" placeholder="State Registration" required> 
-			    <span class="help-block" ng-show="editForm.stateRegistration.$dirty && editForm.stateRegistration.$error.required">Inscrição Estadual é obrigatório.</span>
 			</div>
 		</div>
 
 		<div class="col-md-12">
 			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.email.$dirty && editForm.email.$invalid]">
 			    <label class="control-label" for="email">Email *</label>
-			    <input ng-model="supplier.email" type="text" class="form-control" name="email" placeholder="Email" required> 
-			    <span class="help-block" ng-show="editForm.email.$dirty && editForm.email.$error.required">Email do produto é obrigatório.</span>
+			    <input ng-model="supplier.email" type="email" class="form-control" name="email" placeholder="Email" required> 
 			</div>
 		</div>
 
@@ -66,7 +59,6 @@
 	      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$invalid]">
 	          	<label class="control-label" for="name">Telefone *</label>
 	          	<input ng-model="supplier.phones[0].phone" type="text" class="form-control" name="firstPhoneNumber" placeholder="Phone Number" ui-br-phone-number required>    
-	          	<span class="help-block" ng-show="editForm.firstPhoneNumber.$dirty && editForm.firstPhoneNumber.$error.required">Telefone é obrigatório.</span>
 	      	</div>
 	    </div>
 
@@ -87,7 +79,6 @@
 		        <a href="http://www.buscacep.correios.com.br/servicos/dnec/index.do" target="_blank">Não sabe o CEP?</a>
 		        </label>
 		        <input ng-model="supplier.address.zipCode" ng-blur="findAddressByZipcode(supplier.address.zipCode)" type="text" class="form-control" name="zipcode" placeholder="CEP" ui-br-cep-mask required>    
-		        <span class="help-block" ng-show="editForm.zipcode.$dirty && editForm.zipcode.$error.required">CEP é obrigatório.</span>
 	      	</div>
 
 	      	<div class="form-group">
@@ -100,7 +91,6 @@
 	      	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
 	          	<label class="control-label" for="number">Número *</label>
 	          	<input ng-model="supplier.address.aNumber" type="text" class="form-control" name="number" placeholder="Number" required>    
-	          	<span class="help-block" ng-show="editForm.number.$dirty && editForm.number.$error.required">Número é obrigatório.</span>
 	      	</div>
 	    </div>
 
@@ -136,10 +126,10 @@
 	    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
 				<label>Status *</label>
 				<select name="active" ng-model="supplier.active" class="form-control" required 
-				ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
-					<option value="">Escolha um status</option>
+				ng-controller="ActiveController"
+				ng-options="active.value as (active.name) for active in activies">
+					<option value="">Status</option>
 				</select>
-				<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Status do fornecedor é obrigatório.</span>
 			</div>
 		</div>
 
