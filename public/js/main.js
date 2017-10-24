@@ -1,6 +1,20 @@
-angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', 'angularModalService'])
+angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', 'angularModalService', 'btorfs.multiselect'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
-		
+
+		$httpProvider.interceptors.push('tokenInterceptor');
+
+		//HOME
+		$routeProvider.when('/test', {
+			templateUrl: 'partials/test.html',
+			controller: 'TestController'
+		});
+
+		//LOGIN
+		$routeProvider.when('/login', {
+			templateUrl: 'partials/login.html',
+			controller: 'LoginController'
+		});
+
 		//PRINCIPAL
 		$routeProvider.when('/', {
 			templateUrl: 'partials/principal.html',
@@ -11,6 +25,12 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		$routeProvider.when('/home', {
 			templateUrl: 'partials/home.html',
 			controller: 'HomeController'
+		});
+
+		//SINGUP
+		$routeProvider.when('/singup', {
+			templateUrl: 'partials/singup.html',
+			controller: 'SingupController'
 		});
 
 		//ORDERS
@@ -28,7 +48,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		$routeProvider.when('/home/account', {
 		});
 
-		$routeProvider.when('/home/account/:userId', {
+		$routeProvider.when('/home/account', {
 			templateUrl: 'partials/account.html',
 			controller: 'AccountController'
 		});
@@ -39,10 +59,40 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'AddressesController'
 		});
 
+		$routeProvider.when('/home/addresses/list', {
+			templateUrl: 'partials/addresses.html',
+			controller: 'AddressesController'
+		});
+
+		$routeProvider.when('/home/addresses/new', {
+			templateUrl: 'partials/address.html',
+			controller: 'AddressController'
+		});
+
+		$routeProvider.when('/home/addresses/edit/:addressId', {
+			templateUrl: 'partials/address.html',
+			controller: 'AddressController'
+		});
+
 		//CARDS
 		$routeProvider.when('/home/cards', {
 			templateUrl: 'partials/cards.html',
 			controller: 'CardsController'
+		});
+
+		$routeProvider.when('/home/cards/list', {
+			templateUrl: 'partials/cards.html',
+			controller: 'CardsController'
+		});
+
+		$routeProvider.when('/home/cards/new', {
+			templateUrl: 'partials/card.html',
+			controller: 'CardController'
+		});
+
+		$routeProvider.when('/home/cards/edit/:cardId', {
+			templateUrl: 'partials/card.html',
+			controller: 'CardController'
 		});
 
 		//EXCHANGES
@@ -53,18 +103,18 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 
 		//PRODUCT
 		$routeProvider.when('/products', {
-			templateUrl: 'partials/products.html',
-			controller: 'ProductsController'
+			templateUrl: 'partials/books.html',
+			controller: 'BooksController'
 		});
 		
 		$routeProvider.when('/products/new', {
-			templateUrl: 'partials/product.html',
-			controller: 'ProductController'
+			templateUrl: 'partials/book.html',
+			controller: 'BookController'
 		});
 
 		$routeProvider.when('/products/edit/:productId', {
-			templateUrl: 'partials/product.html',
-			controller: 'ProductController'
+			templateUrl: 'partials/book.html',
+			controller: 'BookController'
 		});
 
 		$routeProvider.when('/products/list', {
@@ -75,6 +125,38 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		$routeProvider.when('/products/detail/:productId', {
 			templateUrl: 'partials/product-detail.html',
 			controller: 'ProductController'
+		});
+
+		//CONFIGURATION
+		$routeProvider.when('/configuration', {
+			templateUrl: 'partials/configurations.html',
+			controller: 'ConfigurationsController'
+		});
+
+		$routeProvider.when('/configuration/new', {
+			templateUrl: 'partials/configuration.html',
+			controller: 'ConfigurationController'
+		});
+
+		$routeProvider.when('/configuration/list', {
+			templateUrl: 'partials/configurations.html',
+			controller: 'ConfigurationsController'
+		});
+		
+		$routeProvider.when('/configuration/edit/:id', {
+			templateUrl: 'partials/configuration.html',
+			controller: 'ConfigurationController'
+		});
+
+		//CLIENT
+		$routeProvider.when('/client', {
+			templateUrl: 'partials/clients.html',
+			controller: 'ClientsController'
+		});		
+
+		$routeProvider.when('/client/list', {
+			templateUrl: 'partials/clients.html',
+			controller: 'ClientsController'
 		});
 
 		//CATEGORY
@@ -93,7 +175,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'CategoriesController'
 		});
 		
-		$routeProvider.when('/category/edit/:categoryId', {
+		$routeProvider.when('/category/edit/:id', {
 			templateUrl: 'partials/category.html',
 			controller: 'CategoryController'
 		});
@@ -104,9 +186,9 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'StockController'
 		});
 
-		$routeProvider.when('/stock/movement', {
-			templateUrl: 'partials/stock-movement.html',
-			controller: 'StockController'
+		$routeProvider.when('/stock/detail/:productId', {
+			templateUrl: 'partials/stock-detail.html',
+			controller: 'StockDetailController'
 		});
 
 		//SUPPLIER
@@ -152,12 +234,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'CheckoutController'
 		});
 
-		//SINGUP
-		$routeProvider.when('/singup', {
-			templateUrl: 'partials/singup.html',
-			controller: 'SingupController'
-		});
-
 		$routeProvider.otherwise({redirectTo: '/'});		
 
-	});
+	})
+;
