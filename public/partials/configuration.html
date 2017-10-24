@@ -1,0 +1,40 @@
+<div class="page-header text-center">
+	<h1>CADASTRO CONFIGURAÇÃO</h1>
+</div>
+
+<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+
+<form novalidate name="editForm" class="row" ng-submit="submit()">
+	
+	<div class="col-md-6">
+	
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
+		    <label class="control-label" for="name">Nome *</label>
+		    <input ng-model="configuration.description" type="text" class="form-control" name="name" placeholder="Name" required>    
+		</div>
+
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
+		    <label class="control-label" for="name">Código *</label>
+		    <input ng-model="configuration.code" type="text" class="form-control" name="code" placeholder="Code" required>    
+		</div>
+
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.value.$dirty && editForm.value.$invalid]">
+		    <label class="control-label" for="name">Valor *</label>
+		    <input ng-model="configuration.value" type="text" class="form-control" name="value" placeholder="Value" required>    
+		</div>
+
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
+			<label>Status *</label>
+			<select name="active" ng-model="configuration.active" class="form-control" required 
+			ng-controller="ActiveController" ng-options="active.value as (active.name) for active in activies">
+				<option value="">Escolha um status</option>
+			</select>
+		</div>
+
+		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
+			Salvar
+		</button>
+		<a href="#/configuration/list" class="btn btn-primary">Voltar</a>
+	</div>
+	
+</form>
