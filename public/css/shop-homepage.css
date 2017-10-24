@@ -8,6 +8,19 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.equal {  
+    display: -webkit-flex;
+    display: flex;
+}
+
 .slide-image {
     width: 100%;
 }

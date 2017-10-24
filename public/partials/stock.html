@@ -1,42 +1,40 @@
-<div class="page-header text-center">
-	<h1>MOVIMENTAÇÃO DE ESTOQUE</h1>
-</div>
-
 <p ng-show="mensagem.length" class="alert alert-info">{{message}}</p>
 
-<div class="col-md-12">
-	<input class="form-control" placeholder="Pesquisar"	ng-model="filter">
-</div>			
-<div class="col-md-12" ng-show="products.length">
-	<br />
-	<form novalidate name="editForm" ng-submit="submit()">
-		<div class="table-responsive">
-			<table class="table">
-			    <thead>
-				    <tr>
-				    	<th>#</th>
-				    	<th>Nome</th>
-				        <th>Código</th>
-				        <th>Descrição</th>
-				        <th>Status</th>
-				        <th></th>
-				    </tr>
-			    </thead>
-			    <tbody>
-			    	<tr ng-repeat="product in products | filter: filter">
-				        <td>{{product.id}}</td>
-				        <td>{{product.name}}</td>
-				        <td>{{product.code}}</td>
-				        <td>{{product.description}}</td>
-				        <td>{{product.active}}</td>
-				        <td class="text-center text-nowrap">
-				        	<a href="#/products/edit/{{product.id}}" class="btn btn-warning">
-				        		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				        	</a> 
-				        </td>
-			      	</tr>
-			    </tbody>
-			</table>
-		</div>
-	</form>
+<div class="col-md-3 panel panel-default panel-body">
+</div>
+<div class="col-md-9">
+	<input class="form-control" placeholder="Pesquisar"	ng-model="filter">			
+	<div>
+		<br />
+		<form novalidate name="editForm" ng-submit="submit()">
+			<div class="table-responsive">
+				<table class="table">
+				    <thead>
+					    <tr>
+					    	<th>#</th>
+					    	<th>Nome</th>
+					        <th>Código</th>
+					        <th>Descrição</th>
+					        <th>Status</th>
+					        <th></th>
+					    </tr>
+				    </thead>
+				    <tbody>
+				    	<tr ng-repeat="product in products | filter: filter">
+					        <td>{{product.id}}</td>
+					        <td>{{product.name}}</td>
+					        <td>{{product.code}}</td>
+					        <td>{{product.description}}</td>
+					        <td>{{product.active}}</td>
+					        <td class="text-center text-nowrap">
+					        	<a href="#/products/edit/{{product.id}}" class="btn btn-warning">
+					        		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					        	</a> 
+					        </td>
+				      	</tr>
+				    </tbody>
+				</table>
+			</div>
+		</form>
+	</div>
 </div>
