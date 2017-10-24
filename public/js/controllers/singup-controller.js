@@ -1,35 +1,43 @@
-angular.module('ecommerce').controller('SingupController', function($scope, $routeParams, viaCepResource, singupResource){
+angular.module('ecommerce').controller('SingupController', function($scope, $routeParams, viaCepResource, singupResource, addressTypeResource){
 	
 	$scope.message = '';
+  $scope.Date = new Date();
+  $scope.addressTypes = [];
 	$scope.user = {
-		address : {},
-    phones : []
+		addresses : [],
+    phones : [],
+    bornDate : new Date()
 	};
+  $scope.responseMessage = {
+    message : '',
+    hasError : true   
+  };
 
-  //if present :supplierId on route, load the supplier by supplierId
-  /*
-  if($routeParams.supplierId) {
-    supplierResource.get({supplierId: $routeParams.supplierId}, function(supplier) {
-    $scope.supplier = supplier; 
-    }, function(erro) {
-      console.log(erro);
-    });
-  }
-  */
+  addressTypeResource.query(function(addressTypes){
+    $scope.addressTypes = addressTypes;
+  }, function(error){
+    console.log(error);
+  });
 
 	$scope.submit = function(){
 
     console.log(JSON.stringify($scope.user));
 
-    singupResource.update($scope.user, function(status) {
-      $scope.user = {
-        address : {},
-        phones : []
-      };
-      $scope.message = status.message;
-    }, function(erro) {
-      console.log(erro);
-    });
+    if ($scope.editForm.$valid) {
+      singupResource.save($scope.user, function(status) {
+        $scope.user = {
+          addresses : [],
+          phones : []
+        };
+        $scope.responseMessage = {
+          message : '',
+          hasError : true   
+        };      
+      }, function(error) {
+        $scope.responseMessage = error.data;
+        console.log(erro);
+      });
+    }
   }
 
 	$scope.findAddressByZipcode = function (cep) {
@@ -37,10 +45,10 @@ angular.module('ecommerce').controller('SingupController', function($scope, $rou
       viaCepResource.get({cep: cep}, function(endereco) {
         
         if(endereco.erro === true){
-          $scope.user.address = {}
+          $scope.user.addresses = []
         } else {
 
-          $scope.user.address = {
+          $scope.user.addresses[0] = {
             street : endereco.logradouro,
             zipCode : endereco.cep,
             neighborhood : {
@@ -48,7 +56,10 @@ angular.module('ecommerce').controller('SingupController', function($scope, $rou
               city : {	
                 description : endereco.localidade,
                 state : {
-                  code : endereco.uf
+                  code : endereco.uf,
+                  country : {
+                    code: 'BR'
+                  }
                 }
               }
             }
@@ -56,7 +67,7 @@ angular.module('ecommerce').controller('SingupController', function($scope, $rou
 
         }
       }, function(erro) {
-        $scope.user.address = {}
+        $scope.user.addresses = []
         console.log(erro);
       });
     }
