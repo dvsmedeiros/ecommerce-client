@@ -3,7 +3,10 @@ angular.module('ecommerce').controller('MyRequestsController', function($scope, 
 	$scope.message = '';
 	$scope.orders = [];
 
-	orderResource.query( function(orders){
+	var req = {
+		"entity" : {}
+	}
+	orderResource.filter(req, function(orders){
 		$scope.orders = orders;
 	}, function(error){
 		console.log(error);
