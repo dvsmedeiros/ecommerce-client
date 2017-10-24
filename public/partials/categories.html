@@ -1,46 +1,87 @@
-<div class="page-header text-center">
-	<h1>CATEGORIAS</h1>
+<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+
+<div class="col-md-3 panel panel-default panel-body">
+
+	<form novalidate name="editForm" class="row" ng-submit="findByFilter()">
+		
+		<div class="col-md-12">			
+			<div class="form-group">
+				<label class="control-label" for="description">Nome</label>
+				<input ng-model="filter.entity.description" type="text" class="form-control" name="description" placeholder="Name">
+			</div>						
+			<div class="form-group">
+			    <label class="control-label" for="code">Código</label>
+			    <input ng-model="filter.entity.code" type="text" class="form-control" name="code" placeholder="Code"> 
+			</div>
+			<div class="form-group">
+				<label>Tipo</label>										
+				<select name="active" ng-model="filter.entity.type.id" class="form-control" 
+				ng-options="type.id as (type.description) for type in types">
+					<option value="" disabled>Selecione</option>
+				</select>					
+			</div>
+			<div class="form-group">
+				<label>Status</label>										
+				<select name="active" ng-model="filter.entity.active" class="form-control" 
+				ng-controller="ActiveController" ng-options="active.value as (active.name) for active in activies">
+					<option value="" disabled>Selecione</option>
+				</select>					
+			</div>
+		</div>
+		<div class="col-md-6 form-group">
+			<button class="btn btn-primary btn-block" ng-click="filterClean()">
+				<span class="glyphicon glyphicon-erase"></span>
+			</button>
+		</div>
+		<div class="col-md-6 form-group">
+			<button type="submit" class="btn btn-primary btn-block" ng-disabled="editForm.$invalid">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</div>
+	</form>
+
 </div>
-
-<p ng-show="mensagem.length" class="alert alert-info">{{message}}</p>
-
-<div class="col-md-12">
+<div class="col-md-9">
 	<div class="input-group">
 		<span class="input-group-btn">
 			<a href="#/category/new" class="btn btn-primary" type="button">
 				Nova Categoria
 			</a>
 		</span>
-		<input class="form-control" placeholder="Pesquisar" ng-model="filter">
+		<input class="form-control" placeholder="Pesquisar" ng-model="_filter">
 	</div>
-</div> 
-<div class="col-md-12" ng-show="categories.length">
 	<br />
 	<form novalidate name="editForm" ng-submit="submit()">
 		<div class="table-responsive">
-			<table class="table">
+			<table class="table table-striped">
 			    <thead>
-				    <tr>
-				    	<th>#</th>
-				    	<th>Nome</th>
+				    <tr class="text-center">
+				    	<th>#</th>				    	
 				        <th>Código</th>
-				        <th>Descrição</th>
+				        <th>Descrição</th>				        
+				        <th>Tipo</th>
 				        <th>Status</th>
 				        <th></th>
 				    </tr>
 			    </thead>
 			    <tbody>
-			    	<tr ng-repeat="category in categories | filter: filter">
-				        <td>{{category.id}}</td>
-				        <td>{{category.name}}</td>
+			    	<tr ng-show="!categories.length"> 
+						<td colspan="6">No results found.</td>
+					</tr>
+			    	<tr ng-repeat="category in categories | filter: _filter">
+				        <td>{{category.id}}</td>				        
 				        <td>{{category.code}}</td>
 				        <td>{{category.description}}</td>
-				        <td>{{category.active}}</td>
+				        <td>{{category.type.description}}</td>			
+				        <td>{{category.active ? 'Ativo' : 'Inativo'}}</td>
 				        <td class="text-center text-nowrap">
 				        	<a href="#/category/edit/{{category.id}}" class="btn btn-warning">
 				        		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				        	</a> 
-				        	<a ng-click="inactivate(category)" class="btn btn-danger">
+				        	<a ng-show="!category.active" ng-click="activate(category)" class="btn btn-success">
+				        		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				        	</a>
+				        	<a ng-show="category.active" ng-click="inactivate(category)" class="btn btn-danger">
 				        		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				        	</a>
 				        </td>

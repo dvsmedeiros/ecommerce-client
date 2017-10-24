@@ -2,7 +2,7 @@
 	<h1>CADASTRO CATEGORIA</h1>
 </div>
 
-<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
 
 <form novalidate name="editForm" class="row" ng-submit="submit()">
 	
@@ -10,36 +10,33 @@
 	
 		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
 		    <label class="control-label" for="name">Nome *</label>
-		    <input ng-model="category.name" type="text" class="form-control" name="name" placeholder="Name" required>    
-		    <span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Nome da categoria é obrigatório.</span>
+		    <input ng-model="category.description" type="text" class="form-control" name="name" placeholder="Name" required>    
 		</div>
 
 		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.code.$dirty && editForm.code.$invalid]">
 		    <label class="control-label" for="name">Código *</label>
-		    <input ng-model="category.code" type="text" class="form-control" name="code" required>    
-		    <span class="help-block" ng-show="editForm.code.$dirty && editForm.code.$error.required">Código da categoria é obrigatório.</span>
+		    <input ng-model="category.code" type="text" class="form-control" name="code" placeholder="Code" required>    
 		</div>
 
-		<div class="form-group">
-			<label>Descrição</label>
-			<textarea name="description" class="form-control" ng-model="category.description">
-			</textarea>
+		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
+			<label>Tipo *</label>
+			<select name="active" ng-model="category.type.id" class="form-control" required ng-options="type.id as (type.description) for type in types">
+				<option value="">Escolha um status</option>
+			</select>
 		</div>
 
 		<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.active.$dirty && editForm.active.$invalid]">
 			<label>Status *</label>
 			<select name="active" ng-model="category.active" class="form-control" required 
-			ng-controller="ActiveController" ng-options="active.value as (active.name | uppercase) for active in activies">
+			ng-controller="ActiveController" ng-options="active.value as (active.name) for active in activies">
 				<option value="">Escolha um status</option>
 			</select>
-			<span class="help-block" ng-show="editForm.name.$dirty && editForm.name.$error.required">Status da categoria é obrigatório.</span>
 		</div>
+
 		<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
 			Salvar
 		</button>
 		<a href="#/category/list" class="btn btn-primary">Voltar</a>
 	</div>
-
-	
 	
 </form>
