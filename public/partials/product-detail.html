@@ -7,19 +7,19 @@
     </div>
     <div class="col-md-6">
         <div class="col-md-12 text-center">
-            <h2>{{product.name}}</h2>
+            <h2>{{product.title}}</h2>
             <br />
         </div>
         <div class="col-md-12">
     		<div class="caption-full">
-    			<p>{{product.description}}</p>
+    			<p>{{product.synopsis}}</p>
     		</div>
             <hr />
         </div>
         <div class="col-md-12">
             <div class="col-md-6 text-center">
-                <h2>{{product.price.value | currency }}</h2>
-                <p>12 x {{product.price.value / 12 | currency }} Sem Juros</p>
+                <h2>{{product.calculatedSalePrice.value | currency }}</h2>
+                <p>12 x {{product.calculatedSalePrice.value / 12 | currency }} Sem Juros</p>
                 <a>Parcelas</a>
             </div>
             <div class="col-md-6 text-center">
