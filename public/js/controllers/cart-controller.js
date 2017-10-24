@@ -39,30 +39,26 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
     }, true);
 
 	$scope.addItemToCart = function (id) {
-		cartResource.save({productId: id}, function(status) {
-			$scope.reload();
-			$scope.message = status.message;
+		cartResource.save({productId: id}, function(cart) {
+			$scope.cart = cart;			
 		}, function(erro) {
 			console.log(erro);
 		});
 	}
 
 	$scope.removeItemCart = function(cartItem) {		
-		cartResource.update({productId: cartItem.product.id}, function(status) {
-			$scope.message = status.message;
-			$scope.reload();
+		cartResource.update({productId: cartItem.product.id}, function(cart) {
+			$scope.cart = cart;
 		}, function(erro) {
 			console.log(erro);
 		});
 	};	
 	
 	$scope.removeAllItemsCart = function(cartItem) {		
-		cartResource.delete({productId: cartItem.product.id}, function(status) {
-			$scope.message = status.message;
-			$scope.reload();
+		cartResource.delete({productId: cartItem.product.id}, function(cart) {
+			$scope.cart = cart;			
 		}, function(erro) {
 			console.log(erro);
 		});
 	};
-
 });

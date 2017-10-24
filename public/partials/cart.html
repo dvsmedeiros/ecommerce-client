@@ -15,8 +15,10 @@
 		                    </div>
 						  	<div class="col-md-4">
 		                        <div class="caption">
-		                        	<h4 class="col-md-12"><a href="/#/products/detail/{{item.product.id}}">{{item.product.name}}</a></h4>
-		                            <h4 class="col-md-12">{{item.product.price.value | currency}} </h4>
+		                        	<h4 class="col-md-12"><a href="/#/products/detail/{{item.product.id}}">{{item.product.title}}</a></h4>
+		                            <h4 class="col-md-12">
+		                            {{ item.product.calculatedSalePrice.value | currency}}
+		                        	</h4>
 		                        </div>
 		                    </div>
 		                	<div class="col-md-3">
@@ -74,13 +76,15 @@
 					<div class="row" ng-repeat="item in cart.cartItems">	  		
 				  		<div class="col-md-12">	
 				  			<div class="col-md-8">
-				  				<p>{{item.product.name}}</p>
+				  				<p>{{item.product.title}}</p>
 				  			</div>
 				  			<div class="col-md-1">
 				  				<p>{{item.quantity}}</p>
 				  			</div>
-				  			<div class="col-md-3">
-				  				<p class="pull-right">{{item.product.price.value * item.quantity | currency}}</p>
+				  			<div class="col-md-3">				  			
+				  				<p class="pull-right">
+				  					{{item.product.calculatedSalePrice.value  * item.quantity | currency}}
+				  				</p>
 				  			</div>
 				  		</div>
 			  		</div>	
