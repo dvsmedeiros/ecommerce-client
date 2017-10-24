@@ -1,0 +1,101 @@
+<p ng-show="message.length" class="alert alert-info">{{message}}</p>
+
+<div class="col-md-3 panel panel-default panel-body">
+
+	<form novalidate name="editForm" class="row" ng-submit="findByFilter()">
+		
+		<div class="col-md-12">			
+			<div class="form-group">
+				<label class="control-label" for="firstName">Nome</label>
+				<input ng-model="filter.entity.firstName" type="text" class="form-control" name="firstName" placeholder="First Name">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="lastName">Sobrenome</label>
+				<input ng-model="filter.entity.lastName" type="text" class="form-control" name="lastName" placeholder="Last Name">
+			</div>						
+			<div class="form-group">
+			    <label class="control-label" for="email">Email</label>
+			    <input ng-model="filter.entity.email" type="text" class="form-control" name="email" placeholder="Email"> 
+			</div>
+			<div class="form-group">
+				<label>Gênero</label>										
+				<select name="active" ng-model="filter.entity.gender" class="form-control" 
+					ng-controller="GenderController" ng-options="gender.id as (gender.description) for gender in genders">
+					<option value="" disabled>Selecione</option>
+				</select>					
+			</div>
+		
+	    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cpf.$dirty && editForm.cpf.$invalid]">
+			    <label class="control-label" for="cpf">CPF</label>
+			    <input ng-model="filter.entity.cpf.number" type="text" class="form-control" name="cpf" placeholder="CPF" ui-br-cpf-mask> 
+			</div>
+			
+			<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.bornDate.$dirty && editForm.bornDate.$invalid]">
+				    <label class="control-label" for="bornDate">Data de Nascimento *</label>
+				    <input ng-model="filter.entity.bornDate" type="date" class="form-control" name="bornDate" placeholder="Born Date"> 
+				</div>
+
+			<div class="form-group">
+				<label>Status</label>										
+				<select name="active" ng-model="filter.entity.active" class="form-control" 
+				ng-controller="ActiveController" ng-options="active.value as (active.name) for active in activies">
+					<option value="" disabled>Selecione</option>
+				</select>					
+			</div>
+		</div>
+		<div class="col-md-6 form-group">
+			<button class="btn btn-primary btn-block" ng-click="filterClean()">
+				<span class="glyphicon glyphicon-erase"></span>
+			</button>
+		</div>
+		<div class="col-md-6 form-group">
+			<button type="submit" class="btn btn-primary btn-block" ng-disabled="editForm.$invalid">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</div>
+	</form>
+
+</div>
+<div class="col-md-9">
+	<div class="form-group">		
+		<input class="form-control" placeholder="Pesquisar" ng-model="_filter">
+	</div>
+	<br />
+	<form novalidate name="editForm" ng-submit="submit()">
+		<div class="table-responsive">
+			<table class="table table-striped">
+			    <thead>
+				    <tr class="text-center">				    	
+				        <th>Nome</th>
+				        <th>Email</th>				        
+				        <th>Data de Nascimento</th>
+				        <th>Status</th>
+				        <th></th>
+				    </tr>
+			    </thead>
+			    <tbody>
+			    	<tr ng-show="!clients.length"> 
+						<td colspan="6">No results found.</td>
+					</tr>
+			    	<tr ng-repeat="client in clients | filter: _filter" ng-disabled="user.id != client.id">
+				        <td>{{client.firstName}} {{client.lastName}}</td>				        
+				        <td>{{client.email}}</td>
+				        <td>{{client.bornDate | date:'dd/MM/yyyy'}}</td>				        
+				        <td>{{client.active ? 'Ativo' : 'Inativo'}}</td>
+				        <td class="text-center text-nowrap">
+				        	<a ng-show="!client.active" ng-click="activate(client)" class="btn btn-success" ng-disabled="user.id == client.id">
+				        		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				        	</a>        	
+				        	<a ng-show="client.active" ng-click="inactivate(client)" class="btn btn-danger" ng-disabled="user.id == client.id">
+				        		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				        	</a>
+				        	<a href="/#/" class="btn btn-primary">
+				        		<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+				        	</a> 
+				        </td>
+			      	</tr>
+			    </tbody>
+			</table>
+		</div>
+	</form>
+</div>
