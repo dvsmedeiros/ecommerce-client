@@ -1,4 +1,4 @@
-angular.module('ecommerce').controller('SingupController', function($scope, $routeParams, viaCepResource, singupResource, addressTypeResource){
+angular.module('ecommerce').controller('SingupController', function($scope, $location, $routeParams, viaCepResource, singupResource, addressTypeResource){
 	
 	$scope.message = '';
   $scope.Date = new Date();
@@ -32,7 +32,8 @@ angular.module('ecommerce').controller('SingupController', function($scope, $rou
         $scope.responseMessage = {
           message : '',
           hasError : true   
-        };      
+        };
+        $location.path('/#/login');      
       }, function(error) {
         $scope.responseMessage = error.data;
         console.log(erro);

@@ -12,13 +12,6 @@ angular.module('ecommerce').controller('PrincipalController', function($scope, b
 		}
 	}
 
-	clientResource.logged(function(user) {
-		$scope.user = user; 
-	}, function(erro) {
-		$scope.responseMessage = erro.data;
-		console.log(erro);
-	});	
-
 	categoryResource.filter(filterCategory, function(categories){
 		$scope.activeCategories = categories;
 	}, function(error){

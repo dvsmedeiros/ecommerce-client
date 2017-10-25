@@ -124,7 +124,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 
 		$routeProvider.when('/products/detail/:productId', {
 			templateUrl: 'partials/product-detail.html',
-			controller: 'ProductController'
+			controller: 'ProductDetailController'
 		});
 
 		//CONFIGURATION

@@ -16,7 +16,7 @@ angular.module('ecommerce').controller('LoginController', function($rootScope, $
 			$location.path('/');			
 		}, function(error){
 			console.log(error);
-   			$scope.message = 'Login ou password inválidos';   			
+   			$scope.message = 'Login ou senha inválidos';   			
 		});
 	};
 

@@ -1,5 +1,7 @@
-<br />
-<div class="row">	
+<div class="row" ng-cloak>
+    <div class="col-md-12">
+        <p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+    </div>	
 	<div class="col-md-6">
         <div class="thumbnail">
             <img class="img-responsive" src="http://placehold.it/800x600" alt="">

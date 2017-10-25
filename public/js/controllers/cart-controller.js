@@ -1,6 +1,9 @@
 angular.module('ecommerce').controller('CartController', function($scope, $route, $routeParams, $location, $window, cartResource, freightResource){
 	
-	$scope.message = '';
+	$scope.responseMessage = {
+		message : '',
+		hasError : true		
+	};
 	$scope.cart = {
 		cartItems : [],
 		subTotal : 0
@@ -40,8 +43,13 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 
 	$scope.addItemToCart = function (id) {
 		cartResource.save({productId: id}, function(cart) {
-			$scope.cart = cart;			
+			$scope.cart = cart;
+			$scope.responseMessage = {
+				message : '',
+				hasError : true
+			}			
 		}, function(erro) {
+			$scope.responseMessage = erro.data;
 			console.log(erro);
 		});
 	}
@@ -49,6 +57,10 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 	$scope.removeItemCart = function(cartItem) {		
 		cartResource.update({productId: cartItem.product.id}, function(cart) {
 			$scope.cart = cart;
+			$scope.responseMessage = {
+				message : '',
+				hasError : true
+			}
 		}, function(erro) {
 			console.log(erro);
 		});
@@ -56,7 +68,11 @@ angular.module('ecommerce').controller('CartController', function($scope, $route
 	
 	$scope.removeAllItemsCart = function(cartItem) {		
 		cartResource.delete({productId: cartItem.product.id}, function(cart) {
-			$scope.cart = cart;			
+			$scope.cart = cart;
+			$scope.responseMessage = {
+				message : '',
+				hasError : true
+			}			
 		}, function(erro) {
 			console.log(erro);
 		});

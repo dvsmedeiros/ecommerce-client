@@ -40,6 +40,7 @@
     <script src="js/controllers/home-controller.js"></script>
     <script src="js/controllers/products-controller.js"></script>
     <script src="js/controllers/product-controller.js"></script>
+    <script src="js/controllers/product-detail-controller.js"></script>
     <script src="js/controllers/book-controller.js"></script>
     <script src="js/controllers/books-controller.js"></script>
     <script src="js/controllers/category-controller.js"></script>
@@ -141,7 +142,10 @@
                         <a href="/#/home/orders">Meus Pedidos</a>
                     </li>
                     <li ng-show="!isAuthenticated()">
-                        <a href="/#/singup">Cadastre-se</a>                        
+                        <a href="/#/singup">Cadastre-se</a>      
+                    </li>
+                    <li ng-show="!isAuthenticated()">
+                        <a href="/#/login">Login</a>      
                     </li>
                 </ul>
             </div>
