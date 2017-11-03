@@ -1,12 +1,12 @@
 <div class="col-md-12" ng-cloak>	
     <!-- SHOP ITEM -->
-    <div ng-show="cart.cartItems.length">
-    	<div class="col-md-12">
-			<div class="page-header text-center">
-				<h2>CARRINHO</h2>
-			</div>
-			<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+	<div class="col-md-12">
+		<div class="page-header text-center">
+			<h2>CARRINHO</h2>
 		</div>
+		<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>		
+	</div>
+    <div ng-show="cart.cartItems.length">
 		<div class="col-md-7">
 			<!-- <div class="panel panel-default"> -->
 			  	<!-- <div class="panel-body"> -->
