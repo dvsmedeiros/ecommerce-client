@@ -6,7 +6,7 @@
 		<a href="/#/home/orders" class="list-group-item">Meus Pedidos</a>
 		<a href="/#/home/exchanges" class="list-group-item">Trocas e Devoluções</a>
 		<a href="/#/home/cards" class="list-group-item">Cartões</a>
-		<a href="/#/logout" class="list-group-item">Sair</a>
+		<!-- <a href="/#/logout" class="list-group-item">Sair</a> -->
     </div>	
 </div>
 
@@ -26,24 +26,24 @@
 			<div class="panel panel-default panel-body">
 				<div class="table-responsive">
 					<table class="table">
-					    <thead>
+					    <thead> 
 						    <tr>
-						    	<th>Nº Pedido</th>
-						    	<th>Itens</th>
-						        <th>Data</th>
-						        <th>Total</th>
-						        <th>Status</th>
-						        <th>Pagamento</th>
+						    	<th class="text-center">Nº Pedido</th>
+						    	<th class="text-center">Itens</th>
+						        <th class="text-center">Data</th>
+						        <th class="text-center">Total</th>
+						        <th class="text-center">Status</th>
+						        <th class="text-center">Pagamento</th>
 						    </tr>
 					    </thead>
 					    <tbody>
-					    	<tr>
+					    	<tr class="text-center">
 						        <td>{{order.id}}</td>
 						        <td>{{order.items.length}}</td>
 						        <td>{{order.insertionDate}}</td>
 						        <td>{{order.total | currency}}</td>
 						        <td>{{order.statusOrder}}</td>
-						        <td>
+						        <td class="text-center">
 							        <span style="font-size:1.4em;" class="glyphicon glyphicon-credit-card" 
 							        ng-show="order.payment.paymentType == 'CREDIT_CARD'"></span>
 						        	<span style="font-size:1.4em;" class="glyphicon glyphicon-barcode" 
@@ -58,14 +58,14 @@
 					    <table class="table table-responsive">
 						    <thead>
 							    <tr>
-							    	<th>Produto</th>
-							    	<th>Quantidade</th>
-							        <th>Valor</th>
-							        <th>Subtotal</th>
+							    	<th class="text-center">Produto</th>
+							    	<th class="text-center">Quantidade</th>
+							        <th class="text-center">Valor</th>
+							        <th class="text-center">Subtotal</th>
 							    </tr>
 						    </thead>
 						    <tbody>
-						    	<tr ng-repeat="item in order.items">
+						    	<tr class="text-center" ng-repeat="item in order.items">
 							        <td><a href="/#/products/detail/{{item.product.id}}">{{item.product.title}}</a></td>
 							        <td>{{item.quantity}}</td>
 							        <td>{{item.product.calculatedSalePrice.value | currency}}</td>
@@ -88,7 +88,7 @@
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">
-                  		<p>{{order.insertionDate}}</p>
+                  		<p>{{order.insertionDate}}</p>                  		
                   </div>
                 </div>
                 
@@ -147,20 +147,24 @@
 		<div class="col-md-12">
 			<br />
 			<div class="col-md-6">	
-				<h5 class="text-center">ENDEREÇO ENTREGA</h5>
+				<h5>ENDEREÇO ENTREGA</h5>
 				<hr />
-				<p>{{order.freight.address.street}}, {{order.freight.address.aNumber}}</p>
-				<p>{{order.freight.address.zipCode}} - {{order.freight.address.neighborhood.name}}
-				<p>{{order.freight.address.neighborhood.city.description}} - {{order.freight.address.neighborhood.city.state.code}}</p>
+				<p>{{order.deliveryAddress.street}}, {{order.deliveryAddress.aNumber}}</p>
+				<p>{{order.deliveryAddress.zipCode}} - {{order.deliveryAddress.neighborhood.name}}
+				<p>{{order.deliveryAddress.neighborhood.city.description}} - {{order.deliveryAddress.neighborhood.city.state.code}}</p>
 			</div>
 
 			<div class="col-md-6">	
-				<h5 class="text-center">RESUMO</h5>
+				<h5>RESUMO</h5>
 				<hr />
-				<p><strong>Subtotal:</strong> {{order.subTotal | currency}}</p>
-				<p><strong>Vale: - </strong></p>
-				<p><strong>Frete:</strong> {{order.freight.value | currency}} ( <strong>{{order.freight.description}} </strong>)</p>
-				<p><strong>Total:</strong> {{order.total | currency}}</p>
+				<div class="col-md-6">
+					<p><strong>Frete:</strong> {{order.freight.value | currency}} ( <strong>{{order.freight.description}} </strong>)</p>
+					<p><strong>Vale: - </strong></p>
+					<p><strong>Subtotal:</strong> {{order.subTotal | currency}}</p>
+				</div>
+				<div class="col-md-6">
+					<p><strong>Total:</strong> {{order.total | currency}}</p>
+				</div>
 			</div>
 
 		</div>
