@@ -53,6 +53,11 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 			controller: 'AccountController'
 		});
 
+		$routeProvider.when('/home/account/password', {
+			templateUrl: 'partials/password.html',
+			controller: 'PasswordController'
+		});
+
 		//ADRESS
 		$routeProvider.when('/home/addresses', {
 			templateUrl: 'partials/addresses.html',

@@ -31,7 +31,7 @@
 			<div class="col-md-6">
 		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.password.$dirty && editForm.password.$invalid]">
 				    <label class="control-label" for="password">Password *</label>
-				    <input ng-model="user.password" type="password" class="form-control" name="password" placeholder="Password" required> 
+				    <input ng-model="user.newPassword" type="password" class="form-control" name="password" placeholder="Password" required> 
 				</div>
 			</div>
 
@@ -94,8 +94,8 @@
 		    <div class="col-md-6">
 		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.addressType.$dirty && editForm.addressType.$invalid]">
 					<label>Tipo de Endereço *</label>
-					<select name="addressType" ng-model="user.addresses[0].type.id" class="form-control" required 
-					ng-options="addressType.id as addressType.description for addressType in addressTypes">
+					<select name="addressType" ng-model="user.addresses[0].type" class="form-control" required 
+					ng-options="addressType as addressType.description for addressType in addressTypes">
 						<option value="">Selecione</option>
 					</select>
 				</div>
@@ -152,7 +152,7 @@
 		</div>
 
 		<div class="col-md-12">
-			<div class="col-md-12">
+			<div class="col-md-12">				
 				<button type="submit" class="btn btn-primary" ng-disabled="editForm.$invalid">
 					Salvar
 				</button>

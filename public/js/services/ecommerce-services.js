@@ -48,6 +48,11 @@ angular.module('ecommerceServices', ['ngResource'])
 				url : 'http://localhost:8888/ecommerce-api/user/active',
 				method: 'GET',
 				isArray : false
+			},
+			'changePassword' : {
+				url : 'http://localhost:8888/ecommerce-api/user/change/password',
+				method: 'POST',
+				isArray : false
 			}
 
 		});

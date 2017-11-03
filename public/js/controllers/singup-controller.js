@@ -4,7 +4,9 @@ angular.module('ecommerce').controller('SingupController', function($scope, $loc
   $scope.Date = new Date();
   $scope.addressTypes = [];
 	$scope.user = {
-		addresses : [],
+		addresses : [{
+      description : ''
+    }],
     phones : [],
     bornDate : new Date()
 	};
@@ -20,10 +22,9 @@ angular.module('ecommerce').controller('SingupController', function($scope, $loc
   });
 
 	$scope.submit = function(){
-
     console.log(JSON.stringify($scope.user));
-
-    if ($scope.editForm.$valid) {
+    if ($scope.editForm.$valid) {      
+      $scope.user.addresses[0].description = $scope.user.addresses[0].type.description;
       singupResource.save($scope.user, function(status) {
         $scope.user = {
           addresses : [],
