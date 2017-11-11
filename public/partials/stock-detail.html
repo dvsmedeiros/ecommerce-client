@@ -10,11 +10,11 @@
 				<p><strong>Titulo: </strong>{{stock.product.title}}</p>
 				<p><strong>Código: </strong>{{stock.product.code}}</p>				
 				<p><strong>Preço de Venda: </strong>{{stock.product.salePrice.value | currency}}</p>
-				<p><strong>Código de Barra: </strong>{{stock.product.barCode}}</p>
+				<p><strong>Código de Barra: </strong>{{stock.product.barCode | barCode}}</p>
 				<p><strong>Grupo de Preço: </strong>{{stock.product.priceGroup.percent * 100}}%</p>
 			</div>		
 			<div class="col-md-6">
-				<p><strong>ISBN: </strong>{{stock.product.isbn}}</p>
+				<p><strong>ISBN: </strong>{{stock.product.isbn | isbn}}</p>
 				<p><strong>Edição: </strong>{{stock.product.edition}}</p>
 				<p><strong>Nº Páginas: </strong>{{stock.product.pages}}</p>
 				<p><strong>Ano: </strong>{{stock.product.year}}</p>				
@@ -129,7 +129,7 @@
 				      	<td class="text-center" ng-show="!record.recordType.code">
 				      		<span class="glyphicon glyphicon-minus"></span>
 				      	</td>
-				      	<td class="text-center">{{record.user.firstName}}</td>
+				      	<td class="text-center">{{record.user.email}}</td>
 				      	<td class="text-center" class="text-center">{{record.insertionDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
 			      	</tr>
 			    </tbody>
