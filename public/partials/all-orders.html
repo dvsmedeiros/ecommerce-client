@@ -1,0 +1,93 @@
+<div class="col-md-3 panel panel-default panel-body">
+
+	<form novalidate name="editForm" class="row" ng-submit="findByFilter()">
+		
+		<div class="col-md-12">			
+			<div class="form-group">
+				<label class="control-label" for="orderNumber">Nº do Pedido</label>
+				<input ng-model="filter.entity.id" type="text" class="form-control" name="orderNumber" placeholder="Order Number" disabled>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="code">Código</label>
+				<input ng-model="filter.entity.code" type="text" class="form-control" name="code" placeholder="Order Code" disabled>
+			</div>						
+			<div class="form-group">
+			    <label class="control-label" for="email">Usuário</label>
+			    <input ng-model="filter.entity.email" type="email" class="form-control" name="email" placeholder="Email" disabled> 
+			</div>
+			<div class="form-group">
+				<label>Status</label>										
+				<select name="active" ng-model="filter.entity.statusOrder.id" class="form-control" 
+				ng-options="status.id as (status.description) for status in statusOrder">
+					<option value="" disabled>Selecione</option>
+				</select>					
+			</div>
+		</div>
+		<div class="col-md-6 form-group">
+			<button class="btn btn-primary btn-block" ng-click="filterClean()">
+				<span class="glyphicon glyphicon-erase"></span>
+			</button>
+		</div>
+		<div class="col-md-6 form-group">
+			<button type="submit" class="btn btn-primary btn-block" ng-disabled="editForm.$invalid">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</div>
+	</form>
+
+</div>
+<div class="col-md-9">
+	
+	<div class="col-md-12">
+		<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+		<input class="form-control" placeholder="Pesquisar" ng-model="_filter">
+	</div> 
+
+	<div class="col-md-12">		
+		<br />
+		<form novalidate name="editForm" ng-submit="submit()">
+			<div class="table-responsive">
+				<table class="table table-striped">
+				    <thead>
+					    <tr>
+					    	<th>Nº Pedido</th>
+					    	<th>Code</th>					    	
+					        <th class="text-center">Data</th>
+					        <!--<th class="text-center">Total</th>-->
+					        <th class="text-center">Usuário</th>
+					        <th class="text-center">Status</th>
+					        <th class="text-center"></th>
+					    </tr>
+				    </thead>
+				    <tbody>
+				    	<tr ng-show="!orders.length"> 
+				    		<td colspan="7">No results found.</td>
+				    	</tr>
+				    	<tr ng-repeat="order in orders | filter: _filter | orderBy: 'id'">
+					        <td>{{order.id}}</td>
+					        <td>{{order.code}}</td>
+					        <td class="text-center">{{order.insertionDate}}</td>
+					        <!--<td class="text-center">{{order.total | currency}}</td>-->
+					        <td class="text-center">{{order.user.email}}</td>
+					        <!--<td class="text-center">{{order.statusOrder.description}}</td>-->
+					        <td>
+					        	<select name="active" ng-model="order.statusOrder.code" class="form-control" 
+								ng-options="status for status in order.statusOrder.possibleStatus">
+									<option value="" disabled>Selecione</option>
+								</select>
+					        </td>
+					        <td class="text-center text-nowrap">					        	
+					        	<a ng-click="changeStatusOrder(order)" class="btn btn-success">
+					        		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					        	</a>
+					        	<a href="#/home/orders/detail/{{order.id}}" class="btn btn-warning">
+							        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+							    </a>	  
+					        </td>
+				      	</tr>
+				    </tbody>				    
+				</table>
+			</div>
+		</form>
+	</div>
+</div>
