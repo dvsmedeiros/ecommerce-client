@@ -2,7 +2,9 @@
 <div class="row">
     <div class="col-md-12">
 		<h3 class="text-center">FINALIZAR COMPRA</h3>
-		<br />
+		<br />		
+		<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
+			
 		<div class="row" ng-show="purchaseOrder.items.length">
 			<div class="col-md-4">
 				<div class="panel panel-default">
@@ -16,36 +18,34 @@
 							 {{billingAddress.neighborhood.name}}<br />
 							 {{billingAddress.zipCode}}<br />
 							 {{billingAddress.neighborhood.city.description}} - {{billingAddress.neighborhood.city.state.code}}
-						</p>
-						<!--<p>(11) 4749-7851 | (11) 4749-7851</p>-->
+						</p>						
 						<hr />
 						<h4>Endereço Entrega</h4>
 						<div ng-show="!deliveryEqBilling">
-							<select name="active" ng-model="delivery" class="	form-control" required 
+							<select name="active" ng-model="purchaseOrder.deliveryAddress" class="	form-control" required 
 								ng-options="address as (address.description) for address in deliveries">				
 							</select>
-							<br/>
-							<strong>{{delivery.description}}</strong>
+							<br/>							
+							<strong>{{purchaseOrder.deliveryAddress.description}}</strong>
 							<p>
-								 {{delivery.street}}, {{delivery.aNumber}}
-								 {{delivery.neighborhood.name}}<br />
-								 {{delivery.zipCode}}<br />
-								 {{delivery.neighborhood.city.description}} - {{delivery.neighborhood.city.state.code}}
+								 {{purchaseOrder.deliveryAddress.street}}, {{purchaseOrder.deliveryAddress.aNumber}}
+								 {{purchaseOrder.deliveryAddress.neighborhood.name}}<br />
+								 {{purchaseOrder.deliveryAddress.zipCode}}<br />
+								 {{purchaseOrder.deliveryAddress.neighborhood.city.description}} - {{purchaseOrder.deliveryAddress.neighborhood.city.state.code}}
 							</p>
 						</div>
 						<div class="checkbox">							
 							<label>
 								<input type="checkbox" ng-model="deliveryEqBilling">Endereço de Entrega igual ao Principal
-							</label>
-							<hr/>
-						</div>						
-
-						<a ng-controller="AddressesController" ng-click="modalShow()" class="btn btn-default btn-block" >INSERIR NOVO ENDEREÇO</a>
+							</label>							
+						</div>
+						<hr />
+						<a href="/#/home/addresses" class="btn btn-block btn-default">NOVO ENDEREÇO</a>						
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
-				
+				<!--
 				<div class="panel panel-default">
 					<div class="panel-heading text-center"><h4>FRETE</h4></div>
 					<div class="panel-body">
@@ -68,9 +68,7 @@
 			            </div>	
 					</div>
 				</div>
-
-
-
+				-->
 				<div class="panel panel-default">
 					<div class="panel-heading text-center"><h4>FORMA DE PAGAMENTO</h4></div>
 					<div class="panel-body">
@@ -80,64 +78,85 @@
 						</div>
 						<hr />
 						<div class="radio">
-							<label><input type="radio" name="optradio" ng-model="purchaseOrder.payment.paymentType" value="1">Cartão de Crédito</label>
+							<label>
+								<input type="radio" name="optradio" ng-model="purchaseOrder.payment.paymentType" value="1">Cartão de Crédito
+							</label>							
 						</div>
 						<br />
 						<div ng-show="purchaseOrder.payment.paymentType == 1">
-								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
-									<label class="control-label col-sm-3" for="number">Cartão:</label>
-									<div class="col-sm-9">
-										<input ng-model="purchaseOrder.payment.card.aNumber" type="text" class="form-control" name="number" ui-mask="9999 9999 9999 9999" required>
-									</div>
-								</div>
+								
+							<div ng-show="cards.length">
+								<select name="active" ng-model="purchaseOrder.payment.card" class="form-control" required 
+								ng-options="card as (card.name + ' - ' +  (card.aNumber | card)) for card in cards">
+									<option value="" selected>Selecione</option>				
+								</select>
+								<br/>															
+							</div>
 
-								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.quota.$dirty && editForm.quota.$invalid]">
-									<label class="control-label col-sm-3" for="quota">Parcelas:</label>
-									<div class="col-sm-9">
-										<select name="quota" ng-model="purchaseOrder.payment.quota.aNumber" class="form-control"
-											ng-init="quotas=[1,2,3,4,5,6,7,8,9,10,11,12]"   
-											ng-options="quota for quota in quotas" required>
-											<option value="">Selecione Parcelas</option>
-										</select>
-									</div>
+							<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cardFlag.$dirty && editForm.cardFlag.$invalid]" ng-show="!purchaseOrder.payment.card.id">	
+								<label class="control-label col-sm-3" for="quota">Bandeira:</label>
+								<div class="col-sm-9">
+									<select name="flag" ng-model="purchaseOrder.payment.card.flag.id" class="form-control" 
+									ng-options="flag.id as flag.description for flag in flags" ng-disabled="purchaseOrder.payment.card.id" required>
+										<option value="">Selecione</option>
+									</select>
 								</div>
+							</div>
 
-								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
-									<label class="control-label col-sm-3" for="name">Nome:</label>
-									<div class="col-sm-9">
-										<input ng-model="purchaseOrder.payment.card.name" type="text" class="form-control" name="name" required>
-									</div>
+							<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]" ng-show="!purchaseOrder.payment.card.id">
+								<label class="control-label col-sm-3" for="number">Cartão:</label>
+								<div class="col-sm-9">
+									<input ng-model="purchaseOrder.payment.card.aNumber" type="text" class="form-control" name="number" ui-mask="9999 9999 9999 9999" ng-disabled="purchaseOrder.payment.card.id" required>
 								</div>
+							</div>
 
-								<div class="form-group">
-									<label class="control-label col-sm-4" for="email">Vencimento:</label>
-									<div class="col-sm-4">
-										<select name="month" ng-model="purchaseOrder.payment.card.expiringDate.month" class="form-control"
-											ng-init="months=[1,2,3,4,5,6,7,8,9,10,11,12]"   
-											ng-options="month for month in months" required>
-											<option value="">Mes</option>
-										</select>
-									</div>
-									<div class="col-sm-4">
-										<select name="year" ng-model="purchaseOrder.payment.card.expiringDate.year" class="form-control"
-											ng-init="years=[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]"   
-											ng-options="year for year in years" required>
-											<option value="">Ano</option>
-										</select>
-									</div>
+							<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.quota.$dirty && editForm.quota.$invalid]">
+								<label class="control-label col-sm-3" for="quota">Parcelas:</label>
+								<div class="col-sm-9">
+									<select name="quota" ng-model="purchaseOrder.payment.quota.aNumber" class="form-control"
+										ng-init="quotas=[1,2,3,4,5,6,7,8,9,10,11,12]"   
+										ng-options="quota for quota in quotas" required>
+										<option value="">Selecione Parcelas</option>
+									</select>
 								</div>
+							</div>
 
-								<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cvv.$dirty && editForm.cvv.$invalid]">
-									<label class="control-label col-sm-5" for="cvv">Cód. Segurança:</label>
-									<div class="col-sm-7">
-										<input ng-model="purchaseOrder.payment.card.cvv" type="text" class="form-control" name="cvv" ui-mask="999" required>
-									</div>
+							<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.name.$dirty && editForm.name.$invalid]">
+								<label class="text-left control-label col-sm-3" for="name">Nome:</label>
+								<div class="col-sm-9">
+									<input ng-model="purchaseOrder.payment.card.name" type="text" class="form-control" name="name" ng-disabled="purchaseOrder.payment.card.id" maxlength="22" required>
 								</div>
-								<!--
-								<div class="checkbox">
-									<label><input type="checkbox" value="">Salvar cartão para para próxima compras</label>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="email">Vencimento:</label>
+								<div class="col-sm-4">
+									<select name="month" ng-model="purchaseOrder.payment.card.expiringDate.month" class="form-control"
+										ng-init="months=[1,2,3,4,5,6,7,8,9,10,11,12]"   
+										ng-options="month for month in months" ng-disabled="purchaseOrder.payment.card.id" required>
+										<option value="">Mes</option>
+									</select>
 								</div>
-								-->
+								<div class="col-sm-4">
+									<select name="year" ng-model="purchaseOrder.payment.card.expiringDate.year" class="form-control"
+										ng-init="years=[2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]"   
+										ng-options="year for year in years" ng-disabled="purchaseOrder.payment.card.id" required>
+										<option value="">Ano</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cvv.$dirty && editForm.cvv.$invalid]">
+								<label class="control-label col-sm-5" for="cvv">Cód. Segurança:</label>
+								<div class="col-sm-7">
+									<input ng-model="purchaseOrder.payment.card.cvv" type="text" class="form-control" name="cvv" ui-mask="999" ng-disabled="purchaseOrder.payment.card.id" required>
+								</div>
+							</div>
+							<div class="checkbox" ng-show="!purchaseOrder.payment.card.id">							
+								<label>
+									<input type="checkbox" ng-model="saveCard">Salvar cartão para próximas compras
+								</label>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -171,7 +190,18 @@
 				  				<td><h5>Frete</h5></td>
 				  				<td><h5 class="text-right">{{purchaseOrder.freight.value | currency}}</h5></td>
 				  			</tr>
-				  	
+				  			
+				  			<tr ng-show="purchaseOrder.cupons.length">
+				  				<td><h5>Desconto</h5></td>
+				  				<td>
+				  					<div ng-repeat="cupom in purchaseOrder.cupons">
+				  						<h5 class="text-right">
+				  							({{cupom.code | uppercase}}) {{cupom.value | currency}}
+				  						</h5>
+				  					</div>				  
+				  				</td>
+				  			</tr>
+
 				  			<tr>
 				  				<td><h4>Total</p><h4></td>
 				  				<td>
@@ -185,7 +215,7 @@
 						<button type="submit" class="btn btn-success btn-block" ng-disabled=" purchaseOrder.payment.paymentType == 1 && editForm.$invalid">FINALIZAR COMPRA</button>
 					</div>
 				</div>
-			</div>
+			</div>			
 		</div>
 	</div>
 </div>
