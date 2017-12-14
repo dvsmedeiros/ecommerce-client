@@ -1,0 +1,71 @@
+<div class="col-md-2 panel panel-default panel-body">
+
+	<form novalidate name="editForm" class="row" ng-submit="findByFilter()">
+    		
+		<div class="col-md-12">			
+			<div class="form-group">
+				<label class="control-label" for="bornDate">Periodo Inicial *</label>
+			    <input ng-model="filter.entity.period.start" type="date" class="form-control" name="startPeriod" placeholder="Start Period" required>				
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="bornDate">Periodo Final *</label>
+			    <input ng-model="filter.entity.period.end" type="date" class="form-control" name="endPeriod" placeholder="End Period" required>				
+			</div>
+			<div class="form-group">
+				<label>Categoria (s)</label>
+				 <multiselect ng-model="filter.entity.categories" options="categories" id-prop="id" display-prop="description" placeholder="Selecione">
+				</multiselect>
+			</div>
+		</div>
+		<div class="col-md-6 form-group">
+			<button class="btn btn-primary btn-block" ng-click="drawGraph()">
+				<span class="glyphicon glyphicon-erase"></span>
+			</button>
+		</div>
+		<div class="col-md-6 form-group">
+			<button type="submit" class="btn btn-primary btn-block" ng-disabled="editForm.$invalid">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</div>
+	</form>
+
+</div>
+<div class="col-md-10">
+    <div class="col-md-12">
+        <p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>       
+    </div> 
+
+    <div class="panel panel-default panel-body">
+        <div id="percert_sale_category_gender_age" />
+        <hr/>
+        <div class="table-responsive">
+			<table class="table	table-bordered table-striped table-condensed  table-hover">
+			    <thead>
+				    <tr>
+				    	<th>Categoria</th>				    	
+				    	<th class="text-center" colspan="2">Masculino</th>				      
+				       	<th class="text-center" colspan="2">Feminino</th>
+				       	<th class="text-center" colspan="2">Outro</th>				      				    
+				        <th class="text-center">Idade Média</th>				     
+				    </tr>
+			    </thead>
+			    <tbody>
+			    	<tr ng-show="!categories.length"> 
+						<td colspan="6">No results found.</td>
+					</tr>
+			    	<tr ng-repeat="d in data">
+				        <td>{{d.category}}</td>				        
+				        <td class="text-center">{{d.male}} unid.</td>
+				        <td class="text-center">{{d.percentMale | number : 2}} %</td>
+				        <td class="text-center">{{d.female}} unid.</td>							        
+				        <td class="text-center">{{d.percentFemale | number : 2}} %</td>				        
+				        <td class="text-center">{{d.other}} unid.</td>
+				        <td class="text-center">{{d.percentOther | number : 2}} %</td>
+				        <td class="text-center">{{d.averageAge}}</td>
+			      	</tr>
+			    </tbody>
+			</table>
+		</div>
+    </div>
+    
+</div>
