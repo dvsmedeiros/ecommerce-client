@@ -39,14 +39,14 @@ angular.module('ecommerce').controller('ClientsController', function($scope, $lo
 		var req = {
 			description : 'Inativado manualmente',
 			category : {
-				code : 'CAT0007'
+				code : 'CAT0017'
 			}
 		}
 
-		if(client.id){
+		if(client.user.id){
 
-			clientResource.inactivate({id: client.id}, req, function(status) {
-				client.active = false;
+			clientResource.inactivate({id: client.user.id}, req, function(status) {
+				client.user.active = false;
 			}, function(erro) {
 				console.log(erro);
 			});
@@ -59,15 +59,15 @@ angular.module('ecommerce').controller('ClientsController', function($scope, $lo
 		var req = {
 			description : 'Ativado manualmente',
 			category : {
-				code : 'CAT0007'
+				code : 'CAT0017'
 			}
 		}
 
-		if(client.id){
+		if(client.user.id){
 
-			client.active = true;
-			clientResource.update(client, function(status) {
-				client.active = true;
+			client.user.active = true;
+			clientResource.activate({id: client.user.id}, function(status) {
+				client.user.active = true;
 			}, function(error) {
 				$scope.responseMessage = error.data;
 				console.log(error);
