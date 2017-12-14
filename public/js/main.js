@@ -1,4 +1,4 @@
-angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', 'angularModalService', 'btorfs.multiselect'])
+angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', 'ui.mask', 'angularModalService', 'btorfs.multiselect'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 		$httpProvider.interceptors.push('tokenInterceptor');
@@ -25,6 +25,12 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		$routeProvider.when('/home', {
 			templateUrl: 'partials/home.html',
 			controller: 'HomeController'
+		});
+
+		//HOME
+		$routeProvider.when('/home/notification', {
+			templateUrl: 'partials/notification.html',
+			controller: 'NotificationController'
 		});
 
 		//SINGUP
@@ -103,7 +109,7 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		//EXCHANGES
 		$routeProvider.when('/home/exchanges', {
 			templateUrl: 'partials/exchanges.html',
-			controller: 'HomeController'
+			controller: 'ExchangeController'
 		});
 
 		//PRODUCT
@@ -123,8 +129,8 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		});
 
 		$routeProvider.when('/products/list', {
-			templateUrl: 'partials/products.html',
-			controller: 'ProductsController'
+			templateUrl: 'partials/books.html',
+			controller: 'BooksController'
 		});
 
 		$routeProvider.when('/products/detail/:productId', {
@@ -162,6 +168,29 @@ angular.module('ecommerce', ['ngRoute', 'ecommerceServices', 'ui.utils.masks', '
 		$routeProvider.when('/client/list', {
 			templateUrl: 'partials/clients.html',
 			controller: 'ClientsController'
+		});
+
+		//ORDERS
+		$routeProvider.when('/orders', {
+			templateUrl: 'partials/all-orders.html',
+			controller: 'AllOrdersController'
+		});		
+
+		//DASHBOARD
+		$routeProvider.when('/dashboard', {
+			templateUrl: 'partials/dashboard.html',
+			controller: 'DashboardController'
+		});
+
+		//AUDIT
+		$routeProvider.when('/audit', {
+			templateUrl: 'partials/log-audit.html',
+			controller: 'LogAuditController'
+		});
+
+		$routeProvider.when('/orders/list', {
+			templateUrl: 'partials/all-orders.html',
+			controller: 'AllOrdersController'
 		});
 
 		//CATEGORY
