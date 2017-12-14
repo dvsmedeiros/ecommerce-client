@@ -1,20 +1,20 @@
 <div class="col-md-3">
     <div class="list-group">
-        <a href="/#/home" class="list-group-item">Inicio</a>
-		<a href="/#/home/account" class="list-group-item">Informações de Conta</a>
-		<a href="/#/home/addresses" class="list-group-item">Meus Endereços</a>
-		<a href="/#/home/orders" class="list-group-item">Meus Pedidos</a>
-		<a href="/#/home/exchanges" class="list-group-item">Trocas e Devoluções</a>
-		<a href="/#/home/cards" class="list-group-item">Cartões</a>
-		<!-- <a href="/#/logout" class="list-group-item">Sair</a> -->
-    </div>	
+        <a href="/#/" class="list-group-item"><span class="glyphicon glyphicon-home"/>&nbsp;Inicio</a>
+		<a href="/#/home/account" class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;Minha conta</a>
+		<a href="/#/home/orders" class="list-group-item"><span class="glyphicon glyphicon-list-alt"/>&nbsp;Meus Pedidos</a>
+		<a href="/#/home/addresses" class="list-group-item"><span class="glyphicon glyphicon-envelope"/>&nbsp;Endereços</a>
+		<a href="/#/home/exchanges" class="list-group-item"><span class="glyphicon glyphicon-gift"/>&nbsp;Cupons</a>
+		<a href="/#/home/cards" class="list-group-item"><span class="glyphicon glyphicon-credit-card"/>&nbsp;Cartões</a>
+		<a href="/#/home/notification" class="list-group-item">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true">
+				</span>&nbsp;Notificações&nbsp;
+				<span class="badge">{{$root.notifications.length}}</span>
+        </a>                                                                		
+    </div>
 </div>
-
 <div class="col-md-9">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="text-center">MEUS PEDIDOS</h4>
-		</div>
+	<div class="panel panel-default">		
 		<div class="panel-body" style="min-height: 500px;">
 
 			<div class="col-md-12">
@@ -25,10 +25,11 @@
 				<br />
 				<form novalidate name="editForm" ng-submit="submit()">
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table table-striped">
 						    <thead>
 							    <tr>
 							    	<th>Nº Pedido</th>
+							    	<th>Código</th>
 							    	<th>Itens</th>
 							        <th>Data</th>
 							        <th>Total</th>
@@ -38,16 +39,17 @@
 						    </thead>
 						    <tbody>
 						    	<tr ng-show="!orders.length"> 
-						    		<td>No results found.</td>
+						    		<td colspan="7">No results found.</td>
 						    	</tr>
-						    	<tr ng-repeat="order in orders | filter: filter">
+						    	<tr ng-repeat="order in orders | filter: filter | orderBy: 'id'">
 							        <td>{{order.id}}</td>
+							        <td>{{order.code}}</td>
 							        <td>{{order.items.length}}</td>
 							        <td>{{order.insertionDate}}</td>
 							        <td>{{order.total | currency}}</td>
-							        <td>{{order.statusOrder}}</td>
+							        <td>{{order.statusOrder.description}}</td>
 							        <td class="text-center text-nowrap">
-							        	<a href="#/home/orders/detail/{{order.id}}" class="btn btn-warning">
+							        	<a href="#/home/orders/detail/{{order.id}}" class="btn btn-sm btn-warning">
 							        		<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 							        	</a> 
 							        </td>

@@ -1,20 +1,20 @@
 <div class="col-md-3">
     <div class="list-group">
-        <a href="/#/home" class="list-group-item">Inicio</a>
-		<a href="/#/home/account" class="list-group-item">Informações de Conta</a>
-		<a href="/#/home/addresses" class="list-group-item">Meus Endereços</a>
-		<a href="/#/home/orders" class="list-group-item">Meus Pedidos</a>
-		<a href="/#/home/exchanges" class="list-group-item">Trocas e Devoluções</a>
-		<a href="/#/home/cards" class="list-group-item">Cartões</a>
-		<!-- <a href="/#/logout" class="list-group-item">Sair</a> -->
+        <a href="/#/" class="list-group-item"><span class="glyphicon glyphicon-home"/>&nbsp;Inicio</a>
+		<a href="/#/home/account" class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;Minha conta</a>
+		<a href="/#/home/orders" class="list-group-item"><span class="glyphicon glyphicon-list-alt"/>&nbsp;Meus Pedidos</a>
+		<a href="/#/home/addresses" class="list-group-item"><span class="glyphicon glyphicon-envelope"/>&nbsp;Endereços</a>
+		<a href="/#/home/exchanges" class="list-group-item"><span class="glyphicon glyphicon-gift"/>&nbsp;Cupons</a>
+		<a href="/#/home/cards" class="list-group-item"><span class="glyphicon glyphicon-credit-card"/>&nbsp;Cartões</a>
+		<a href="/#/home/notification" class="list-group-item">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true">
+				</span>&nbsp;Notificações&nbsp;
+				<span class="badge">{{$root.notifications.length}}</span>
+        </a>                                                                		
     </div>
 </div>
 <div class="col-md-9">
 	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="text-center">CARTÃO</h4>
-		</div>
-
 		<div class="panel-body">
 			
 			<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
@@ -33,7 +33,7 @@
 				<div class="col-md-4">
 				    <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.number.$dirty && editForm.number.$invalid]">
 				      	<label class="control-label" for="number">Número</label>
-				      	<input ng-model="card.aNumber" type="text" class="form-control" name="number" placeholder="Number" minlength="16" maxlength="16" required>    
+				      	<input ng-model="card.aNumber" type="text" class="form-control" name="number" ui-mask="9999 9999 9999 9999" required>    
 				  	</div>
 				</div>		
 
@@ -61,7 +61,7 @@
 				<div class="col-md-4">
 				    <div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.cvv.$dirty && editForm.cvv.$invalid]">
 				      	<label class="control-label" for="cvv">Código de Segurança</label>
-				      	<input ng-model="card.cvv" type="text" class="form-control" name="cvv" placeholder="CVV" minlength="3" maxlength="3" required>    
+				      	<input ng-model="card.cvv" type="text" class="form-control" name="cvv" ui-mask="999" required>    
 				  	</div>
 				</div>
 				<div class="col-md-12">

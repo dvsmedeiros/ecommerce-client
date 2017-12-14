@@ -1,27 +1,25 @@
 <div class="col-md-3">
     <div class="list-group">
-        <a href="/#/home" class="list-group-item">Inicio</a>
-		<a href="/#/home/account" class="list-group-item">Informações de Conta</a>
-		<a href="/#/home/addresses" class="list-group-item">Meus Endereços</a>
-		<a href="/#/home/orders" class="list-group-item">Meus Pedidos</a>
-		<a href="/#/home/exchanges" class="list-group-item">Trocas e Devoluções</a>
-		<a href="/#/home/cards" class="list-group-item">Cartões</a>
-		<!-- <a href="/#/logout" class="list-group-item">Sair</a> -->
-    </div>	
+        <a href="/#/" class="list-group-item"><span class="glyphicon glyphicon-home"/>&nbsp;Inicio</a>
+		<a href="/#/home/account" class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;Minha conta</a>
+		<a href="/#/home/orders" class="list-group-item"><span class="glyphicon glyphicon-list-alt"/>&nbsp;Meus Pedidos</a>
+		<a href="/#/home/addresses" class="list-group-item"><span class="glyphicon glyphicon-envelope"/>&nbsp;Endereços</a>
+		<a href="/#/home/exchanges" class="list-group-item"><span class="glyphicon glyphicon-gift"/>&nbsp;Cupons</a>
+		<a href="/#/home/cards" class="list-group-item"><span class="glyphicon glyphicon-credit-card"/>&nbsp;Cartões</a>
+		<a href="/#/home/notification" class="list-group-item">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true">
+				</span>&nbsp;Notificações&nbsp;
+				<span class="badge">{{$root.notifications.length}}</span>
+        </a>                                                                		
+    </div>
 </div>
-
 <div class="col-md-9">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="text-center">MEUS PEDIDOS</h4>
-		</div>
+	<div class="panel panel-default">		
 		<div class="panel-body" style="min-height: 500px;">
-		
-
 		<div class="col-md-12">
-			<a class="btn btn-default" href="/#/home/orders"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;VOLTAR</a>
-		</div>
-		<br /><br /><br />
+			<br />
+			<p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>		
+		</div>			
 		<div class="col-md-12">
 			<div class="panel panel-default panel-body">
 				<div class="table-responsive">
@@ -29,20 +27,23 @@
 					    <thead> 
 						    <tr>
 						    	<th class="text-center">Nº Pedido</th>
+						    	<th class="text-center">Código</th>
 						    	<th class="text-center">Itens</th>
 						        <th class="text-center">Data</th>
 						        <th class="text-center">Total</th>
 						        <th class="text-center">Status</th>
 						        <th class="text-center">Pagamento</th>
+						        <th class="text-center" ng-show="order.statusOrder.code == 'DELIVERY'">Trocar</th>
 						    </tr>
 					    </thead>
 					    <tbody>
-					    	<tr class="text-center">
+					    	<tr class="text-center">					    		
 						        <td>{{order.id}}</td>
+						        <td>{{order.code}}</td>
 						        <td>{{order.items.length}}</td>
 						        <td>{{order.insertionDate}}</td>
 						        <td>{{order.total | currency}}</td>
-						        <td>{{order.statusOrder}}</td>
+						        <td>{{order.statusOrder.description}}</td>
 						        <td class="text-center">
 							        <span style="font-size:1.4em;" class="glyphicon glyphicon-credit-card" 
 							        ng-show="order.payment.paymentType == 'CREDIT_CARD'"></span>
@@ -50,26 +51,33 @@
 							        ng-show="order.payment.paymentType == 'BOLETO'"></span> 
 					        		
 						        </td>
+						        <td ng-show="order.statusOrder.code == 'DELIVERY'">
+						        	<a ng-click="changeStatusOrder(order)" class="btn btn-primary"><span class="glyphicon glyphicon-transfer"></span></a>
+						        </td>
 					      	</tr>
 					    </tbody>
 					    </table>
-					    <hr />
-					    <h4 class="text-center">ITENS</h4>
+					    <hr />					    
 					    <table class="table table-responsive">
 						    <thead>
-							    <tr>
+						    	<caption class="text-center"><h3>ITENS</h3></caption>
+							    <tr>							    	
 							    	<th class="text-center">Produto</th>
 							    	<th class="text-center">Quantidade</th>
 							        <th class="text-center">Valor</th>
 							        <th class="text-center">Subtotal</th>
+							        <th class="text-center" ng-show="order.statusOrder.code == 'DELIVERY'">Trocar</th>
 							    </tr>
 						    </thead>
 						    <tbody>
 						    	<tr class="text-center" ng-repeat="item in order.items">
-							        <td><a href="/#/products/detail/{{item.product.id}}">{{item.product.title}}</a></td>
+							        <td><a href="/#/products/detail/{{item.product.id}}">{{item.product.description}}</a></td>
 							        <td>{{item.quantity}}</td>
 							        <td>{{item.product.calculatedSalePrice.value | currency}}</td>
 							        <td>{{item.quantity * item.product.calculatedSalePrice.value | currency}}</td>
+							        <td ng-show="order.statusOrder.code == 'DELIVERY'">
+      									<input type="checkbox" name="remember">
+					    			</td>							        
 						      	</tr>
 						    </tbody>
 						</table>
@@ -77,6 +85,7 @@
 			</div>
 		</div>	
 
+		<!--
 		<div class="col-md-12">
 
 			<div class="row bs-wizard">
@@ -92,58 +101,46 @@
                   </div>
                 </div>
                 
-                <div class="col-md-2 bs-wizard-step active"><!-- complete -->
+                <div class="col-md-2 bs-wizard-step active">
                   <div class="text-center bs-wizard-stepnum">Pagamento</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">
-                  		<!--
-                  		<p>12/12/2017</p>
-                  		<p>22h59</p>
-                  		-->
+                  		
                   </div>
                 </div>
                 
-                <div class="col-md-2 bs-wizard-step disabled"><!-- complete -->
+                <div class="col-md-2 bs-wizard-step disabled">
                   <div class="text-center bs-wizard-stepnum">Separação</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">
-                  		<!--
-                  		<p>12/12/2017</p>
-                  		<p>22h59</p>
-                  		-->
+                  		
                   </div>
                 </div>
                 
-                <div class="col-md-2 bs-wizard-step disabled"><!-- active -->
+                <div class="col-md-2 bs-wizard-step disabled">
                   <div class="text-center bs-wizard-stepnum">Transporte</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">
-                  		<!--
-                  		<p>12/12/2017</p>
-                  		<p>22h59</p>
-                  		-->
+                  		
                   </div>
             	</div>
 
-            	<div class="col-md-2 bs-wizard-step disabled"><!-- active -->
+            	<div class="col-md-2 bs-wizard-step disabled">
                   <div class="text-center bs-wizard-stepnum">Entregue</div>
                   <div class="progress"><div class="progress-bar"></div></div>
                   <a href="#" class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">
-                  		<!--
-                  		<p>12/12/2017</p>
-                  		<p>22h59</p>
-                  		-->
+                  		
                   </div>
             	</div>
 
             	<div class="col-md-1"></div>
             </div>
 		</div>
-
+		-->
 		<div class="col-md-12">
 			<br />
 			<div class="col-md-6">	
@@ -157,16 +154,22 @@
 			<div class="col-md-6">	
 				<h5>RESUMO</h5>
 				<hr />
-				<div class="col-md-6">
-					<p><strong>Frete:</strong> {{order.freight.value | currency}} ( <strong>{{order.freight.description}} </strong>)</p>
-					<p><strong>Vale: - </strong></p>
-					<p><strong>Subtotal:</strong> {{order.subTotal | currency}}</p>
+				<p><strong>Frete:</strong> {{order.freight.value === '0' ? (order.freight.value | currency) : 'Grátis'}} 
+				<p><strong>Subtotal:</strong> {{order.subTotal | currency}}</p>
+				<p ng-show="order.cupons.length"><strong>Cupom(ns):</strong></p>
+				<div ng-repeat="cupom in order.cupons">
+					<ul>
+					  <li>{{cupom.code}} - {{cupom.value | currency}}</li>					  
+					</ul>
 				</div>
-				<div class="col-md-6">
-					<p><strong>Total:</strong> {{order.total | currency}}</p>
-				</div>
+				
+				<p><strong>Total:</strong> {{order.total | currency}}</p>
 			</div>
+		</div>
 
+		<div class="col-md-12">
+			<hr/>
+			<a class="btn btn-primary" href="/#/home/orders">Voltar</a>
 		</div>
 	</div>
 </div>
