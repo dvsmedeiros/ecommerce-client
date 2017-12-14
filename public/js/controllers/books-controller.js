@@ -73,7 +73,7 @@ angular.module('ecommerce').controller('BooksController', function($rootScope, $
 			var req = {
 				description : 'Inativado manualmente',
 				category : {
-					code : 'CAT0007'
+					code : 'CAT0017'
 				}
 			}
 
@@ -93,7 +93,7 @@ angular.module('ecommerce').controller('BooksController', function($rootScope, $
 			var req = {
 				description : 'Ativado manualmente',
 				category : {
-					code : 'CAT0007'
+					code : 'CAT0017'
 				}
 			}
 
