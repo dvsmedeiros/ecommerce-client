@@ -24,21 +24,21 @@
 			<div class="col-md-12">
 		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.email.$dirty && editForm.email.$invalid]">
 				    <label class="control-label" for="email">Email *</label>
-				    <input ng-model="user.email" type="email" class="form-control" name="email" placeholder="Email"required> 
+				    <input ng-model="user.user.email" type="email" class="form-control" name="email" placeholder="Email"required> 
 				</div>
 			</div>	
 	  		
 			<div class="col-md-6">
 		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.password.$dirty && editForm.password.$invalid]">
 				    <label class="control-label" for="password">Password *</label>
-				    <input ng-model="user.newPassword" type="password" class="form-control" name="password" placeholder="Password" required> 
+				    <input ng-model="user.user.newPassword" type="password" class="form-control" name="password" placeholder="Password" required> 
 				</div>
 			</div>
 
 			<div class="col-md-6">
 		    	<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.confirmPassword.$dirty && editForm.confirmPassword.$invalid]">
 				    <label class="control-label" for="confirmPassword">Confirmar Password *</label>
-				    <input ng-model="user.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required> 
+				    <input ng-model="user.user.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required> 
 				</div>
 			</div>
 			
