@@ -15,11 +15,11 @@
 			</div>			
 			<div class="form-group">
 			    <label class="control-label" for="isbn">ISBN *</label>
-			    <input ng-model="filter.entity.isbn" type="text" class="form-control" name="isbn" placeholder="ISBN"> 
+			    <input ng-model="filter.entity.isbn" type="text" class="form-control" name="isbn" ui-mask="999-99-999-9999-9"> 
 			</div>
 			<div class="form-group">
 			    <label class="control-label" for="barcode">Código de Barras *</label>
-			    <input ng-model="filter.entity.barCode" type="text" class="form-control" name="barcode" placeholder="Bar Code"> 
+			    <input ng-model="filter.entity.barCode" type="text" class="form-control" name="barcode" ui-mask="9 999999 999999"> 
 			</div>
 			
 			<div class="form-group">
@@ -124,7 +124,7 @@
 					</tr>			    	
 			    	<tr ng-repeat="product in products | filter: _filter" class="text-center">
 				        <td>{{product.title}}</td>				        
-				        <td>{{product.isbn}}</td>				        
+				        <td>{{product.isbn | isbn}}</td>				        
 				        <td>{{product.year}}</td>
 				        <td>{{product.edition}}</td>
 				        <td>{{product.pages}}</td>

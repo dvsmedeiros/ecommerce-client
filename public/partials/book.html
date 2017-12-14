@@ -32,13 +32,14 @@
 			<div class="col-md-6">
 				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.isbn.$dirty && editForm.isbn.$invalid]">
 				    <label class="control-label" for="isbn">ISBN *</label>
-				    <input ng-model="product.isbn" type="text" class="form-control" name="isbn" placeholder="ISBN" required> 
+				    <input ng-model="product.isbn" type="text" class="form-control" name="isbn" ui-mask="999-99-999-9999-9" 
+				    required> 
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.barcode.$dirty && editForm.barcode.$invalid]">
 				    <label class="control-label" for="barcode">Código de Barras *</label>
-				    <input ng-model="product.barCode" type="text" class="form-control" name="barcode" placeholder="Bar Code" required> 
+				    <input ng-model="product.barCode" type="text" class="form-control" name="barcode" ui-mask="9 999999 999999" required> 
 				</div>
 			</div>
 	
@@ -196,7 +197,7 @@
 				    </thead>
 				    <tbody>						
 				    	<tr ng-repeat="reason in reasons | orderBy: '-insertionDate'">
-					        <td>{{reason.insertionDate | date:'dd/MM/yyyy'}}</td>		        
+					        <td>{{reason.insertionDate | date:'dd/MM/yyyy hh:MM:ss'}}</td>		        
 					        <td>{{reason.description}}</td>					        
 					        <td>{{reason.category.description}}</td>				        
 				      	</tr>
