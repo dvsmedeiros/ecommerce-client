@@ -8,6 +8,7 @@ angular.module('ecommerce').controller('SingupController', function($scope, $loc
       description : ''
     }],
     phones : [],
+    user : {},
     bornDate : new Date()
 	};
   $scope.responseMessage = {
@@ -34,7 +35,7 @@ angular.module('ecommerce').controller('SingupController', function($scope, $loc
           message : '',
           hasError : true   
         };
-        $location.path('/#/login');      
+        $location.path('/login');      
       }, function(error) {
         $scope.responseMessage = error.data;
         console.log(erro);
