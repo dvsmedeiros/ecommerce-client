@@ -73,9 +73,20 @@
 				</div>
 			</div>
 			-->
+			<div class="panel panel-default">				
+				<div class="panel-body">
+					<h4 class="text-center">CUPONS DE DESCONTO</h4>			  		
+				  	<hr />				
+					<div class="form-group" ng-class="{true: 'has-error',false: 'is-required'}[editForm.title.$dirty && editForm.title.$invalid]">							    
+					    <input ng-model="filter.entity.code" type="text" class="form-control" name="title" placeholder="Cupom"> 
+					</div>
+					<button ng-show="!purchaseOrder.cupom.code" type="button" ng-click="addCupom(filter.entity.code)" class="btn btn-success btn-block" ng-disabled="!filter.entity.code.length">ADICIONAR CUPOM</button>
+					<button ng-show="purchaseOrder.cupom.code" type="button" ng-click="removeCupom()" class="btn btn-success btn-block" ng-disabled="!filter.entity.code.length">REMOVER CUPOM</button>
+				</div>
+			</div>
 			<div class="panel panel-default">
 			  	<div class="panel-body">
-				  	<h4 class="text-center">RESUMO</h4>
+				  	<h4 class="text-center">RESUMO</h4>			  		
 				  	<hr />
 					<div class="row" ng-repeat="item in cart.cartItems">	  		
 				  		<div class="col-md-12">	
@@ -104,6 +115,17 @@
 			  				<td><p class="text-right">{{freightSelected.value | currency}}</p></td>
 			  			</tr>
 			  			-->
+			  			<tr ng-show="cart.cupons.length">
+			  				<td><h5>Desconto</h5></td>
+			  				<td>
+			  					<div ng-repeat="cupom in cart.cupons">
+			  						<h5 class="text-right">
+			  							<a ng-click="removeCupom(cupom)"><span class="glyphicon glyphicon-remove"></span></a>
+			  							({{cupom.code | uppercase}}) {{cupom.value | currency}}
+			  						</h5>
+			  					</div>				  
+			  				</td>
+			  			</tr>
 			  			<tr>
 			  				<td><h4>Total</p><h4></td>
 			  				<td>
@@ -118,6 +140,7 @@
 			  	</div>
 			</div>
 		</div>
+		<!--
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -125,5 +148,6 @@
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 </div>
