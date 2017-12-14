@@ -1,0 +1,81 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="/#/" class="list-group-item"><span class="glyphicon glyphicon-home"/>&nbsp;Inicio</a>
+		<a href="/#/home/account" class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;Minha conta</a>
+		<a href="/#/home/orders" class="list-group-item"><span class="glyphicon glyphicon-list-alt"/>&nbsp;Meus Pedidos</a>
+		<a href="/#/home/addresses" class="list-group-item"><span class="glyphicon glyphicon-envelope"/>&nbsp;Endereços</a>
+		<a href="/#/home/exchanges" class="list-group-item"><span class="glyphicon glyphicon-gift"/>&nbsp;Cupons</a>
+		<a href="/#/home/cards" class="list-group-item"><span class="glyphicon glyphicon-credit-card"/>&nbsp;Cartões</a>
+		<a href="/#/home/notification" class="list-group-item">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true">
+				</span>&nbsp;Notificações&nbsp;
+				<span class="badge">{{$root.notifications.length}}</span>
+        </a>                                                                		
+    </div>
+</div>
+<div class="col-md-9">
+	<div class="panel panel-default">		
+		<div class="panel-body">
+						
+			<div class="col-md-12">			
+				<br />
+				<form novalidate name="editForm" ng-submit="submit()">
+					<div class="table-responsive">
+						<table class="table table-striped">
+						    <thead>
+							    <tr>
+							    	<th class="text-center">Data</th>
+							    	<th class="text-center">Titulo</th>
+							        <th class="text-center">Descrição</th>							        
+							    </tr>
+						    </thead>
+						    <tbody>
+						    	<tr ng-show="!notifications.length"> 
+						    		<td colspan="6">No results found.</td>
+						    	</tr>
+						    	<tr ng-repeat="n in notifications" ng-show="notifications.length">
+							        <td class="text-center">{{n.insertionDate | date:'dd/MM/yyy'}}</td>
+							        <td class="text-center">{{n.code}}</td>
+							        <td class="text-center">{{n.description}}</td>							        
+						      	</tr>
+						    </tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+			<!--
+			<div class="col-md-12">
+				<h4>VALES</h4>
+
+			</div>			
+			<div class="col-md-12" >
+				<br />
+				<form novalidate name="editForm" ng-submit="submit()">
+					<div class="table-responsive">
+						<table class="table">
+						    <tbody>
+						    	<tr ng-show="!voucher.length">
+						    		<td>
+						    			<p>No results found.
+						    		</td>
+						    	</tr>
+						    	<tr ng-repeat="voucher in vouchers | filter: filter" ng-show="voucher.length">
+							        <td>{{card.id}}</td>
+							        <td>{{card.name}}</td>
+							        <td>{{card.code}}</td>
+							        <td>{{card.description}}</td>
+							        <td>{{card.active}}</td>
+							        <td class="text-center text-nowrap">
+							        	<a href="#/cards/edit/{{card.id}}" class="btn btn-warning">Editar</a> 
+							        	<a ng-click="inactivate(card)" class="btn btn-danger">Remover</a>
+							        </td>
+						      	</tr>
+						    </tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+			-->
+		</div>
+	</div>
+</div>
