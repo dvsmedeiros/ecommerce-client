@@ -97,6 +97,8 @@ angular.module('ecommerce').controller('BookController', function($scope, $route
 		
 		if ($scope.editForm.$valid) {
 
+			$scope.product.description = $scope.product.title;
+			
 			if($scope.product.id){
 
 				bookResource.update($scope.product, function(status) {
