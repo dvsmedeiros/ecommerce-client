@@ -6,8 +6,8 @@ angular.module('ecommerce')
 		interceptor.response = function(res){			
 			var token = res.headers('Authorization');
 			if(token){
-				$window.sessionStorage.token = token;				
-			}
+				$window.sessionStorage.token = token;
+			}			
 			return res;
 		};
 
@@ -15,7 +15,7 @@ angular.module('ecommerce')
 			config.headers = config.headers || {};		
 			if($window.sessionStorage.token){				
 				config.headers['Authorization'] = $window.sessionStorage.token;
-				$rootScope.user.login = angular.fromJson($window.sessionStorage.getItem('principal'));	
+				$rootScope.user = angular.fromJson($window.sessionStorage.getItem('principal'));	
 			}			
 			return config;
 		};
