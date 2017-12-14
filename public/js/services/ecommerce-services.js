@@ -21,9 +21,19 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('clientResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommerce-api/user/:id', null, {
+		return $resource('http://localhost:8888/ecommerce-api/client/:id', null, {
 			'update' : { 
 				method: 'PUT'
+			},
+			'filter' : {
+				url : 'http://localhost:8888/ecommerce-api/client/filter',
+				method: 'POST',
+				isArray : true
+			},
+			'logged' : {
+				url : 'http://localhost:8888/ecommerce-api/client/active',
+				method: 'GET',
+				isArray : false
 			},
 			'inactivate' : {
 				url : 'http://localhost:8888/ecommerce-api/user/inactivate/:id',
@@ -38,16 +48,6 @@ angular.module('ecommerceServices', ['ngResource'])
 				params: {
 					id: '@id'
 				}
-			},
-			'filter' : {
-				url : 'http://localhost:8888/ecommerce-api/user/filter',
-				method: 'POST',
-				isArray : true
-			},
-			'logged' : {
-				url : 'http://localhost:8888/ecommerce-api/user/active',
-				method: 'GET',
-				isArray : false
 			},
 			'changePassword' : {
 				url : 'http://localhost:8888/ecommerce-api/user/change/password',
@@ -114,7 +114,7 @@ angular.module('ecommerceServices', ['ngResource'])
 	})
 	.factory('cartResource', function($resource) {
 
-		return $resource('http://localhost:8888/ecommerce-api/cart/product/:productId', null, {
+		return $resource('http://localhost:8888/ecommerce-api/cart/:productId', null, {
 			'update' : { 
 				method: 'PUT',
 				params: {
@@ -172,11 +172,18 @@ angular.module('ecommerceServices', ['ngResource'])
 			'filter' : {
 				url : 'http://localhost:8888/ecommerce-api/order/filter',
 				method: 'POST',
+				params: {
+					logged: '@logged'
+				},
 				isArray : true
 			},
 			'checkout' : {
 				url : 'http://localhost:8888/ecommerce-api/order/checkout',
 				method: 'POST'
+			},
+			'changeStatus' : {				
+				url : 'http://localhost:8888/ecommerce-api/order/status',
+				method: 'PUT'
 			}
 		});
 	})
@@ -214,6 +221,57 @@ angular.module('ecommerceServices', ['ngResource'])
 			}	
 		});
 	})
+	.factory('cupomResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/cart/cupom/:cupomCode', null, {
+			'update' : {
+				method : 'PUT',
+				params : {
+					cupomCode : '@cupomCode'
+				}
+			},
+			'save' : {
+				method : 'POST',
+				params : {
+					cupomCode : '@cupomCode'
+				}
+			},
+			'delete' : {
+				method : 'DELETE',
+				params : {
+					cupomCode : '@cupomCode'
+				}
+			},
+			'filter' : {
+				url : 'http://localhost:8888/ecommerce-api/cupom/filter',
+				method: 'POST',
+				params: {
+					logged: '@logged'
+				},
+				isArray : true
+			}	
+		});
+	})
+	.factory('analyzeResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/analyze/:id', null, {			
+			'filter' : {
+				url : 'http://localhost:8888/ecommerce-api/analyze/filter',
+				method: 'POST',
+				isArray : true
+			}
+		});
+	})
+	.factory('notificationResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/notification/:id', null, {			
+			'filter' : {
+				url : 'http://localhost:8888/ecommerce-api/notification/filter',
+				method: 'POST',
+				params: {
+					logged: '@logged'
+				},
+				isArray : true
+			}
+		});
+	})
 	.factory('reasonResource', function($resource) {
 		return $resource('http://localhost:8888/ecommerce-api/reason/:id', null, {			
 			'filter' : {
@@ -222,6 +280,9 @@ angular.module('ecommerceServices', ['ngResource'])
 				isArray : true
 			}
 		});
+	})
+	.factory('auditResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/audit/:id', null, null);
 	})
 	.factory('categoryTypeResource', function($resource) {
 		return $resource('http://localhost:8888/ecommerce-api/category/type/:id', null, null);
@@ -250,8 +311,11 @@ angular.module('ecommerceServices', ['ngResource'])
 	.factory('flagResource', function($resource) {
 		return $resource('http://localhost:8888/ecommerce-api/flag', null, null);
 	})
+	.factory('statusOrderResource', function($resource) {
+		return $resource('http://localhost:8888/ecommerce-api/statusOrder', null, null);
+	})
 	.factory('singupResource', function($resource) {
-		return $resource('http://localhost:8888/ecommerce-api/user', null, null);
+		return $resource('http://localhost:8888/ecommerce-api/client', null, null);
 	})
 	.factory('viaCepResource', function($resource) {
 		return $resource('https://viacep.com.br/ws/:cep/json', null, {
