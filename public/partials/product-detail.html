@@ -2,12 +2,12 @@
     <div class="col-md-12">
         <p ng-show="responseMessage.message.length" class="alert" ng-class="{true: 'alert-danger',false: 'alert-info'}[responseMessage.hasError]">{{responseMessage.message}}</p>
     </div>	
-	<div class="col-md-6">
+	<div class="col-md-5">
         <div class="thumbnail">
             <img class="img-responsive" src="http://placehold.it/800x600" alt="">
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="col-md-12 text-center">
             <h2>{{product.title}}</h2>
             <br />
@@ -19,43 +19,63 @@
             <hr />
         </div>
         <div class="col-md-12">
-            <div class="col-md-6 text-center">
+            <div class="col-md-5 text-center">
                 <h2>{{product.calculatedSalePrice.value | currency }}</h2>
-                <p>12 x {{product.calculatedSalePrice.value / 12 | currency }} Sem Juros</p>
-                <a>Parcelas</a>
+                <p><h4>ou 12 x {{product.calculatedSalePrice.value / 12 | currency }}</h4></p>            
             </div>
-            <div class="col-md-6 text-center">
+            <div class="col-md-7 text-center">
                 <a class="btn btn-success btn-block" href="" ng-click="addItemToCart(product.id)">COMPRAR</a>
-            </div>
-        </div>  
-        <div class="col-md-12" ng-controller="FreightController">
-            <hr />
-            <form novalidate name="freightForm">
-                <div class="input-group">
-                    <span class="input-group-addon">Calcular Frete e Prazo</span>
-                    <input ng-model="freight.postalCodeSource"   type="text" class="form-control" ui-br-cep-mask required>
-                    <span class="input-group-btn">
-                        <button ng-click="calculateFreight()" class="btn btn-default" ng-disabled="freightForm.$invalid">CALCULAR</button>
-                   </span>
-                </div>
-            </form>
-            <br />
-            <div class="row">
-                <div class="col-md-6" ng-repeat="freight in freights">
-                    <div class="panel panel-default text-center">
-                        <p><strong>{{freight.service.description}}</strong></p>
-                        <p>{{freight.service.value | currency}}</p>
-                        <p>Prazo: {{freight.service.deadline}} dia(s)<span ng-show="freight.service.description == 'PAC'"> úteis</span></p>
+
+                <br/>
+
+                <div  ng-controller="FreightController">            
+                    <form novalidate name="freightForm">
+                        <div class="input-group">
+                            <span class="input-group-addon">Frete e Prazo</span>
+                            <input ng-model="freight.postalCodeSource"   type="text" class="form-control" ui-br-cep-mask required>
+                            <span class="input-group-btn">
+                                <button ng-click="calculateFreight()" class="btn btn-default" ng-disabled="freightForm.$invalid">CALCULAR</button>
+                           </span>
+                        </div>
+                    </form>
+                    <br />
+                    <div class="row">
+                        <div ng-repeat="freight in freights">
+                            <div class="panel panel-default text-center">
+                                <p><strong>{{freight.service.description}}</strong></p>
+                                <p>{{freight.service.value | currency}}</p>
+                                <p>Prazo: {{freight.service.deadline}} dia(s)<span ng-show="freight.service.description == 'PAC'"> úteis</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
+        </div>  
     </div>
-    <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4 class="text-center">RECOMENDAÇÕES</h4>
-                </div>
-            </div>
-        </div>
+        
+    <div class="col-md-12">        
+        <hr/>
+        <p><label>ISBN:</label> {{product.isbn | isbn}}</p>
+        
+        <p>
+            <label>Autor (s):</label>    
+            <span ng-repeat="a in product.authors">
+                {{a.description}}            
+            </span>
+        </p>
+        <p>
+            <label>Editora (s):</label>    
+            <span ng-repeat="p in product.publishers">
+                {{p.description}}            
+            </span>
+        </p>
+        <p>
+            <label>Edição: </label> {{product.edition}} 
+            <label>Ano: </label> {{product.year}}
+            <label>Páginas: </label> {{product.pages}}
+        </p>
+        <hr/>
+    </div>
+    
 </div>
