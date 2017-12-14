@@ -46,7 +46,7 @@
 	<br />
 	<form novalidate name="editForm" ng-submit="submit()">
 		<div class="table-responsive">
-			<table class="table table-striped">
+			<table class="table table-striped table-condensed">
 			    <thead>			    	
 				    <tr class="text-center">
 				    	<th>#</th>				    	
@@ -68,13 +68,13 @@
 				      	<td>{{configuration.value}}  			       				       
 				        <td>{{configuration.active ? 'Ativo' : 'Inativo'}}</td>
 				        <td class="text-center text-nowrap">
-				        	<a href="#/configuration/edit/{{configuration.id}}" class="btn btn-warning">
+				        	<a href="#/configuration/edit/{{configuration.id}}" class="btn btn-sm btn-warning">
 				        		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				        	</a>
-				        	<a ng-show="!configuration.active" ng-click="activate(configuration)" class="btn btn-success">
+				        	<a ng-show="!configuration.active" ng-click="activate(configuration)" class="btn btn-sm btn-success">
 				        		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 				        	</a> 
-				        	<a ng-show="configuration.active" ng-click="inactivate(configuration)" class="btn btn-danger">
+				        	<a ng-show="configuration.active" ng-click="inactivate(configuration)" class="btn btn-sm btn-danger">
 				        		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				        	</a>
 				        </td>

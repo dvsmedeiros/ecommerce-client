@@ -63,7 +63,7 @@
 				    	<tr ng-show="!orders.length"> 
 				    		<td colspan="7">No results found.</td>
 				    	</tr>
-				    	<tr ng-repeat="order in orders | filter: _filter | orderBy: 'id'">
+				    	<tr ng-repeat="order in orders | filter: _filter | orderBy: '-id'">
 					        <td>{{order.id}}</td>
 					        <td>{{order.code}}</td>
 					        <td class="text-center">{{order.insertionDate}}</td>
@@ -77,10 +77,10 @@
 								</select>
 					        </td>
 					        <td class="text-center text-nowrap">					        	
-					        	<a ng-click="changeStatusOrder(order)" class="btn btn-success">
+					        	<a ng-click="changeStatusOrder(order)" class="btn btn-sm btn-success">
 					        		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 					        	</a>
-					        	<a href="#/home/orders/detail/{{order.id}}" class="btn btn-warning">
+					        	<a href="#/home/orders/detail/{{order.id}}" class="btn btn-sm btn-warning">
 							        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 							    </a>	  
 					        </td>
